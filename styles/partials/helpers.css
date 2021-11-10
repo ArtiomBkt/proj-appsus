@@ -1,0 +1,17 @@
+/* List helpers */
+
+.clean-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+/* TEXT HELPERS */
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
