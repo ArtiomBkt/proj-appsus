@@ -2,9 +2,9 @@ export default {
   name: 'mail-top-filter',
   template: `
       <div class="mail-top-filter">
-        <form @submit.prevent>
+        <form @submit.prevent >
+          <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
           <input v-model="filterBy.bySubject" @input="filter" type="text" class="search-bar" placeholder="Search mail" />
-          <button type="submit">Search</button>
         </form>
       </div>
       `,

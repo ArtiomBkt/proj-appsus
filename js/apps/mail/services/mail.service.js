@@ -7,7 +7,13 @@ const loggedinUser = { email: 'basel@appsus.com', fullname: 'Basel Boulos' }
 var gMails
 createEmails()
 
-export const mailService = { query, getMailById, readMail, removeEmail }
+export const mailService = {
+  query,
+  getMailById,
+  readMail,
+  removeEmail,
+  composeMail,
+}
 
 function createEmails() {
   let gMails = utilService.loadFromStorage(MAILS_KEY)
@@ -53,20 +59,6 @@ function createEmails() {
 
 function query() {
   return storageService.query(MAILS_KEY)
-
-  //   return storageService.query(BOOKS_KEY)
-
-  // The emailService query function should get a criteria object,
-  // not sure yet what this function should return
-  // it returns the mails depend on the criteria maybe ??
-
-  //   const criteria = {
-  //     status: '',
-  //     txt: '',
-  //     isRead: true,
-  //     isStared: true,
-  //     label: ['important', 'business'],
-  //   }
 }
 
 function save(mail) {
@@ -87,4 +79,10 @@ function readMail(mailId) {
 
 function removeEmail(mailId) {
   return storageService.remove(MAILS_KEY, mailId)
+}
+
+function composeMail(mail) {
+  mail.isRead = false
+  mail.sentAt = Date.now()
+  return save(mail)
 }

@@ -25,6 +25,7 @@ export default {
   methods: {
     deleteMail(mailId) {
       mailService.removeEmail(mailId)
+      this.$router.push('/mail')
     },
   },
   watch: {
