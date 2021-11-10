@@ -1,3 +1,6 @@
+@import './cmps/todos.css';
+@import './cmps/img.css';
+
 .notes-list {
     font-size: 1.2rem;
     color: linen;

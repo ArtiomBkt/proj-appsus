@@ -1,15 +1,14 @@
 @import 'cmps/app-header.css';
 @import 'cmps/app-footer.css';
-@import '../styles/partials/helpers.css';
+@import 'partials/helpers.css';
 @import 'apps/keep/note-app.css';
-@import '../styles/apps/mail/mail-app.css';
+@import 'apps/mail/mail-app.css';
 
 * {
   box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
   min-height: 100%;
 }
 

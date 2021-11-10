@@ -10,7 +10,7 @@ export default {
     <section class="notes-list">
         <div v-for="note in notes" :key="note.id" class="note-card">
             <note-preview :note="note" @click.native="previewNote" />
-            <div class="action">
+            <div class="note-actions">
                 <span @click.prevent="notePin(note.id)">pin</span>
                 <span @click.prevent="noteColorChange(note.id)">color</span>
                 <span @click.prevent="noteShare(note.id)">share</span>

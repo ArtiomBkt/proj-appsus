@@ -1,5 +1,5 @@
 import appHeader from './cmps/app-header.cmp.js'
-import appFooter from './cmps/app-footer.cmp.js'
+// import appFooter from './cmps/app-footer.cmp.js'
 // import flashMsg from './cmps/flash-msg.cmp.js'
 import { router } from './routes/router.js'
 
@@ -9,7 +9,7 @@ const options = {
   name: 'main-app',
   components: {
     appHeader,
-    appFooter,
+    // appFooter,
     // flashMsg
   },
 
@@ -18,7 +18,7 @@ const options = {
             <!-- <flash-msg /> -->
             <app-header />
             <router-view />
-            <app-footer />
+            <!-- <app-footer /> -->
         </section> 
         `,
 }

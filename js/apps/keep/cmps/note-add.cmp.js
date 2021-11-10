@@ -32,6 +32,8 @@ export default {
         },
         saveNote() {
             noteService.addNote(this.note)
+            this.note.title = ''
+            this.note.txt = ''
         }
     }
 }
