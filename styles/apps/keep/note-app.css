@@ -1,0 +1,10 @@
+.notes-list {
+    font-size: 1.2rem;
+    color: linen;
+    height: 250px;
+}
+
+.note-card {
+    background-color: red;
+    margin-bottom: 5px;
+}

@@ -1,5 +1,6 @@
 @import 'cmps/app-header.css';
 @import 'cmps/app-footer.css';
+@import 'apps/keep/note-app.css';
 
 * {
     box-sizing: border-box;

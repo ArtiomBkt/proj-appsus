@@ -9,6 +9,7 @@ header {
 
 header a {
     text-decoration: none;
+    color: linen;
 }
 
 header a:visited {
