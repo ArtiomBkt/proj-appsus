@@ -4,23 +4,23 @@ import appFooter from './cmps/app-footer.cmp.js'
 import { router } from './routes/router.js'
 
 const options = {
-    el: '#app',
-    router,
-    name: 'main-app',
-    components: {
-        appHeader,
-        appFooter,
-        // flashMsg
-    },
+  el: '#app',
+  router,
+  name: 'main-app',
+  components: {
+    appHeader,
+    appFooter,
+    // flashMsg
+  },
 
-    template: `
+  template: `
         <section>
             <!-- <flash-msg /> -->
             <app-header />
             <router-view />
             <app-footer />
         </section> 
-        `
+        `,
 }
 
 new Vue(options)

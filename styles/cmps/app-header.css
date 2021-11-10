@@ -1,23 +1,23 @@
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    background-color: #696969;
-    color: linen;
+  background-color: #696969;
+  color: linen;
 }
 
 header a {
-    text-decoration: none;
-    color: linen;
+  text-decoration: none;
+  color: linen;
 }
 
 header a:visited {
-    color: linen;
+  color: linen;
 }
 
 .main-nav {
-    display: flex;
-    justify-content: space-evenly;
-    width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
 }
