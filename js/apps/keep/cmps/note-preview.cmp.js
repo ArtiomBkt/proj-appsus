@@ -1,6 +1,7 @@
 import noteTxt from './input-type/txt.cmp.js'
 import noteTodos from './input-type/todos.cmp.js'
 import noteImg from './input-type/img.cmp.js'
+import noteVid from './input-type/video.cmp.js'
 
 export default {
     name: 'note-preview',
@@ -8,7 +9,8 @@ export default {
     components: {
         noteTxt,
         noteTodos,
-        noteImg
+        noteImg,
+        noteVid
     },
     template: `
         <component class="note-preview" 

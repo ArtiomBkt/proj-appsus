@@ -4,8 +4,9 @@ import { storageService } from "../../../services/async-storage.service.js"
 export const noteService = {
     query,
     getById,
-    getDummyNotes,
-    addNote
+    addNote,
+    removeNote,
+    pinNote
 }
 
 const NOTE_STORAGE_KEY = 'notesStorage'
@@ -20,32 +21,63 @@ const notes = [
         },
     },
     {
-        id: "n102",
+        id: utilService.makeId(),
         type: "note-img",
         info: { 
-            url: "http://some-img/me",
+            url: "https://w7.pngwing.com/pngs/70/60/png-transparent-vue-js-javascript-library-github-github-angle-text-triangle.png",
             title: "Bobi and Me" 
         },
         style: { 
             backgroundColor: "#00d" 
-        }
+        },
+        isPinned: true,
     },
     {
-        id: "n103",
+        id: utilService.makeId(),
         type: "note-todos",
         info: {
             label: "Get my stuff together",
             todos: [
                 { txt: "Driving liscence", doneAt: null },
-                { txt: "Coding power", doneAt: 187111111 },
+                { txt: "Coding power", doneAt: null },
             ],
         },
+        isPinned: true,
+    },
+    {
+        id: utilService.makeId(),
+        type: "note-vid",
+        info: {
+            title: "Great video for a clip!",
+            url: 'https://www.youtube.com/embed/8aGhZQkoFbQ'
+        },
+        isPinned: true,
+    },
+    {
+        id: utilService.makeId(),
+        type: "note-todos",
+        info: {
+            label: "Get my stuff together",
+            todos: [
+                { txt: "Driving liscence", doneAt: null },
+                { txt: "Coding power", doneAt: null },
+                { txt: "Coding power", doneAt: null },
+                { txt: "Coding power", doneAt: null },
+                { txt: "Coding power", doneAt: null },
+            ],
+        },
+        isPinned: true,
+    },
+    {
+        id: utilService.makeId(),
+        type: "note-img",
+        info: {
+            url: "https://w7.pngwing.com/pngs/70/60/png-transparent-vue-js-javascript-library-github-github-angle-text-triangle.png",
+            title: 'Vue.js'
+        },
+        isPinned: true,
     },
 ]
-
-function getDummyNotes() {
-    return notes
-}
 
 function query() {
     return storageService.query(NOTE_STORAGE_KEY)
@@ -53,6 +85,18 @@ function query() {
 
 function getById(noteId) {
     return storageService.get(NOTE_STORAGE_KEY, noteId)
+}
+
+function pinNote(noteId) {
+    getById(noteId)
+        .then(note => {
+            note.isPinned = !note.isPinned
+            console.log(note);
+        })
+}
+
+function removeNote(noteId) {
+    return storageService.remove(NOTE_STORAGE_KEY, noteId)
 }
 
 function addNote(note) {
@@ -64,13 +108,13 @@ function addNote(note) {
         type,
         style: null
     }
-    if (note.type === 'note-txt') newNote.info = txt
+    if (note.type === 'note-txt') newNote.info['txt'] = txt
     if (note.type === 'note-todos') newNote = processTodosNote(newNote, txt, title)
     if (note.type === 'note-img' || note.type === 'note-vid') {
         newNote.info['title'] = title
         newNote.info['url'] = txt
     }
-    storageService.post(NOTE_STORAGE_KEY, newNote)
+    return storageService.post(NOTE_STORAGE_KEY, newNote)
 }
 
 function processTodosNote(note, txt, title) {

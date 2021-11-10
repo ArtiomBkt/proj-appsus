@@ -1,5 +1,3 @@
-import { noteService } from "../services/note.service.js"
-
 export default {
     name: 'note-add',
     template: `
@@ -31,9 +29,9 @@ export default {
             this.note.type = ev.target.dataset.type
         },
         saveNote() {
-            noteService.addNote(this.note)
+            this.$emit('noteSaved', this.note)
             this.note.title = ''
             this.note.txt = ''
         }
-    }
+    },
 }

@@ -1,4 +1,3 @@
-import { eventBus } from './../../../services/event-bus.service.js'
 import { noteService } from '../services/note.service.js'
 import noteList from './../cmps/note-list.cmp.js'
 import noteAdd from './../cmps/note-add.cmp.js'
@@ -11,8 +10,8 @@ export default {
     },
     template: `
         <section class="note-app app-main">
-            <note-add />
-            <note-list :notes="notes" />
+            <note-add @noteSaved="addNote" />
+            <note-list @listChanged="loadNotes" :notes="notes" />
         </section>
     `,
     data() {
@@ -27,6 +26,11 @@ export default {
         loadNotes() {
             noteService.query()
                 .then(notes => this.notes = notes)
-        }
+        },
+        addNote(newNote) {
+            noteService.addNote(newNote)
+                .then(note => this.notes.push(note))
+                // .then(flashmsg)
+        },
     },
 }
