@@ -19,7 +19,7 @@ export default {
           <h2>My Emails</h2>
           <mail-side-filter @filtered="setFilter" />
           <mail-list @read-mail="readMail" :mails="mailsToShow" />
-          <mail-compose />
+          <mail-compose @send-mail="sendMail" />
         </section>
     `,
   data() {
@@ -40,6 +40,9 @@ export default {
     },
     setFilter(filterBy) {
       this.filterBy = filterBy
+    },
+    sendMail(mail) {
+      mailService.composeMail(mail).then((mail) => this.mails.push(mail))
     },
   },
   computed: {
