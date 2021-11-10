@@ -1,0 +1,15 @@
+@import 'cmps/app-header.css';
+@import 'cmps/app-footer.css';
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}

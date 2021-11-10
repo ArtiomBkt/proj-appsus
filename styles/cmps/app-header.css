@@ -1,0 +1,22 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #696969;
+    color: linen;
+}
+
+header a {
+    text-decoration: none;
+}
+
+header a:visited {
+    color: linen;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-evenly;
+    width: 50%;
+}

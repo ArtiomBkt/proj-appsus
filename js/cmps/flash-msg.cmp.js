@@ -1,6 +1,7 @@
 import { eventBus } from '../../services/event-bus.service.js'
 
 export default {
+    name: 'flash-msg',
     template: `
     <transition name="fade">
         <div v-if="msg" class="flash-msg" :class="msg.type">
