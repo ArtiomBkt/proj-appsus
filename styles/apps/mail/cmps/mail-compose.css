@@ -1,0 +1,13 @@
+.mail-compose {
+  display: flex;
+}
+
+.mail-compose .compose-form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.compose-form > * {
+  width: 100%;
+}
