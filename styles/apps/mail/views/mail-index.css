@@ -1,0 +1,7 @@
+.mail-index {
+  display: flex;
+}
+
+.layout-wrapper {
+  flex-grow: 1;
+}

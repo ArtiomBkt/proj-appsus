@@ -13,6 +13,8 @@ export const mailService = {
   readMail,
   removeEmail,
   composeMail,
+  toggleStar,
+  toggleRead,
 }
 
 function createEmails() {
@@ -21,35 +23,36 @@ function createEmails() {
     gMails = [
       {
         id: 'e101',
+        title: 'First Mail',
         subject: 'Miss you!',
         body: 'Would love to catch up sometimes',
         isRead: false,
         sentAt: 1551133930594,
+        from: loggedinUser.email,
         to: 'momo@momo.com',
+        isStarred: false,
       },
       {
         id: 'e102',
+        title: 'Second Mail',
         subject: 'This is appSus!',
         body: 'No time for missing me',
         isRead: false,
         sentAt: 1551133930594,
+        from: loggedinUser.email,
         to: 'momo@momo.com',
+        isStarred: false,
       },
       {
         id: 'e103',
+        title: 'Third Mail',
         subject: 'Much love for sprints',
         body: 'oh yeah much love',
         isRead: false,
         sentAt: 1551133930594,
+        from: loggedinUser.email,
         to: 'momo@momo.com',
-      },
-      {
-        id: 'e104',
-        subject: '5 pm bla bla bla',
-        body: 'time for telllletubies',
-        isRead: false,
-        sentAt: 1551133930594,
-        to: 'momo@momo.com',
+        isStarred: false,
       },
     ]
     utilService.saveToStorage(MAILS_KEY, gMails)
@@ -84,5 +87,20 @@ function removeEmail(mailId) {
 function composeMail(mail) {
   mail.isRead = false
   mail.sentAt = Date.now()
+  mail.from = loggedinUser.email
   return save(mail)
+}
+
+function toggleStar(mailId) {
+  return getMailById(mailId).then((mail) => {
+    mail.isStarred = !mail.isStarred
+    return save(mail)
+  })
+}
+
+function toggleRead(mailId) {
+  return getMailById(mailId).then((mail) => {
+    mail.isRead = !mail.isRead
+    return save(mail)
+  })
 }

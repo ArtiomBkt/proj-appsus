@@ -2,6 +2,7 @@ import { mailService } from '../services/mail.service.js'
 import mailList from '../cmps/mail-list.cmp.js'
 import mailTopFilter from '../cmps/mail-top-filter.cmp.js'
 import mailSideFilter from '../cmps/mail-side-filter.cmp.js'
+import mailFolderList from '../cmps/mail-folder-list.cmp.js'
 import mailCompose from '../cmps/mail-compose.cmp.js'
 
 export default {
@@ -12,20 +13,32 @@ export default {
     mailTopFilter,
     mailSideFilter,
     mailCompose,
+    mailFolderList,
   },
   template: `
-        <section>
-          <mail-top-filter @filtered="setFilter" />
-          <h2>My Emails</h2>
+        <section class="mail-index">
           <mail-side-filter @filtered="setFilter" />
-          <mail-list @read-mail="readMail" :mails="mailsToShow" />
-          <mail-compose @send-mail="sendMail" />
+          <div class="layout-wrapper">
+            <mail-top-filter @filtered="setFilter" />
+            <mail-folder-list @sorted="setSort" />
+            <span>Unread Emails: {{unReadMails}}</span>
+            <mail-list 
+            @read-mail="readMail" 
+            @toggle-star="toggleStar"
+            @toggle-read="toggleRead"
+            @remove-mail="removeMail" 
+          :mails="mailsToShow" />
+          <!-- <mail-compose @send-mail="sendMail" /> -->
+        </div>
         </section>
     `,
   data() {
     return {
       mails: [],
       filterBy: null,
+      sortBy: {
+        sortKey: 'title',
+      },
     }
   },
   created() {
@@ -41,16 +54,34 @@ export default {
     setFilter(filterBy) {
       this.filterBy = filterBy
     },
+    setSort(sortBy) {
+      this.sortBy = sortBy
+    },
     sendMail(mail) {
       mailService.composeMail(mail).then((mail) => this.mails.push(mail))
+    },
+    toggleStar(mailId) {
+      const idx = this.mails.findIndex((mail) => mail.id === mailId)
+      this.mails[idx].isStarred = !this.mails[idx].isStarred
+      mailService.toggleStar(mailId)
+    },
+    toggleRead(mailId) {
+      const idx = this.mails.findIndex((mail) => mail.id === mailId)
+      this.mails[idx].isRead = !this.mails[idx].isRead
+      mailService.toggleRead(mailId)
+    },
+    removeMail(mailId) {
+      const idx = this.mails.findIndex((mail) => mail.id === mailId)
+      this.mails.splice(idx, 1)
+      mailService.removeEmail(mailId).then()
     },
   },
   computed: {
     mailsToShow() {
+      if (this.sortBy) this.sortMails
+      // || !this.filterBy.bySubject
       if (!this.filterBy) return this.mails
-
       const { bySubject, filterBtn } = this.filterBy
-
       if (bySubject) {
         const searchStr = bySubject.toLowerCase()
         const mailsToShow = this.mails.filter((mail) => {
@@ -58,8 +89,8 @@ export default {
         })
         return mailsToShow
       }
-
       const searchStr = filterBtn.toLowerCase()
+      if (searchStr === 'inbox') return this.mails
 
       if (searchStr === 'read') {
         const mailsToShow = this.mails.filter((mail) => {
@@ -73,6 +104,29 @@ export default {
           return !mail.isRead
         })
         return mailsToShow
+      }
+      if (searchStr === 'starred') {
+        const mailsToShow = this.mails.filter((mail) => {
+          return mail.isStarred
+        })
+        return mailsToShow
+      }
+    },
+    unReadMails() {
+      var count = 0
+      this.mails.forEach((mail) => (!mail.isRead ? count++ : count))
+      return count
+    },
+    sortMails() {
+      if (this.sortBy.sortKey === 'title') {
+        return this.mails.sort((a, b) => {
+          return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1
+        })
+      }
+      if (this.sortBy.sortKey === 'date') {
+        return this.mails.sort((a, b) => {
+          return a.sentAt < b.sentAt ? 1 : -1
+        })
       }
     },
   },

@@ -1,15 +1,23 @@
 export default {
   name: 'mail-side-filter',
   template: `
-  <div class="mail-side-filter">
-      <button value="inbox" @click="filter($event)">Inbox</button>
-      <button value="Starred" @click="filter($event)">Starred</button>
-      <button value="Sent" @click="filter($event)">Sent</button>
-      <button value="Drafts" @click="filter($event)">Drafts</button>
-      <button value="Trash" @click="filter($event)">Trash</button>
-      <button value="Read" @click="filter($event)">Read</button>
-      <button value="Unread" @click="filter($event)">Unread</button>
-  </div>
+  <aside class="mail-side-filter">
+    <button class="compose-btn"><i class="fas fa-plus"></i> Compose</button>
+      <button value="inbox" @click="filter($event)">
+      <i class="fas fa-inbox"></i> Inbox</button>
+      <button  value="Starred" @click="filter($event)">
+      <i class="fas fa-star"></i> Starred</button>
+      <button value="Sent" @click="filter($event)">
+      <i class="fas fa-paper-plane"></i> Sent</button>
+      <button value="Drafts" @click="filter($event)">
+      <i class="fas fa-envelope-open"></i> Drafts</button>
+      <button value="Trash" @click="filter($event)">
+      <i class="fas fa-trash"></i> Trash</button>
+      <button value="Read" @click="filter($event)">
+      <i class="fas fa-book"></i> Read</button>
+      <button value="Unread" @click="filter($event)">
+      <i class="fas fa-envelope"></i> Unread</button>
+  </aside>
         `,
   data() {
     return {

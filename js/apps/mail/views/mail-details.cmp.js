@@ -5,12 +5,16 @@ export default {
   template: `
     <section class="mail-details">
         <template v-if="mail">
+            <p>id: {{mail.id}}</p>
+            <p>title: {{mail.title}}</p>
+            <p>from: {{mail.from}}</p>
             <p>to: {{mail.to}}</p>
             <!-- subject should be with txt size limit -->
             <p>subject: {{mail.subject}}</p>
             <p>body: {{mail.body}}</p>
             <p>sentAt: {{mail.sentAt}}</p>
             <p>isRead: {{mail.isRead}}</p>
+            <p>isStarred: {{mail.isStarred}}</p>
             <button @click="deleteMail(mail.id)">Delete</button>
             <router-link to="/mail">Back</router-link>
         </template>
