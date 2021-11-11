@@ -20,7 +20,7 @@ export default {
             </aside>
             <div class="main-keep-container">
                 <note-add @noteSaved="addNote" />
-                <note-list @listChanged="loadNotes" :notes="notes" />
+                <note-list :notes="notes" />
             </div>
         </section>
     `,
@@ -31,6 +31,7 @@ export default {
     },
     created() {
         this.loadNotes()
+        eventBus.$on('listChanged', this.loadNotes)
     },
     methods: {
         loadNotes() {

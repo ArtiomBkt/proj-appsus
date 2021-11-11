@@ -6,7 +6,7 @@ export default {
         <section class="note-add">
             <form @submit.prevent="validateForm" novalidate="true">
                 <div class="input-row">
-                    <input type="text" v-model="note.title" placeholder="Title" />
+                    <!-- <input type="text" v-model="note.title" placeholder="Title" /> -->
                     <input type="text" v-model="note.txt" :placeholder="setPlaceHolder" />
                     <span @click.stop.prevent="setType" title="Text input"><i data-type="note-txt" class="far fa-edit"></i></span>
                     <span @click.stop.prevent="setType" title="Todos input"><i data-type="note-todos" class="fas fa-list-ul"></i></span>
@@ -20,7 +20,7 @@ export default {
     data() {
         return {
             note: {
-                title: '',
+                title: 's',
                 txt: '',
                 type: 'note-txt'
             },
@@ -32,10 +32,19 @@ export default {
             this.note.type = ev.target.dataset.type
         },
         validateForm() {
-            this.errors = []
-            if (!this.note.txt) this.errors.push('Text is required.')
-            if (this.note.type !== 'note-txt' && !this.note.title) this.errors.push('Title is required.')
-            if (this.errors.length > 0) msgService.sendMsg('error', 'Invalid inputs.')
+            console.log(this.note);
+            if (!this.note.txt || !this.note.title) return msgService.sendMsg('error', 'Invalid inputs.')
+            console.log(this.note.type);
+            if (this.note.type !== 'note-txt' && this.note.type !== 'note-todos') {
+                let ytId = this.note.txt.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
+                if (ytId) {
+                    this.note.txt = ytId
+                    this.note.type = 'note-vid'
+                }
+                else if (this.note.txt.match(/\.(jpeg|jpg|gif|png)$/)) this.note.type = 'note-img'
+                else console.log('error');
+                console.log(this.note.type);
+            }
             else this.saveNote()
         },
         saveNote() {
@@ -52,3 +61,6 @@ export default {
         }
     }
 }
+
+
+

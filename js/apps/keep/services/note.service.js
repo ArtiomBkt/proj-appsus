@@ -29,6 +29,10 @@ function pinNote(noteId) {
         })
 }
 
+function colorNote(noteId) {
+    
+}
+
 function removeNote(noteId) {
     return storageService.remove(NOTE_STORAGE_KEY, noteId)
 }
@@ -51,7 +55,9 @@ function addNote(note) {
         newNote.info['txt'] = txt
     }
     if (note.type === 'note-todos') newNote = _processTodosNote(newNote, txt, title)
-    if (note.type === 'note-img' || note.type === 'note-vid') {
+    // if (note.type === 'note-img' || note.type === 'note-vid') 
+    else {
+
         newNote.info['title'] = title
         newNote.info['url'] = txt
     }
@@ -181,6 +187,19 @@ const dummyNotes = [
         info: {
             url: "https://w7.pngwing.com/pngs/70/60/png-transparent-vue-js-javascript-library-github-github-angle-text-triangle.png",
             title: 'Vue.js'
+        },
+        isPinned: false,
+        isEditing: false,
+        style: {
+            backgroundColor: ''
+        }
+    },
+    {
+        id: utilService.makeId(),
+        type: "note-img",
+        info: {
+            url: "https://i.imgflip.com/5ttvtq.jpg",
+            title: 'vueeeee'
         },
         isPinned: false,
         isEditing: false,
