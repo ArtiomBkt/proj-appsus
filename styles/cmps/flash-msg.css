@@ -1,0 +1,17 @@
+.flash-msg {
+    position: absolute;
+    top: 15vh;
+    right: 0;
+    padding: 10px 50px;
+ 
+    border-radius: 5px;
+    background-color: inherit;
+}
+ 
+.success {
+    background-color: rgba(32, 197, 32, .5);
+}
+ 
+.error {
+    background-color: rgba(255, 38, 38, 0.5);
+}

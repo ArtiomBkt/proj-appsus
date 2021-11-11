@@ -9,9 +9,17 @@ export default {
         noteAdd
     },
     template: `
-        <section class="note-app app-main">
-            <note-add @noteSaved="addNote" />
-            <note-list @listChanged="loadNotes" :notes="notes" />
+        <section class="note-app">
+            <aside class="aside-dummy">
+                <div class="side">aside</div>
+                <div class="side">ads</div>
+                <div class="side">asd</div>
+                <div class="side">asd</div>
+            </aside>
+            <div class="main-keep-container">
+                <note-add @noteSaved="addNote" />
+                <note-list @listChanged="loadNotes" :notes="notes" />
+            </div>
         </section>
     `,
     data() {

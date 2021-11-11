@@ -1,10 +1,13 @@
 import { eventBus } from "./event-bus.service.js"
 
-export function sendMsg(type, txt, link = '') {
+export const msgService = {
+    sendMsg
+}
+
+function sendMsg(type, txt) {
     const msg = {
         txt,
-        type,
-        link
+        type
     }
     eventBus.$emit('showMsg', msg)
 }

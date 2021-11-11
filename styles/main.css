@@ -3,6 +3,7 @@
 @import 'partials/helpers.css';
 @import 'apps/keep/note-app.css';
 @import 'apps/mail/mail-app.css';
+@import 'cmps/flash-msg.css';
 
 * {
   box-sizing: border-box;

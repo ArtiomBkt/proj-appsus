@@ -1,0 +1,7 @@
+.notes-list {
+    display: grid;
+    /* grid-template-columns: repeat(2, 1fr); */
+    grid-auto-rows: minmax(100px, min-content);
+    grid: auto-flow;
+    gap: 20px;
+}

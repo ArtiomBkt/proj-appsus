@@ -2,7 +2,7 @@ export const utilService = {
     saveToStorage,
     loadFromStorage,
     makeId,
-    getRandInt,
+    getRandInt
 }
 
 function saveToStorage(key, value) {

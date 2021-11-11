@@ -1,4 +1,4 @@
-import { eventBus } from '../../services/event-bus.service.js'
+import { eventBus } from './../services/event-bus.service.js'
 
 export default {
     name: 'flash-msg',
@@ -6,9 +6,9 @@ export default {
     <transition name="fade">
         <div v-if="msg" class="flash-msg" :class="msg.type">
             <p>{{ msg.txt }}</p>
-            <template v-if="msg.link.length > 1">
+            <!-- <template v-if="msg.link.length > 1">
                 <router-link :to="msg.link">Check it out</router-link>
-            </template>
+            </template> -->
         </div>
     </transition>
     `,
