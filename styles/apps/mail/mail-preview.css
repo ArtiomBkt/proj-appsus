@@ -19,3 +19,7 @@
 .mail-unread {
   background-color: #ffffff;
 }
+
+.checked {
+  color: gold;
+}

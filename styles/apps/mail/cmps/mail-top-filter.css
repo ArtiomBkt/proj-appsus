@@ -23,11 +23,11 @@
 }
 
 .search-bar:hover {
-  box-shadow: 5px 5px 15px 4px #dadce0;
+  box-shadow: 3px 3px 8px 4px #dadce0;
 }
 
 .search-bar:focus {
-  box-shadow: 5px 5px 15px 4px #dadce0;
+  box-shadow: 3px 3px 8px 4px #dadce0;
   background: #ffffff;
 }
 

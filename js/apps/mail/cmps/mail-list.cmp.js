@@ -10,7 +10,7 @@ export default {
   <div class="mail-list-container">
       <ul class="mail-list clean-list">
           <li v-for="mail in mails" :key="mail.id">
-              <mail-preview :mail="mail" @read-mail="read"/>
+              <mail-preview :mail="mail" @read-mail="read" @toggle-star="toggleStar" @toggle-read="toggleRead" />
           </li>
       </ul>
   </div>
@@ -18,6 +18,12 @@ export default {
   methods: {
     read(mailId) {
       this.$emit('read-mail', mailId)
+    },
+    toggleRead(mailId) {
+      this.$emit('toggle-read', mailId)
+    },
+    toggleStar(mailId) {
+      this.$emit('toggle-star', mailId)
     },
   },
 }
