@@ -2,8 +2,8 @@ export default {
   name: 'mail-preview',
   props: ['mail'],
   template: `
-    <router-link :to='/mail/+this.mail.id' class="mail-route">
-        <section class="mail-container" :class="isReadBgc" @click="read(mail.id)">
+    <!-- <router-link :to='/mail/+this.mail.id' class="mail-route"> -->
+        <section class="mail-container" :class="isReadBgc" @click="read(mail.id)" >
           <div class="mail-content">
             <span class="fa fa-star mail-star" :class="colorStar" @click.stop.prevent="toggleStar(mail.id)"></span>
             <span>{{mail.title}}</span>
@@ -19,8 +19,9 @@ export default {
               </span>
           </section>
       </section>
-    </router-link>
+    <!-- </router-link> -->
   `,
+
   methods: {
     read(mailId) {
       this.$emit('read-mail', mailId)

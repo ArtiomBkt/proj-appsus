@@ -8,11 +8,12 @@
   padding: 5px 0;
   display: flex;
   align-items: center;
+  border-bottom: 2px solid #f3f5f7;
 }
 
 .mail-content {
   flex-basis: 100%;
-  /* font-size: 20px; */
+  font-size: 20px;
 }
 
 .mail-content .mail-star:hover {
@@ -20,7 +21,6 @@
 }
 
 .mail-container .mail-actions {
-  color: #808080;
   display: flex;
   gap: 25px;
   font-size: 20px;
@@ -34,6 +34,10 @@
   justify-content: center;
   align-items: center;
   border-radius: 50%;
+}
+
+.mail-actions > span > * {
+  opacity: 0.6;
 }
 
 .mail-actions > span:hover {

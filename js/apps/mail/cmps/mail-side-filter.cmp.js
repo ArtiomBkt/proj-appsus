@@ -2,7 +2,7 @@ export default {
   name: 'mail-side-filter',
   template: `
   <aside class="mail-side-filter">
-    <button class="compose-btn"><i class="fas fa-plus"></i> Compose</button>
+    <button class="compose-btn" @click="compose"><i class="fas fa-plus"></i> Compose</button>
     <router-link to='/mail/inbox'><i class="fas fa-inbox"></i> Inbox</router-link>
     <router-link to='/mail/starred'><i class="fas fa-star"></i> Starred</router-link>
     <router-link to='/mail/sent'><i class="fas fa-paper-plane"></i> Sent</router-link>
@@ -12,4 +12,9 @@ export default {
     <router-link to='/mail/unread'><i class="fas fa-envelope"></i> Unread</router-link>
   </aside>
         `,
+  methods: {
+    compose() {
+      this.$emit('compose')
+    },
+  },
 }

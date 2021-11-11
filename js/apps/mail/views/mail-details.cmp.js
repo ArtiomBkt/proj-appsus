@@ -2,6 +2,7 @@ import { mailService } from '../services/mail.service.js'
 
 export default {
   name: 'mail-details',
+  props: ['mail'],
   template: `
     <section class="mail-details">
         <template v-if="mail">
@@ -9,7 +10,6 @@ export default {
             <p>title: {{mail.title}}</p>
             <p>from: {{mail.from}}</p>
             <p>to: {{mail.to}}</p>
-            <!-- subject should be with txt size limit -->
             <p>subject: {{mail.subject}}</p>
             <p>body: {{mail.body}}</p>
             <p>sentAt: {{mail.sentAt}}</p>
@@ -21,24 +21,24 @@ export default {
     </section>
     `,
 
-  data() {
-    return {
-      mail: null,
-    }
-  },
+  // data() {
+  //   return {
+  //     mail: null,
+  //   }
+  // },
   methods: {
     deleteMail(mailId) {
       mailService.removeEmail(mailId)
       this.$router.push('/mail')
     },
   },
-  watch: {
-    '$route.params.mailId': {
-      immediate: true,
-      handler() {
-        const { mailId } = this.$route.params
-        mailService.getMailById(mailId).then((mail) => (this.mail = mail))
-      },
-    },
-  },
+  // watch: {
+  //   '$route.params.mailId': {
+  //     immediate: true,
+  //     handler() {
+  //       const { mailId } = this.$route.params
+  //       mailService.getMailById(mailId).then((mail) => (this.mail = mail))
+  //     },
+  //   },
+  // },
 }

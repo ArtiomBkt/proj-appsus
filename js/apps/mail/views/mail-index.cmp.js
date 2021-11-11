@@ -17,7 +17,7 @@ export default {
   },
   template: `
         <section class="mail-index">
-          <mail-side-filter  />
+          <mail-side-filter @compose="compose" />
           <div class="layout-wrapper">
             <mail-top-filter @searched="setSearch" />
             <mail-folder-list @sorted="setSort" />
@@ -28,7 +28,7 @@ export default {
             @toggle-read="toggleRead"
             @remove-mail="removeMail" 
           :mails="mailsToShow" />
-          <!-- <mail-compose @send-mail="sendMail" /> -->
+          <mail-compose v-show="showCompose" @send-mail="sendMail" @close-compose="closeCompose"/>
         </div>
         </section>
     `,
@@ -40,6 +40,7 @@ export default {
       criteria: {
         folder: null,
       },
+      showCompose: false,
     }
   },
   methods: {
@@ -58,8 +59,15 @@ export default {
     setSort(sortBy) {
       this.sortBy = sortBy
     },
+    compose() {
+      this.showCompose = true
+    },
+    closeCompose() {
+      this.showCompose = false
+    },
     sendMail(mail) {
       mailService.composeMail(mail).then((mail) => this.mails.push(mail))
+      this.showCompose = false
     },
     toggleStar(mailId) {
       const idx = this.mails.findIndex((mail) => mail.id === mailId)

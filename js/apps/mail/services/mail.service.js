@@ -23,7 +23,7 @@ function createEmails() {
     gMails = [
       {
         id: 'e101',
-        title: 'bbFirst Mail',
+        title: 'This is inbox',
         subject: 'Miss you!',
         body: 'Would love to catch up sometimes',
         sentAt: 1636658085448,
@@ -37,13 +37,69 @@ function createEmails() {
       },
       {
         id: 'e102',
-        title: 'aaaaaFirst Mail',
+        title: 'This is starred',
         subject: 'Miss you!',
         body: 'Would love to catch up sometimes',
         sentAt: 1551133930500,
         from: loggedinUser.email,
         to: 'momo@momo.com',
         isRead: false,
+        isSent: false,
+        isStarred: true,
+        isDraft: false,
+        isTrash: false,
+      },
+      {
+        id: 'e103',
+        title: 'This is sent',
+        subject: 'Miss you!',
+        body: 'Would love to catch up sometimes',
+        sentAt: 1551133930500,
+        from: loggedinUser.email,
+        to: 'momo@momo.com',
+        isRead: false,
+        isSent: true,
+        isStarred: false,
+        isDraft: false,
+        isTrash: false,
+      },
+      {
+        id: 'e104',
+        title: 'This is drafts',
+        subject: 'Miss you!',
+        body: 'Would love to catch up sometimes',
+        sentAt: 1551133930500,
+        from: loggedinUser.email,
+        to: 'momo@momo.com',
+        isRead: false,
+        isSent: false,
+        isStarred: false,
+        isDraft: true,
+        isTrash: false,
+      },
+      {
+        id: 'e105',
+        title: 'This is trash',
+        subject: 'Miss you!',
+        body: 'Would love to catch up sometimes',
+        sentAt: 1551133930500,
+        from: loggedinUser.email,
+        to: 'momo@momo.com',
+        isRead: false,
+        isSent: false,
+        isStarred: true,
+        isDraft: false,
+        isTrash: true,
+      },
+      {
+        id: 'e106',
+        title: 'This is read',
+        subject: 'Miss you!',
+        body: 'Would love to catch up sometimes',
+        sentAt: 1551133930500,
+        from: loggedinUser.email,
+        to: 'momo@momo.com',
+        isRead: true,
         isSent: false,
         isStarred: false,
         isDraft: false,
@@ -59,12 +115,17 @@ function query(criteria) {
   return storageService.query(MAILS_KEY).then((mails) => {
     const folder = criteria.folder
     if (folder === 'inbox')
-      return mails.filter((mail) => !mail.isSent && !mail.isTrash)
-    if (folder === 'sent') return mails.filter((mail) => mail.isSent)
+      return mails.filter(
+        (mail) => !mail.isSent && !mail.isTrash && !mail.isDraft
+      )
+    if (folder === 'sent')
+      return mails.filter((mail) => mail.isSent && !mail.isTrash)
     if (folder === 'read') return mails.filter((mail) => mail.isRead)
     if (folder === 'unread') return mails.filter((mail) => !mail.isRead)
-    if (folder === 'starred') return mails.filter((mail) => mail.isStarred)
-    if (folder === 'drafts') return mails.filter((mail) => mail.isDraft)
+    if (folder === 'starred')
+      return mails.filter((mail) => mail.isStarred && !mail.isTrash)
+    if (folder === 'drafts')
+      return mails.filter((mail) => mail.isDraft && !mail.isTrash)
     if (folder === 'trash') return mails.filter((mail) => mail.isTrash)
   })
 }

@@ -2,13 +2,30 @@ export default {
   name: 'mail-compose',
   template: `
       <section class="mail-compose">
+
           <form class="compose-form" @submit.prevent="send">
-            <input v-model="mail.title" class="compose-title" type="text" placeholder="Title" required/>
-            <input v-model="mail.to" type="mail" class="compose-to" placeholder="Recipient" required/>
-            <input v-model="mail.subject" type="text" class="compose-subject" placeholder="Subject" />
-            <textarea v-model="mail.body" class="compose-body" type="text" />
-            <button>Send</button>
+
+            <div class="compose-form-header">
+              <h2>New Message</h2>
+              <span @click.stop.prevent="closeCompose" class="close-form"><i class="fas fa-times"></i></span>
+            </div>
+
+            <div class="compose-content">
+              <input v-model="mail.title" class="compose-title" type="text" placeholder="Title" required/>
+              <input v-model="mail.to" type="mail" class="compose-to" placeholder="To: " required/>
+              <input v-model="mail.subject" type="text" class="compose-subject" placeholder="Subject" />
+              <textarea v-model="mail.body" class="compose-body" type="text" />
+            </div>
+
+            <div class="compose-actions">
+              <button type="submit" class="send-btn">Send</button>
+              <span class="compose-trash">
+                <i class="fas fa-trash"></i>
+              </span>
+            </div>
+
         </form>
+
     </section>
   `,
   data() {
@@ -31,6 +48,9 @@ export default {
       this.mail.to = ''
       this.mail.subject = ''
       this.mail.body = ''
+    },
+    closeCompose() {
+      this.$emit('close-compose')
     },
   },
 }
