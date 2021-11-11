@@ -36,6 +36,7 @@ export default {
     return {
       mails: [],
       searchBy: null,
+      sortBy: null,
       criteria: {
         folder: null,
       },
@@ -91,21 +92,20 @@ export default {
       }
     },
     unReadMails() {
-      var count = 0
-      this.mails.forEach((mail) => (!mail.isRead ? count++ : count))
+      let count = this.mails.reduce((acc, mail) => {
+        return !mail.isRead ? acc + 1 : acc
+      }, 0)
       return count
     },
     sortMails() {
-      if (this.sortBy.sortKey === 'title') {
-        return this.mails.sort((a, b) => {
+      return this.mails.sort((a, b) => {
+        if (this.sortBy.sortKey === 'title') {
           return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1
-        })
-      }
-      if (this.sortBy.sortKey === 'date') {
-        return this.mails.sort((a, b) => {
+        }
+        if (this.sortBy.sortKey === 'date') {
           return a.sentAt < b.sentAt ? 1 : -1
-        })
-      }
+        }
+      })
     },
   },
   watch: {
