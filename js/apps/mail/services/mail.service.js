@@ -23,28 +23,34 @@ function createEmails() {
     gMails = [
       {
         id: 'e101',
-        subject: 'bMiss you!',
+        title: 'First Mail',
+        subject: 'Miss you!',
         body: 'Would love to catch up sometimes',
         isRead: false,
         sentAt: 1551133930594,
+        from: loggedinUser.email,
         to: 'momo@momo.com',
         isStarred: false,
       },
       {
         id: 'e102',
-        subject: 'aThis is appSus!',
+        title: 'Second Mail',
+        subject: 'This is appSus!',
         body: 'No time for missing me',
         isRead: false,
         sentAt: 1551133930594,
+        from: loggedinUser.email,
         to: 'momo@momo.com',
         isStarred: false,
       },
       {
         id: 'e103',
-        subject: 'cMuch love for sprints',
+        title: 'Third Mail',
+        subject: 'Much love for sprints',
         body: 'oh yeah much love',
         isRead: false,
         sentAt: 1551133930594,
+        from: loggedinUser.email,
         to: 'momo@momo.com',
         isStarred: false,
       },
@@ -81,6 +87,7 @@ function removeEmail(mailId) {
 function composeMail(mail) {
   mail.isRead = false
   mail.sentAt = Date.now()
+  mail.from = loggedinUser.email
   return save(mail)
 }
 

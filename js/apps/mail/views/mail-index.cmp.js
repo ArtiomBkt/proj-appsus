@@ -16,14 +16,20 @@ export default {
     mailFolderList,
   },
   template: `
-        <section>
-          <mail-top-filter @filtered="setFilter" />
-          <h2>My Emails</h2>
-          <mail-folder-list @sorted="setSort" />
+        <section class="mail-index">
           <mail-side-filter @filtered="setFilter" />
-          <mail-list @read-mail="readMail" @toggle-star="toggleStar" @toggle-read="toggleRead" :mails="mailsToShow"  />
-          <mail-compose @send-mail="sendMail" />
-          <span>Unread Emails: {{unReadMails}}</span>
+          <div class="layout-wrapper">
+            <mail-top-filter @filtered="setFilter" />
+            <mail-folder-list @sorted="setSort" />
+            <span>Unread Emails: {{unReadMails}}</span>
+            <mail-list 
+            @read-mail="readMail" 
+            @toggle-star="toggleStar"
+            @toggle-read="toggleRead"
+            @remove-mail="removeMail" 
+          :mails="mailsToShow" />
+          <!-- <mail-compose @send-mail="sendMail" /> -->
+        </div>
         </section>
     `,
   data() {
@@ -64,11 +70,17 @@ export default {
       this.mails[idx].isRead = !this.mails[idx].isRead
       mailService.toggleRead(mailId)
     },
+    removeMail(mailId) {
+      const idx = this.mails.findIndex((mail) => mail.id === mailId)
+      this.mails.splice(idx, 1)
+      mailService.removeEmail(mailId).then()
+    },
   },
   computed: {
     mailsToShow() {
       if (this.sortBy) this.sortMails
-      if (!this.filterBy || !this.filterBy.bySubject) return this.mails
+      // || !this.filterBy.bySubject
+      if (!this.filterBy) return this.mails
       const { bySubject, filterBtn } = this.filterBy
       if (bySubject) {
         const searchStr = bySubject.toLowerCase()
@@ -86,6 +98,7 @@ export default {
         })
         return mailsToShow
       }
+
       if (searchStr === 'unread') {
         const mailsToShow = this.mails.filter((mail) => {
           return !mail.isRead
@@ -107,7 +120,7 @@ export default {
     sortMails() {
       if (this.sortBy.sortKey === 'title') {
         return this.mails.sort((a, b) => {
-          return a.subject.toLowerCase() > b.subject.toLowerCase() ? 1 : -1
+          return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1
         })
       }
       if (this.sortBy.sortKey === 'date') {

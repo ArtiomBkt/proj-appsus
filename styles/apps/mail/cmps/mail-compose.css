@@ -1,5 +1,6 @@
 .mail-compose {
   display: flex;
+  align-items: center;
 }
 
 .mail-compose .compose-form {
@@ -10,4 +11,18 @@
 
 .compose-form > * {
   width: 100%;
+}
+
+.compose-form .compose-title {
+  padding: 5px 10px;
+}
+.compose-form .compose-to {
+  padding: 5px 10px;
+}
+.compose-form .compose-subject {
+  padding: 5px 10px;
+}
+.compose-form .compose-body {
+  direction: ltr;
+  min-height: 266px;
 }

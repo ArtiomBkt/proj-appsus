@@ -1,3 +1,6 @@
 @import '../mail/mail-preview.css';
 @import '../mail/cmps/mail-compose.css';
 @import '../mail/cmps/mail-top-filter.css';
+@import '../mail/cmps/mail-side-filter.css';
+@import '../mail/cmps/mail-list.css';
+@import '../mail/views/mail-index.css';

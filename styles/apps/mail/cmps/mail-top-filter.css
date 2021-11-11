@@ -1,12 +1,11 @@
 .mail-top-filter {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  margin-bottom: 15px;
 }
 
 .search-bar {
-  height: 52px;
-  width: 700px;
+  width: 100%;
+  height: 62px;
   font-size: 20px;
   border-radius: 10px;
   background-color: #f2f5f5cc;
@@ -35,7 +34,7 @@
   all: unset;
   position: absolute;
   border-radius: 10px;
-  height: 52px;
+  height: 62px;
   padding-left: 20px;
   z-index: 1;
   color: lightgray;
