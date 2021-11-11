@@ -3,13 +3,48 @@ export default {
     props: ['note'],
     template: `
         <section class="note-edit">
-            <form @submit.prevent="validateForm" novalidate="true">
+            <form @submit.prevent="editNote" novalidate="true">
                 <div class="input-row">
-                    <input v-if="note.type !== 'note-txt'" type="text" :v-model="note.title" placeholder="Title" />
-                    <input type="text" :v-model="note.txt" placeholder="What's on your mind.." />
+                    <input type="text" v-model="newInfo.title" placeholder="Title" />
+                    <input type="text" v-model="newInfo.txt" placeholder="What's on your mind.." />
                 </div>
                 <input type="submit" value="Submit edit" />
             </form>
         </section>
-    `
+    `,
+    data() {
+        return {
+            newInfo: {
+                title: '',
+                txt: '',
+                type: null
+            }
+        }
+    },
+    created() {
+        this.newInfo = this.getNoteInfo()
+    },
+    methods: {
+        getNoteInfo() {
+            let title = ''
+            let txt = ''
+            let type = this.note.type
+            if (this.note.type === 'note-txt') {
+                title = this.note.info.title
+                txt = this.note.info.txt
+            } 
+            else if (this.note.type === 'note-todos') {
+                title = this.note.info.label
+                txt = this.note.info.todos.map(todo => todo.txt).join(', ')
+            }
+            else if (this.note.type === 'note-img' || this.note.type === 'note-vid') {
+                title = this.note.info.title
+                txt = this.note.info.url
+            }
+            return { title, txt, type }
+        },
+        editNote() {
+            this.$emit('noteSaved', this.newInfo)
+        }
+    }
 }

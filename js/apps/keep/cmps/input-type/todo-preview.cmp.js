@@ -2,8 +2,8 @@ export default {
     name: 'todo-preview',
     props: ['todo'],
     template: `
-        <span :class="strikeTodo">
-            {{ todo.txt }} <span v-if="isDone">-</span> {{ todo.doneAt }}
+        <span :class="strikeTodo" @click="toggleTodo">
+            {{ todo.txt }} <span v-if="isDone">- {{ todo.doneAt }}</span>
         </span>
     `,
     data() {
@@ -11,12 +11,15 @@ export default {
             isDone: false
         }
     },
+    methods: {
+        toggleTodo(){
+            this.isDone = !this.isDone
+            this.todo.doneAt = this.todo.doneAt ? null : new Date().toLocaleTimeString()
+        }
+    },
     computed: {
         strikeTodo() {
-            if (this.todo.doneAt !== null) {
-                this.isDone = true
-                return 'strike'
-            } else return ''
+            return this.isDone ? 'strike' : ''
         }
     }
 }

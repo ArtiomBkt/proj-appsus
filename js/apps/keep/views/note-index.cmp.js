@@ -1,3 +1,5 @@
+import { eventBus } from '../../../services/event-bus.service.js'
+import { msgService } from './../../../services/msg.service.js'
 import { noteService } from '../services/note.service.js'
 import noteList from './../cmps/note-list.cmp.js'
 import noteAdd from './../cmps/note-add.cmp.js'
@@ -38,7 +40,8 @@ export default {
         addNote(newNote) {
             noteService.addNote(newNote)
                 .then(note => this.notes.push(note))
-                // .then(flashmsg)
+                .then(msgService.sendMsg('success', 'Note was successfully added.'))
+                .catch(() => msgService.sendMsg('error', 'Something went wrong, please try again.'))
         },
     },
 }

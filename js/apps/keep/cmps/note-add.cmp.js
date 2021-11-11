@@ -6,12 +6,12 @@ export default {
         <section class="note-add">
             <form @submit.prevent="validateForm" novalidate="true">
                 <div class="input-row">
-                    <input v-if="note.type !== 'note-txt'" type="text" v-model="note.title" placeholder="Title" />
-                    <input type="text" v-model="note.txt" placeholder="What's on your mind.." />
-                    <span @click.stop.prevent="setType" data-type="note-txt" title="Text input"><i class="far fa-edit"></i></span>
-                    <span @click.stop.prevent="setType" data-type="note-todos" title="Todos input"><i class="fas fa-list-ul"></i></span>
-                    <span @click.stop.prevent="setType" data-type="note-img" title="Img input"><i class="far fa-image"></i></span>
-                    <span @click.stop.prevent="setType" data-type="note-vid" title="Video input"><i class="fab fa-youtube"></i></span>
+                    <input type="text" v-model="note.title" placeholder="Title" />
+                    <input type="text" v-model="note.txt" :placeholder="setPlaceHolder" />
+                    <span @click.stop.prevent="setType" title="Text input"><i data-type="note-txt" class="far fa-edit"></i></span>
+                    <span @click.stop.prevent="setType" title="Todos input"><i data-type="note-todos" class="fas fa-list-ul"></i></span>
+                    <span @click.stop.prevent="setType" title="Img input"><i data-type="note-img" class="far fa-image"></i></span>
+                    <span @click.stop.prevent="setType" title="Video input"><i data-type="note-vid" class="fab fa-youtube"></i></span>
                 </div>
                 <input type="submit" value="Submit" />
             </form>
@@ -40,9 +40,15 @@ export default {
         },
         saveNote() {
             this.$emit('noteSaved', this.note)
-            msgService.sendMsg('success', 'Note was successfully added.')
             this.note.title = ''
             this.note.txt = ''
         }
     },
+    computed: {
+        setPlaceHolder() {
+            if (this.note.type === 'note-txt') return 'What\'s on your mind...'
+            if (this.note.type === 'note-todos') return 'Use commas to separate todos'
+            else return 'Insert your desired URL'
+        }
+    }
 }

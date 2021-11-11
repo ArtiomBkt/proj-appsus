@@ -6,7 +6,8 @@ export const noteService = {
     getById,
     pinNote,
     removeNote,
-    addNote
+    addNote,
+    editNote
 }
 
 const NOTE_STORAGE_KEY = 'notesStorage'
@@ -33,21 +34,32 @@ function removeNote(noteId) {
 }
 
 function addNote(note) {
+    // return Promise.reject()
     const { title, txt, type } = note
     let newNote = {
         id: utilService.makeId(),
         info: {},
+        style: {
+            backgroundColor: ''
+        },
         isPinned: false,
+        isEditing: false,
         type,
-        style: null
     }
-    if (note.type === 'note-txt') newNote.info['txt'] = txt
+    if (note.type === 'note-txt') {
+        newNote.info['title'] = title
+        newNote.info['txt'] = txt
+    }
     if (note.type === 'note-todos') newNote = _processTodosNote(newNote, txt, title)
     if (note.type === 'note-img' || note.type === 'note-vid') {
         newNote.info['title'] = title
         newNote.info['url'] = txt
     }
     return storageService.post(NOTE_STORAGE_KEY, newNote)
+}
+
+function editNote(note) {
+    return storageService.post(NOTE_STORAGE_KEY, note)
 }
 
 
@@ -93,8 +105,13 @@ const dummyNotes = [
         type: "note-txt",
         isPinned: false,
         info: {
-            txt: "Fullstack Me Baby!",
+            title: 'I FREAKING LOVE PROGRAMMING!',
+            txt: "Fullstack Me All The Way To The Bones Baby!!!!!",
         },
+        isEditing: false,
+        style: {
+            backgroundColor: ''
+        }
     },
     {
         id: utilService.makeId(),
@@ -107,6 +124,8 @@ const dummyNotes = [
             backgroundColor: "#00d" 
         },
         isPinned: false,
+        isEditing: false,
+
     },
     {
         id: utilService.makeId(),
@@ -119,6 +138,10 @@ const dummyNotes = [
             ],
         },
         isPinned: false,
+        isEditing: false,
+        style: {
+            backgroundColor: ''
+        }
     },
     {
         id: utilService.makeId(),
@@ -128,6 +151,10 @@ const dummyNotes = [
             url: 'https://www.youtube.com/embed/8aGhZQkoFbQ'
         },
         isPinned: false,
+        isEditing: false,
+        style: {
+            backgroundColor: ''
+        }
     },
     {
         id: utilService.makeId(),
@@ -143,6 +170,10 @@ const dummyNotes = [
             ],
         },
         isPinned: false,
+        isEditing: false,
+        style: {
+            backgroundColor: ''
+        }
     },
     {
         id: utilService.makeId(),
@@ -152,6 +183,10 @@ const dummyNotes = [
             title: 'Vue.js'
         },
         isPinned: false,
+        isEditing: false,
+        style: {
+            backgroundColor: ''
+        }
     },
 ]
 _saveNotes(dummyNotes)
