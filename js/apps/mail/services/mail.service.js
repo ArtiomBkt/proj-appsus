@@ -26,33 +26,14 @@ function createEmails() {
         title: 'First Mail',
         subject: 'Miss you!',
         body: 'Would love to catch up sometimes',
-        isRead: false,
         sentAt: 1551133930594,
         from: loggedinUser.email,
         to: 'momo@momo.com',
-        isStarred: false,
-      },
-      {
-        id: 'e102',
-        title: 'Second Mail',
-        subject: 'This is appSus!',
-        body: 'No time for missing me',
         isRead: false,
-        sentAt: 1551133930594,
-        from: loggedinUser.email,
-        to: 'momo@momo.com',
+        isSent: false,
         isStarred: false,
-      },
-      {
-        id: 'e103',
-        title: 'Third Mail',
-        subject: 'Much love for sprints',
-        body: 'oh yeah much love',
-        isRead: false,
-        sentAt: 1551133930594,
-        from: loggedinUser.email,
-        to: 'momo@momo.com',
-        isStarred: false,
+        isDraft: false,
+        isTrash: false,
       },
     ]
     utilService.saveToStorage(MAILS_KEY, gMails)
@@ -60,8 +41,18 @@ function createEmails() {
   return gMails
 }
 
-function query() {
-  return storageService.query(MAILS_KEY)
+function query(criteria) {
+  return storageService.query(MAILS_KEY).then((mails) => {
+    const folder = criteria.folder
+    if (folder === 'inbox')
+      return mails.filter((mail) => !mail.isSent && !mail.isTrash)
+    if (folder === 'sent') return mails.filter((mail) => mail.isSent)
+    if (folder === 'read') return mails.filter((mail) => mail.isRead)
+    if (folder === 'unread') return mails.filter((mail) => !mail.isRead)
+    if (folder === 'starred') return mails.filter((mail) => mail.isStarred)
+    if (folder === 'drafts') return mails.filter((mail) => mail.isDraft)
+    if (folder === 'trash') return mails.filter((mail) => mail.isTrash)
+  })
 }
 
 function save(mail) {
@@ -81,11 +72,20 @@ function readMail(mailId) {
 }
 
 function removeEmail(mailId) {
-  return storageService.remove(MAILS_KEY, mailId)
+  getMailById(mailId).then((mail) => {
+    if (!mail.isTrash) {
+      mail.isTrash = true
+      save(mail)
+    } else return storageService.remove(MAILS_KEY, mailId)
+  })
 }
 
 function composeMail(mail) {
+  mail.isSent = true
   mail.isRead = false
+  mail.isStarred = false
+  mail.isDraft = false
+  mail.isTrash = false
   mail.sentAt = Date.now()
   mail.from = loggedinUser.email
   return save(mail)

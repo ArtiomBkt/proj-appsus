@@ -16,7 +16,38 @@ const routes = [
   {
     path: '/mail',
     component: mailPage,
+    children: [
+      {
+        name: 'inbox',
+        path: 'inbox',
+      },
+      {
+        name: 'starred',
+        path: 'starred',
+      },
+      {
+        name: 'sent',
+        path: 'sent',
+      },
+      {
+        name: 'drafts',
+        path: 'drafts',
+      },
+      {
+        name: 'trash',
+        path: 'trash',
+      },
+      {
+        name: 'read',
+        path: 'read',
+      },
+      {
+        name: 'unread',
+        path: 'unread',
+      },
+    ],
   },
+
   {
     path: '/mail/:mailId',
     component: mailDetails,

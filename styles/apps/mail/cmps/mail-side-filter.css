@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   width: 250px;
   gap: 5px;
   margin-right: 15px;
@@ -22,6 +21,10 @@
 .mail-side-filter > *:hover {
   background-color: #e0e0e0;
   transform: ease-in;
+}
+
+.router-link-active {
+  color: red;
 }
 
 .compose-btn {

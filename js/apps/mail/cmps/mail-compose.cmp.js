@@ -27,6 +27,7 @@ export default {
       this.clear()
     },
     clear() {
+      this.mail.title = ''
       this.mail.to = ''
       this.mail.subject = ''
       this.mail.body = ''

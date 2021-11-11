@@ -16,7 +16,7 @@ export default {
             <p>isRead: {{mail.isRead}}</p>
             <p>isStarred: {{mail.isStarred}}</p>
             <button @click="deleteMail(mail.id)">Delete</button>
-            <router-link to="/mail">Back</router-link>
+            <a @click="$router.go(-1)">Back</a>
         </template>
     </section>
     `,

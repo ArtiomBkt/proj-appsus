@@ -3,9 +3,9 @@ export default {
   props: ['mail'],
   template: `
     <router-link :to='/mail/+this.mail.id' class="mail-route">
-        <section class="mail-container" :class="isReadBgc" @click.self="read(mail.id)">
+        <section class="mail-container" :class="isReadBgc" @click="read(mail.id)">
           <div class="mail-content">
-            <span class="far fa-star mail-star" :class="colorStar" @click.stop.prevent="toggleStar(mail.id)"></span>
+            <span class="fa fa-star mail-star" :class="colorStar" @click.stop.prevent="toggleStar(mail.id)"></span>
             <span>{{mail.title}}</span>
             <span>{{mail.subject}}</span>
             </div>

@@ -1,6 +1,6 @@
 import { mailService } from '../services/mail.service.js'
 import mailList from '../cmps/mail-list.cmp.js'
-import mailTopFilter from '../cmps/mail-top-filter.cmp.js'
+import mailTopFilter from '../cmps/mail-top-search.cmp.js'
 import mailSideFilter from '../cmps/mail-side-filter.cmp.js'
 import mailFolderList from '../cmps/mail-folder-list.cmp.js'
 import mailCompose from '../cmps/mail-compose.cmp.js'
@@ -17,9 +17,9 @@ export default {
   },
   template: `
         <section class="mail-index">
-          <mail-side-filter @filtered="setFilter" />
+          <mail-side-filter  />
           <div class="layout-wrapper">
-            <mail-top-filter @filtered="setFilter" />
+            <mail-top-filter @searched="setSearch" />
             <mail-folder-list @sorted="setSort" />
             <span>Unread Emails: {{unReadMails}}</span>
             <mail-list 
@@ -35,24 +35,24 @@ export default {
   data() {
     return {
       mails: [],
-      filterBy: null,
-      sortBy: {
-        sortKey: 'title',
+      searchBy: null,
+      criteria: {
+        folder: null,
       },
     }
   },
-  created() {
-    this.loadMails()
-  },
   methods: {
     loadMails() {
-      mailService.query().then((mails) => (this.mails = mails))
+      mailService.query(this.criteria).then((mails) => (this.mails = mails))
     },
     readMail(mailId) {
+      const idx = this.mails.findIndex((mail) => mail.id === mailId)
+      this.mails[idx].isRead = true
       mailService.readMail(mailId)
     },
-    setFilter(filterBy) {
-      this.filterBy = filterBy
+    setSearch(searchBy) {
+      console.log(searchBy)
+      this.searchBy = searchBy
     },
     setSort(sortBy) {
       this.sortBy = sortBy
@@ -71,43 +71,21 @@ export default {
       mailService.toggleRead(mailId)
     },
     removeMail(mailId) {
-      const idx = this.mails.findIndex((mail) => mail.id === mailId)
-      this.mails.splice(idx, 1)
-      mailService.removeEmail(mailId).then()
+      // const idx = this.mails.findIndex((mail) => mail.id === mailId)
+      // this.mails.splice(idx, 1)
+      mailService.removeEmail(mailId)
     },
   },
   computed: {
     mailsToShow() {
       if (this.sortBy) this.sortMails
-      // || !this.filterBy.bySubject
-      if (!this.filterBy) return this.mails
-      const { bySubject, filterBtn } = this.filterBy
-      if (bySubject) {
-        const searchStr = bySubject.toLowerCase()
+      if (!this.searchBy || !this.searchBy.byTitle) return this.mails
+      const { byTitle } = this.searchBy
+      if (byTitle) {
+        console.log('title')
+        const searchStr = byTitle.toLowerCase()
         const mailsToShow = this.mails.filter((mail) => {
-          return mail.subject.toLowerCase().includes(searchStr)
-        })
-        return mailsToShow
-      }
-      const searchStr = filterBtn.toLowerCase()
-      if (searchStr === 'inbox') return this.mails
-
-      if (searchStr === 'read') {
-        const mailsToShow = this.mails.filter((mail) => {
-          return mail.isRead
-        })
-        return mailsToShow
-      }
-
-      if (searchStr === 'unread') {
-        const mailsToShow = this.mails.filter((mail) => {
-          return !mail.isRead
-        })
-        return mailsToShow
-      }
-      if (searchStr === 'starred') {
-        const mailsToShow = this.mails.filter((mail) => {
-          return mail.isStarred
+          return mail.title.toLowerCase().includes(searchStr)
         })
         return mailsToShow
       }
@@ -128,6 +106,15 @@ export default {
           return a.sentAt < b.sentAt ? 1 : -1
         })
       }
+    },
+  },
+  watch: {
+    '$route.name': {
+      immediate: true,
+      handler() {
+        this.criteria.folder = this.$route.name
+        this.loadMails()
+      },
     },
   },
 }
