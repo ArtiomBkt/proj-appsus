@@ -12,12 +12,12 @@ export default {
         <div v-for="note in notes" :key="note.id" class="note-card">
             <note-preview :note="note" @click.native="previewNote" />
             <div class="note-actions">
-                <span @click="notePin(note.id); $emit('listChanged')">pin</span>
-                <span @click="noteColorChange(note.id); $emit('listChanged')">color</span>
-                <span @click="noteShare(note.id); $emit('listChanged')">share</span>
-                <span @click="noteEdit(note.id); $emit('listChanged')">edit</span>
-                <span @click="noteDuplicate(note.id); $emit('listChanged')">duplicate</span>
-                <span @click="noteRemove(note.id)">remove</span>
+                <span @click.prevent="notePin(note.id)">pin</span>
+                <span @click.prevent="noteColorChange(note.id)">color</span>
+                <span @click.prevent="noteShare(note.id)">share</span>
+                <span @click.prevent="noteEdit(note.id)">edit</span>
+                <span @click.prevent="noteDuplicate(note.id)">duplicate</span>
+                <span @click.prevent="noteRemove(note.id)">remove</span>
             </div>
         </div>
     </section>
