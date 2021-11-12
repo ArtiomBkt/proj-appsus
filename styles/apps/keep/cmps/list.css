@@ -1,4 +1,21 @@
-.notes-list {
-    /* column-count: 2; */
-    column-gap: 10px;
+.masonry {
+    column-count: 3;
+    gap: 25px;
+}
+
+.pinned-notes {
+    height: 100%;
+    margin-bottom: 50px;
+}
+
+@media screen and (max-width: 1024px) {
+    .masonry {
+        column-count: 2;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .masonry {
+        column-count: 1;
+    }
 }

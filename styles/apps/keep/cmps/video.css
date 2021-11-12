@@ -1,5 +1,3 @@
-iframe {
-    display: flex;
-    max-width: 95%;
-    height: auto;
+video {
+    width: 90%;
 }

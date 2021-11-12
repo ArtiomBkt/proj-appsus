@@ -1,4 +1,5 @@
 import { msgService } from './../../../services/msg.service.js'
+import { eventBus } from './../../../services/event-bus.service.js'
 
 export default {
     name: 'note-add',
@@ -8,10 +9,10 @@ export default {
                 <div class="input-row">
                     <!-- <input type="text" v-model="note.title" placeholder="Title" /> -->
                     <input type="text" v-model="note.txt" :placeholder="setPlaceHolder" />
-                    <span @click.stop.prevent="setType" title="Text input"><i data-type="note-txt" class="far fa-edit"></i></span>
-                    <span @click.stop.prevent="setType" title="Todos input"><i data-type="note-todos" class="fas fa-list-ul"></i></span>
-                    <span @click.stop.prevent="setType" title="Img input"><i data-type="note-img" class="far fa-image"></i></span>
-                    <span @click.stop.prevent="setType" title="Video input"><i data-type="note-vid" class="fab fa-youtube"></i></span>
+                    <span @click.stop.prevent="setType" data-type="note-txt" title="Text input"><i class="far fa-edit"></i></span>
+                    <span @click.stop.prevent="setType" data-type="note-todos" title="Todos input"><i class="fas fa-list-ul"></i></span>
+                    <span @click.stop.prevent="setType" data-type="note-img" title="Img input"><i class="far fa-image"></i></span>
+                    <span @click.stop.prevent="setType" data-type="note-vid" title="Video input"><i class="fab fa-youtube"></i></span>
                 </div>
                 <input type="submit" value="Submit" />
             </form>
@@ -23,8 +24,7 @@ export default {
                 title: 's',
                 txt: '',
                 type: 'note-txt'
-            },
-            errors: []
+            }
         }
     },
     methods: {
@@ -45,12 +45,13 @@ export default {
                 else console.log('error');
                 console.log(this.note.type);
             }
-            else this.saveNote()
+            this.saveNote()
         },
         saveNote() {
-            this.$emit('noteSaved', this.note)
-            this.note.title = ''
+            this.$emit('noteSaved', {...this.note})
             this.note.txt = ''
+            // this.note.title = ''
+            eventBus.$emit('listChanged')
         }
     },
     computed: {

@@ -1,29 +1,53 @@
 .note-card {
-    /* width: 240px; */
-    /* padding: 5px; */
-
-    margin: 0;
-    display: grid;
-    grid-template-rows: 1fr auto;
-    margin-bottom: 10px;
     break-inside: avoid;
 
     box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
     
-    background-color: linen;
+    background-color: #faf0e6;
     color: #2c2c2c;
     font-size: 1.2rem;
     font-weight: 500;
 }
 
-.note-video {
+.note-video, .note-img {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.note-img {
+.note-card:hover {
+    /* transform: scale(1.012); */
+}
+
+.note-card:hover .actions {
+    visibility: visible;
+}
+
+.actions {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-evenly;
+
+    position: relative;
+    visibility: hidden;
+    padding-top: 1em;
+}
+
+.actions:hover {
+    cursor: pointer;
+}
+
+.color-picker {
+    position: absolute;
+    right: 0;
+    top: 2em;
+    padding-top: 10px;
+}
+
+.color-blob {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 1px solid rgb(230, 230, 230);
 }

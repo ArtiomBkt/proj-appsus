@@ -13,20 +13,42 @@ export default {
     },
     template: `
     <section class="notes-list">
-        <div v-for="note in notes" :key="note.id" class="note-card">
-            <note-preview :note="note" @click.native="previewNote" />
-            <note-edit :note="note" v-if="note.isEditing" @noteSaved="noteEdit" />
-            <div class="note-actions">
+        <div v-if="pinnedNotes.length" class="pinned-notes masonry">
+            <h3>Pinned Notes</h3>
+            <div v-for="(note, idx) in pinnedNotes" class="note-card" :style="note.style">
+                <note-preview :note="note" />
+                <note-edit :note="note" v-if="note.isEditing" @noteSaved="noteEdit" />
+                <note-actions :note="note" />
+            </div>
+        </div>
+        <div v-if="otherNotes.length" class="other-notes masonry">
+            <h3>Notes</h3>
+            <div v-for="(note, idx) in otherNotes" class="note-card" :style="note.style">
+                <note-preview :note="note" />
+                <note-edit :note="note" v-if="note.isEditing" @noteSaved="noteEdit" />
                 <note-actions :note="note" />
             </div>
         </div>
     </section>
     `,
+    data() {
+        return {
+            pinnedNotes: null,
+            otherNotes: null
+        }
+    },
+    created() {
+        this.getPinnedNotes()
+        this.getNotes()
+    },
     methods: {
-        previewNote() {
-            
+        getPinnedNotes() {
+            let filtered = this.notes.filter(note => note.isPinned)
+            this.pinnedNotes = filtered
+        },
+        getNotes() {
+            let filtered = this.notes.filter(note => !note.isPinned)
+            this.otherNotes = filtered
         }
     },
 }
-
-// v-if="isNoteEditing"

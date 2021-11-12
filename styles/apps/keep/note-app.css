@@ -8,10 +8,11 @@
 
 .note-app {
     display: flex;
+    transition: .3s;
 
-    margin-top: 15px;
+    margin: 15px;
 }
 
 .main-keep-container {
-    width: 70%;
+    width: 100%;
 }

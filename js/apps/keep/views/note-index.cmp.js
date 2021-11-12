@@ -20,7 +20,7 @@ export default {
             </aside>
             <div class="main-keep-container">
                 <note-add @noteSaved="addNote" />
-                <note-list :notes="notes" />
+                <note-list v-if="notes" :notes="notesToShow" />
             </div>
         </section>
     `,
@@ -33,6 +33,9 @@ export default {
         this.loadNotes()
         eventBus.$on('listChanged', this.loadNotes)
     },
+    // destroyed() {
+    //     eventBus.$off('listChanged')
+    // },
     methods: {
         loadNotes() {
             noteService.query()
@@ -40,9 +43,17 @@ export default {
         },
         addNote(newNote) {
             noteService.addNote(newNote)
-                .then(note => this.notes.push(note))
+                .then(note => {
+                    this.notes.unshift(note)
+                })
                 .then(msgService.sendMsg('success', 'Note was successfully added.'))
                 .catch(() => msgService.sendMsg('error', 'Something went wrong, please try again.'))
         },
     },
+    computed: {
+        notesToShow() {
+            console.log(this.notes)
+            return this.notes
+        }
+    }
 }

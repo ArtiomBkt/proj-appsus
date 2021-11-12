@@ -20,17 +20,11 @@ function getById(noteId) {
     return storageService.get(NOTE_STORAGE_KEY, noteId)
 }
 
-function pinNote(noteId) {
-    getById(noteId)
-        .then(note => {
-            note.isPinned = !note.isPinned
-            storageService.put(NOTE_STORAGE_KEY, note)
-            // _manipulateNoteIdx(note)
-        })
-}
-
-function colorNote(noteId) {
-    
+function pinNote(note) {
+    console.log(note);
+    note.isPinned = !note.isPinned
+    storageService.put(NOTE_STORAGE_KEY, note)
+        
 }
 
 function removeNote(noteId) {
@@ -143,7 +137,7 @@ const dummyNotes = [
                 { txt: "Coding power", doneAt: null },
             ],
         },
-        isPinned: false,
+        isPinned: true,
         isEditing: false,
         style: {
             backgroundColor: ''
@@ -175,7 +169,7 @@ const dummyNotes = [
                 { txt: "Coding power", doneAt: null },
             ],
         },
-        isPinned: false,
+        isPinned: true,
         isEditing: false,
         style: {
             backgroundColor: ''
