@@ -10,6 +10,10 @@
   border-bottom: 2px solid #f3f5f7;
 }
 
+.mail-container:hover {
+  background-color: gold;
+}
+
 .mail-content {
   flex-basis: 100%;
 }
@@ -67,5 +71,5 @@
 }
 
 .mail-from {
-  padding: 60px;
+  padding-inline-end: 60px;
 }
