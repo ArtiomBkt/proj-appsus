@@ -41,3 +41,35 @@
   box-shadow: 0 1px 3px 0 rgb(60 64 67 / 30%), 0 4px 8px 3px rgb(60 64 67 / 15%);
   background-color: #fafafb;
 }
+
+.progress-title {
+  margin: 0;
+  height: 10px;
+  text-align: center;
+}
+
+.progress-title:hover {
+  background: none;
+  cursor: text;
+}
+
+.progress-bar {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+}
+
+.progress-bar span {
+  position: absolute;
+  display: inline-block;
+  color: lightgray;
+  text-align: left;
+  padding: 20px;
+}
+
+progress {
+  width: 100%;
+  min-height: 40px;
+  padding: 10px;
+}
