@@ -1,12 +1,18 @@
 export default {
-  name: 'mail-folder-list',
+  name: 'mail-sort-list',
   template: `
-    <select @change="onSelect($event)">
+    <section class="sort-container">
+      <button @click="onSelect($event)" value="from">From</button>
+      <button @click="onSelect($event)" value="title">Title</button>
+      <button @click="onSelect($event)" value="subject">Subject</button>
+      <button @click="onSelect($event)" value="date">Date</button>
+    </section>
+    <!-- <select @change="onSelect($event)">
         <option value="title">Title</option>
         <option value="date">Date</option>
         <option value="subject">Subject</option>
         <option value="from">From</option>
-    </select>
+    </select> -->
   `,
   data() {
     return {

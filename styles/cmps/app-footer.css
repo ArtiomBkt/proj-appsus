@@ -1,7 +1,12 @@
 footer {
-    width: 100%;
-    height: 100px;
-
-    background-color: #696969;
-    color: linen;
+  width: 100%;
+  height: 5vh;
+  position: absolute;
+  bottom: 0;
+  background-color: #696969;
+  color: linen;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
 }

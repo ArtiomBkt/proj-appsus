@@ -1,26 +1,33 @@
 .mail-side-filter {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 250px;
+  min-width: 250px;
+  max-width: 250px;
   gap: 5px;
   margin-right: 15px;
+  justify-content: space-between;
 }
 
 .mail-side-filter > * {
   all: unset;
-  height: 40px;
-  font-size: 1.2rem;
+  height: 52px;
+  font-size: 0.875rem;
   cursor: pointer;
   width: 100%;
   transition: ease-in 0.1s;
   color: #808080;
-  padding-inline-start: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 0.25px;
+  gap: 10px;
+  border-bottom: 2px solid #f3f5f7;
 }
 
 .mail-side-filter > *:hover {
   background-color: #e0e0e0;
   transform: ease-in;
+  color: red;
 }
 
 .router-link-active {
@@ -30,11 +37,9 @@
 .compose-btn {
   box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
   border-radius: 24px;
-  letter-spacing: 0.25px;
-  height: 52px;
-  width: 100%;
   text-align: center;
   color: #3c4043;
+  font-size: 1.1em;
 }
 
 .compose-btn:hover {
@@ -46,30 +51,29 @@
   margin: 0;
   height: 10px;
   text-align: center;
+  border: none;
+  padding: 10px;
 }
 
-.progress-title:hover {
+.progress-title:hover,
+.progress-bar:hover {
   background: none;
   cursor: text;
+  color: black;
 }
 
 .progress-bar {
-  display: flex;
-  align-items: center;
   position: relative;
-  width: 100%;
 }
 
 .progress-bar span {
   position: absolute;
-  display: inline-block;
   color: lightgray;
-  text-align: left;
-  padding: 20px;
+  padding: 10px;
 }
 
 progress {
   width: 100%;
-  min-height: 40px;
+  min-height: 70px;
   padding: 10px;
 }

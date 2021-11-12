@@ -6,15 +6,10 @@ export default {
   template: `
     <section class="mail-details">
         <template v-if="mail">
-            <p>id: {{mail.id}}</p>
-            <p>title: {{mail.title}}</p>
-            <p>from: {{mail.from}}</p>
-            <p>to: {{mail.to}}</p>
-            <p>subject: {{mail.subject}}</p>
-            <p>body: {{mail.body}}</p>
-            <p>updatedAt: {{mail.updatedAt}}</p>
-            <p>isRead: {{mail.isRead}}</p>
-            <p>isStarred: {{mail.isStarred}}</p>
+            <p>Title: {{mail.title}}</p>
+            <p>To: {{mail.to}}</p>
+            <p>Subject: {{mail.subject}}</p>
+            <p>{{mail.body}}</p>
             <button @click="deleteMail(mail.id)">Delete</button>
             <a @click="$router.go(-1)">Back</a>
         </template>

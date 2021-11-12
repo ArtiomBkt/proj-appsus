@@ -10,7 +10,7 @@ const options = {
   components: {
     appHeader,
     appFooter,
-    flashMsg
+    flashMsg,
   },
 
   template: `
@@ -18,7 +18,7 @@ const options = {
             <flash-msg />
             <app-header />
             <router-view />
-            <app-footer />
+            <!-- <app-footer /> -->
         </section> 
         `,
 }
