@@ -15,7 +15,7 @@ export default {
             <span class="color-picker" v-if="colorChangeOn">
                 <template v-for="color in bgcolors">
                     <span :style="{'background-color': color.value}" 
-                        :class="[setColorClass(color.name), color.name]" class="color-blob"
+                        :class="[setColorClass(color.value), color.name]" class="color-blob"
                         @click="colorChange(color.value)">
                     </span>
                 </template>
@@ -37,34 +37,25 @@ export default {
     },
     methods: {
         notePin() {
-            noteService.pinNote(this.note)
-            eventBus.$emit('listChanged')
+            this.$emit('notePinned', this.note.id)
+        },
+        colorChange(color) {
+            this.$emit('noteColored', this.note.id, color)
+        },
+        noteShare() {
+            this.$emit('noteShare', this.note.id)
+        },
+        noteEdit() {
+            this.$emit('noteEdit', this.note.id)
+        },
+        noteDuplicate() {
+            this.$emit('noteDuplicate', this.note.id)
+        },
+        noteRemove() {
+            this.$emit('noteRemove', this.note.id)
         },
         toggleColorsMenu() {
             this.colorChangeOn = !this.colorChangeOn
-        },
-        colorChange(color) {
-            this.note.style.backgroundColor = color
-            this.colorChangeOn = false
-            eventBus.$emit('listChanged')
-        },
-        noteShare(noteId) {
-            console.log('share' , noteId)
-        },
-        noteEdit(note) {
-            if (note.isEditing) {
-                note.isEditing = false
-                return noteService.editNote(note)
-            }
-            else note.isEditing = !note.isEditing
-        },
-        noteDuplicate(noteId) {
-            console.log('duplicate',noteId)
-        },
-        noteRemove() {
-            noteService.removeNote(this.note.id)
-                .then(eventBus.$emit('listChanged'))
-                .then(msgService.sendMsg('success', 'Note removed successfully.'))
         },
         setColorClass(color) {
             return (this.note.style.backgroundColor === color) ? 'selected' : ''

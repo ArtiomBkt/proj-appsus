@@ -7,7 +7,9 @@ export const noteService = {
     pinNote,
     removeNote,
     addNote,
-    editNote
+    editNote,
+    colorNote,
+    dupNote
 }
 
 const NOTE_STORAGE_KEY = 'notesStorage'
@@ -20,15 +22,37 @@ function getById(noteId) {
     return storageService.get(NOTE_STORAGE_KEY, noteId)
 }
 
-function pinNote(note) {
-    console.log(note);
-    note.isPinned = !note.isPinned
-    storageService.put(NOTE_STORAGE_KEY, note)
-        
+function pinNote(noteId) {
+    return getById(noteId).then(note => {
+        note.isPinned = !note.isPinned
+        return _save(note)
+    })
+}
+
+function colorNote(noteId, color) {
+    return getById(noteId).then(note => {
+        note.style.backgroundColor = color
+        return _save(note)
+    })
 }
 
 function removeNote(noteId) {
     return storageService.remove(NOTE_STORAGE_KEY, noteId)
+}
+
+function dupNote(note) {
+    return storageService.post(NOTE_STORAGE_KEY, note)
+}
+
+function editNote(editedNote) {
+    const { title, txt, type } = editedNote
+    return getById(editedNote.id).then(note => {
+        note.type = type
+        note.info.title = title
+        if (note.info.type === 'note-txt' || note.info.type === 'note-todos') note.info.txt = txt
+        else note.info.url = txt
+        return _save(note)
+    })
 }
 
 function addNote(note) {
@@ -58,10 +82,6 @@ function addNote(note) {
     return storageService.post(NOTE_STORAGE_KEY, newNote)
 }
 
-function editNote(note) {
-    return storageService.post(NOTE_STORAGE_KEY, note)
-}
-
 
 function _save(note) {
     if (note.id) return storageService.put(NOTE_STORAGE_KEY, note)
@@ -75,7 +95,7 @@ function _processTodosNote(note, txt, title) {
         todos.push({ txt: todo, doneAt: null })
     }
     note.info.todos = todos
-    note.info.label = title
+    note.info.title = title
     return note
 }
 
@@ -121,7 +141,7 @@ const dummyNotes = [
             title: "Bobi and Me" 
         },
         style: { 
-            backgroundColor: "#00d" 
+            backgroundColor: ''
         },
         isPinned: false,
         isEditing: false,
@@ -131,7 +151,7 @@ const dummyNotes = [
         id: utilService.makeId(),
         type: "note-todos",
         info: {
-            label: "Get my stuff together",
+            title: "Get my stuff together",
             todos: [
                 { txt: "Driving liscence", doneAt: null },
                 { txt: "Coding power", doneAt: null },
@@ -160,7 +180,7 @@ const dummyNotes = [
         id: utilService.makeId(),
         type: "note-todos",
         info: {
-            label: "Get my stuff together",
+            title: "Get my stuff together",
             todos: [
                 { txt: "Driving liscence", doneAt: null },
                 { txt: "Coding power", doneAt: null },

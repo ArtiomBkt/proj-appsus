@@ -1,6 +1,8 @@
 .note-card {
     break-inside: avoid;
 
+    margin: 15px;
+
     box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
     
     background-color: #faf0e6;
@@ -13,6 +15,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.note-video {
+    min-width: 250px;
+    height: 200px;
 }
 
 .note-card:hover {

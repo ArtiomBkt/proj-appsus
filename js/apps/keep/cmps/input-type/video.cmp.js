@@ -3,8 +3,7 @@ export default {
     props: ['info'],
     template: `
         <div class="note-video">
-            <h3 class="note-title">{{ info.title }}</h3>
-            <video :src="info.url" controls></video>
+            <iframe :src="info.url"></iframe>
         </div>
     `,
 }

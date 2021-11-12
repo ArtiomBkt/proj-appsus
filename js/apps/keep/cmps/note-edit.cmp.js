@@ -15,6 +15,7 @@ export default {
     data() {
         return {
             newInfo: {
+                id: '',
                 title: '',
                 txt: '',
                 type: null
@@ -29,19 +30,20 @@ export default {
             let title = ''
             let txt = ''
             let type = this.note.type
+            let id = this.note.id
             if (this.note.type === 'note-txt') {
                 title = this.note.info.title
                 txt = this.note.info.txt
             } 
             else if (this.note.type === 'note-todos') {
-                title = this.note.info.label
+                title = this.note.info.title
                 txt = this.note.info.todos.map(todo => todo.txt).join(', ')
             }
             else if (this.note.type === 'note-img' || this.note.type === 'note-vid') {
                 title = this.note.info.title
                 txt = this.note.info.url
             }
-            return { title, txt, type }
+            return { title, txt, type, id }
         },
         editNote() {
             this.$emit('noteSaved', this.newInfo)

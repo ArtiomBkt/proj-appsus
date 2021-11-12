@@ -1,3 +1,26 @@
-video {
-    width: 90%;
+iframe {
+    position: absolute;
+    width: inherit;
+    height: inherit;
+}
+
+@media screen and (min-width: 1008px) and (max-width: 1280px) {
+    iframe {
+        width: 250px;
+        height: 150px
+    }
+}
+
+@media screen and (min-width: 664px) and (max-width: 905px) {
+    iframe {
+        width: 250px;
+        height: 150px
+    }
+}
+
+@media screen and (max-width: 500px) {
+    iframe {
+        width: 250px;
+        height: 150px
+    }
 }
