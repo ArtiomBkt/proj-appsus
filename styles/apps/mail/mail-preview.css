@@ -14,6 +14,8 @@
 .mail-content {
   flex-basis: 100%;
   font-size: 20px;
+  /* display: flex; */
+  /* justify-content: space-between; */
 }
 
 .mail-content .mail-star:hover {

@@ -1,15 +1,22 @@
+import longText from '../../../cmps/long-txt.cmp.js'
+
 export default {
   name: 'mail-preview',
   props: ['mail'],
+  components: {
+    longText,
+  },
   template: `
-    <!-- <router-link :to='/mail/+this.mail.id' class="mail-route"> -->
         <section class="mail-container" :class="isReadBgc" @click="read(mail.id)" >
           <div class="mail-content">
-            <span class="fa fa-star mail-star" :class="colorStar" @click.stop.prevent="toggleStar(mail.id)"></span>
-            <span>{{mail.title}}</span>
-            <span>{{mail.subject}}</span>
-            </div>
-            <section class="mail-actions">
+          <span class="mail-star" :class="colorStar" @click.stop.prevent="toggleStar(mail.id)"> 
+          </span>
+              <span>{{mail.from}}</span>
+              <long-text v-bind:txt="mail.subject" /> 
+              <!-- <span>{{mail.subject}}</span> -->
+              <span>{{timeToShow}}</span>
+          </div>
+          <section class="mail-actions">
               <span @click.stop.prevent="toggleRead(mail.id)">
               <i :class="toggleEnvelope" class="envelope-icon">
               </i>
@@ -19,7 +26,6 @@ export default {
               </span>
           </section>
       </section>
-    <!-- </router-link> -->
   `,
 
   methods: {
@@ -38,13 +44,16 @@ export default {
   },
   computed: {
     isReadBgc() {
-      return this.mail.isRead ? 'mail-read' : 'mail-unread'
+      return this.mail.isRead ? 'mail-read ' : 'mail-unread'
     },
     colorStar() {
-      return this.mail.isStarred ? 'checked' : ''
+      return this.mail.isStarred ? 'fa fa-star checked' : 'far fa-star'
     },
     toggleEnvelope() {
       return this.mail.isRead ? 'fas fa-envelope-open' : 'fas fa-envelope'
+    },
+    timeToShow() {
+      return this.mail.updatedAt
     },
   },
 }

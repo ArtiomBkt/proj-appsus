@@ -4,6 +4,8 @@ export default {
     <select @change="onSelect($event)">
         <option value="title">Title</option>
         <option value="date">Date</option>
+        <option value="subject">Subject</option>
+        <option value="from">From</option>
     </select>
   `,
   data() {

@@ -17,7 +17,7 @@ export default {
   },
   template: `
         <section class="mail-index">
-          <mail-side-filter @compose="compose" :mails="mails"/>
+          <mail-side-filter @compose="openCompose" :foldersMap="foldersMap"/>
           <div class="layout-wrapper">
             <mail-top-filter @searched="setSearch" />
             <mail-folder-list @sorted="setSort" />
@@ -25,26 +25,29 @@ export default {
             @read-mail="readMail" 
             @toggle-star="toggleStar"
             @toggle-read="toggleRead"
-            @remove-mail="removeMail" 
+            @remove-mail="removeMail"
             :mails="mailsToShow" />
-          <mail-compose v-show="showCompose" @send-mail="sendMail" @close-compose="closeCompose"/>
+          <mail-compose v-if="showCompose" :mailTemplate="mailTemplate" @send-mail="sendMail" @autosave-mail="autoSave" @close-compose="closeCompose" />
         </div>
         </section>
     `,
   data() {
     return {
       mails: [],
+      foldersMap: {},
       searchBy: null,
       sortBy: null,
       criteria: {
         folder: null,
       },
       showCompose: false,
+      mailTemplate: null,
     }
   },
   methods: {
     loadMails() {
       mailService.query(this.criteria).then((mails) => (this.mails = mails))
+      mailService.getMailMap().then((mailsMap) => (this.foldersMap = mailsMap))
     },
     readMail(mailId) {
       const idx = this.mails.findIndex((mail) => mail.id === mailId)
@@ -57,8 +60,11 @@ export default {
     setSort(sortBy) {
       this.sortBy = sortBy
     },
-    compose() {
-      this.showCompose = true
+    openCompose() {
+      mailService.createMail().then((mailTemplate) => {
+        this.mailTemplate = mailTemplate
+        this.showCompose = true
+      })
     },
     closeCompose() {
       this.showCompose = false
@@ -70,17 +76,20 @@ export default {
     toggleStar(mailId) {
       const idx = this.mails.findIndex((mail) => mail.id === mailId)
       this.mails[idx].isStarred = !this.mails[idx].isStarred
-      mailService.toggleStar(mailId)
+      mailService.toggleStar(mailId).then(this.loadMails)
     },
     toggleRead(mailId) {
       const idx = this.mails.findIndex((mail) => mail.id === mailId)
       this.mails[idx].isRead = !this.mails[idx].isRead
-      mailService.toggleRead(mailId)
+      mailService.toggleRead(mailId).then(this.loadMails)
     },
     removeMail(mailId) {
       const idx = this.mails.findIndex((mail) => mail.id === mailId)
       this.mails.splice(idx, 1)
-      mailService.removeEmail(mailId)
+      mailService.removeEmail(mailId).then(this.loadMails)
+    },
+    autoSave(mail) {
+      mailService.autoSave(mail).then(this.loadMails)
     },
   },
   computed: {
@@ -98,12 +107,14 @@ export default {
     },
     sortMails() {
       return this.mails.sort((a, b) => {
-        if (this.sortBy.sortKey === 'title') {
+        if (this.sortBy.sortKey === 'title')
           return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1
-        }
-        if (this.sortBy.sortKey === 'date') {
-          return a.sentAt < b.sentAt ? 1 : -1
-        }
+        if (this.sortBy.sortKey === 'date')
+          return a.updatedAt < b.updatedAt ? 1 : -1
+        if (this.sortBy.sortKey === 'subject')
+          return a.subject.toLowerCase() > b.subject.toLowerCase() ? 1 : -1
+        if (this.sortBy.sortKey === 'from')
+          return a.from.toLowerCase() > b.from.toLowerCase() ? 1 : -1
       })
     },
   },
