@@ -12,7 +12,7 @@ export default {
             <p>to: {{mail.to}}</p>
             <p>subject: {{mail.subject}}</p>
             <p>body: {{mail.body}}</p>
-            <p>sentAt: {{mail.sentAt}}</p>
+            <p>updatedAt: {{mail.updatedAt}}</p>
             <p>isRead: {{mail.isRead}}</p>
             <p>isStarred: {{mail.isStarred}}</p>
             <button @click="deleteMail(mail.id)">Delete</button>
