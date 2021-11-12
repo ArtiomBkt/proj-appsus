@@ -17,17 +17,16 @@ export default {
   },
   template: `
         <section class="mail-index">
-          <mail-side-filter @compose="compose" />
+          <mail-side-filter @compose="compose" :mails="mails"/>
           <div class="layout-wrapper">
             <mail-top-filter @searched="setSearch" />
             <mail-folder-list @sorted="setSort" />
-            <span>Unread Emails: {{unReadMails}}</span>
             <mail-list 
             @read-mail="readMail" 
             @toggle-star="toggleStar"
             @toggle-read="toggleRead"
             @remove-mail="removeMail" 
-          :mails="mailsToShow" />
+            :mails="mailsToShow" />
           <mail-compose v-show="showCompose" @send-mail="sendMail" @close-compose="closeCompose"/>
         </div>
         </section>
@@ -53,7 +52,6 @@ export default {
       mailService.readMail(mailId)
     },
     setSearch(searchBy) {
-      console.log(searchBy)
       this.searchBy = searchBy
     },
     setSort(sortBy) {
@@ -80,8 +78,8 @@ export default {
       mailService.toggleRead(mailId)
     },
     removeMail(mailId) {
-      // const idx = this.mails.findIndex((mail) => mail.id === mailId)
-      // this.mails.splice(idx, 1)
+      const idx = this.mails.findIndex((mail) => mail.id === mailId)
+      this.mails.splice(idx, 1)
       mailService.removeEmail(mailId)
     },
   },
@@ -91,19 +89,12 @@ export default {
       if (!this.searchBy || !this.searchBy.byTitle) return this.mails
       const { byTitle } = this.searchBy
       if (byTitle) {
-        console.log('title')
         const searchStr = byTitle.toLowerCase()
         const mailsToShow = this.mails.filter((mail) => {
           return mail.title.toLowerCase().includes(searchStr)
         })
         return mailsToShow
       }
-    },
-    unReadMails() {
-      let count = this.mails.reduce((acc, mail) => {
-        return !mail.isRead ? acc + 1 : acc
-      }, 0)
-      return count
     },
     sortMails() {
       return this.mails.sort((a, b) => {
