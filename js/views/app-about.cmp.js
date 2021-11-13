@@ -4,7 +4,7 @@ export default {
         <section class="app-about">
             <div class="team-container">
                 
-                <img class="team-image" src="./../../assets/img/team/basel.jpg" />
+                <img class="team-image" src="./assets/img/team/basel.jpg" />
                     <h2>Basel Boulos</h2>
                 <div class="about-me">
                         <p>CODING ACADEMY</p>
@@ -17,7 +17,7 @@ export default {
             </div>
             <div class="team-container">
                 
-                <img class="team-image" src="./../../assets/img/team/artiom.jpg" />
+                <img class="team-image" src="./assets/img/team/artiom.jpg" />
                     <h2>Ariom Bukati</h2>
                 <div class="about-me">
                     <p>CODING ACADEMY</p>
