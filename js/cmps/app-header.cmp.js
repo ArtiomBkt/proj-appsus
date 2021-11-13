@@ -59,8 +59,8 @@ export default {
     },
     getHeaderLogo() {
       return this.mouseOver
-        ? './../../assets/img/vuejs-color.svg'
-        : './../../assets/img/vuejs-shadow.svg'
+        ? '../../../assets/img/vuejs-color.svg'
+        : '../../../assets/img/vuejs-shadow.svg'
     },
   },
 }
