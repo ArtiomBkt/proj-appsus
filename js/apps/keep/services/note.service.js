@@ -101,7 +101,8 @@ function getTemplateNote() {
 
 function prepareParams(note) {
     const subject = note.info.title
-    const body = note.info.txt || note.info.url || note.info.todos.map(todo => todo.txt).join(', ')
+    let body = note.info.txt || note.info.url || note.info.todos.map(todo => todo.txt).join(', ')
+    if (note.type === 'vid') body = `https://www.youtube.com/watch?v=${body}`
     return queryService.noteToMail(subject, body)
 }
 
