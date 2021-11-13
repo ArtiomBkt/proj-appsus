@@ -32,7 +32,9 @@ export default {
   created() {
     this.mail = this.mailTemplate
     this.myInterval = setInterval(() => {
-      if (this.mail.subject) this.$emit('autosave-mail', { ...this.mail })
+      if (this.mail.subject) {
+        this.$emit('autosave-mail', { ...this.mail })
+      }
     }, 5000)
   },
   methods: {

@@ -34,11 +34,9 @@ function query(criteria) {
     if (folder === 'unread') return mails.filter((mail) => !mail.isRead)
     if (folder === 'starred')
       return mails.filter((mail) => mail.isStarred && !mail.isTrash)
-    if (folder === 'drafts')
+    if (folder === 'drafts' || folder === 'compose')
       return mails.filter((mail) => mail.isDraft && !mail.isTrash)
     if (folder === 'trash') return mails.filter((mail) => mail.isTrash)
-    if (folder === 'compose')
-      return mails.filter((mail) => mail.isDraft && !mail.isTrash)
   })
 }
 
@@ -70,7 +68,6 @@ function createEmails() {
 
 function createMail() {
   const mail = {
-    id: utilService.makeId(),
     title: '',
     subject: '',
     body: '',
@@ -83,7 +80,14 @@ function createMail() {
     isTrash: false,
     updatedAt: new Date().toLocaleDateString(),
   }
-  return mail
+  // return mail
+  return save(mail)
+}
+
+function autoSave(mail) {
+  mail.isDraft = true
+  mail.updatedAt = new Date().toLocaleTimeString()
+  return save(mail)
 }
 
 function composeMail(mail) {
@@ -144,12 +148,6 @@ function removeEmail(mailId) {
       save(mail)
     } else storageService.remove(MAILS_KEY, mailId)
   })
-}
-
-function autoSave(mail) {
-  mail.isDraft = true
-  mail.updatedAt = new Date().toLocaleDateString()
-  return save(mail)
 }
 
 function toggleStar(mailId) {

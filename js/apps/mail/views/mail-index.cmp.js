@@ -17,7 +17,7 @@ export default {
   },
   template: `
         <section class="mail-index">
-          <mail-side-filter @compose="openCompose" :foldersMap="foldersMap"/>
+          <mail-side-filter :foldersMap="foldersMap"/>
           <div class="layout-wrapper">
             <mail-top-filter @searched="setSearch" />
             <mail-sort-list @sorted="setSort" />
@@ -28,7 +28,11 @@ export default {
             @remove-mail="removeMail"
             :mails="mailsToShow" />
           </div>
-          <mail-compose v-if="showCompose" :mailTemplate="mailTemplate" @send-mail="sendMail" @autosave-mail="autoSave" @close-compose="closeCompose" />
+          <mail-compose v-if="showCompose"
+          :mailTemplate="mailTemplate" 
+          @send-mail="sendMail" 
+          @autosave-mail="autoSave"
+          @close-compose="closeCompose" />
         </section>
     `,
   data() {
@@ -63,17 +67,21 @@ export default {
       this.sortBy = sortBy
     },
     openCompose() {
-      this.mailTemplate = mailService.createMail()
-      this.showCompose = true
+      mailService.createMail().then((mailTemplate) => {
+        this.mailTemplate = mailTemplate
+        this.showCompose = true
+      })
     },
     closeCompose() {
       this.showCompose = false
       this.$router.push('/mail/drafts')
     },
     sendMail(mail) {
-      mailService.composeMail(mail).then(this.loadMails)
-      this.showCompose = false
-      this.$router.push('/mail/inbox')
+      mailService.composeMail(mail).then(() => {
+        this.showCompose = false
+        this.$router.push('/mail/inbox')
+        this.loadMails
+      })
     },
     toggleStar(mailId) {
       const idx = this.mails.findIndex((mail) => mail.id === mailId)
@@ -112,7 +120,7 @@ export default {
         if (this.sortBy.sortKey === 'title')
           return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1
         if (this.sortBy.sortKey === 'date')
-          return a.updatedAt < b.updatedAt ? 1 : -1
+          return new Date(b.updatedAt) - new Date(a.updatedAt)
         if (this.sortBy.sortKey === 'subject')
           return a.subject.toLowerCase() > b.subject.toLowerCase() ? 1 : -1
         if (this.sortBy.sortKey === 'from')
