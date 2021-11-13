@@ -1,3 +1,5 @@
+import { mailService } from '../services/mail.service.js'
+
 export default {
   name: 'mail-details',
   props: ['mail'],
@@ -7,7 +9,7 @@ export default {
           <span title="Expand">
             <i class="fas fa-expand"></i>
           </span>
-          <span title="Save as note">
+          <span @click="shareAsNote(mail)" title="Save as note">
             <i class="fas fa-paper-plane"></i>
           </span>
           <span @click.stop.prevent="removeMail(mail.id)" class="details-delete-mail" title="Delete">
@@ -28,6 +30,10 @@ export default {
   methods: {
     removeMail(mailId) {
       this.$emit('remove-mail', mailId)
+    },
+    shareAsNote(mail) {
+      const url = mailService.prepareParams(mail)
+      this.$router.push(url)
     },
   },
 }

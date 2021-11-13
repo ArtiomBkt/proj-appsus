@@ -1,5 +1,6 @@
 import { storageService } from '../../../services/async-storage.service.js'
 import { utilService } from '../../../services/util.service.js'
+import { queryService } from './../../../services/query-string.service.js'
 
 const MAILS_KEY = 'emails'
 
@@ -21,6 +22,13 @@ export const mailService = {
   getMailMap,
   autoSave,
   createMail,
+  prepareParams,
+}
+
+function prepareParams(mail) {
+  const title = mail.title
+  const body = mail.body
+  return queryService.mailToNote(title, body)
 }
 
 function query(criteria) {
@@ -80,7 +88,6 @@ function createMail() {
     isTrash: false,
     updatedAt: new Date().toLocaleDateString(),
   }
-  // return mail
   return save(mail)
 }
 
