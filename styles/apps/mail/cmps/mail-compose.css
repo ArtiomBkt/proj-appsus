@@ -75,4 +75,5 @@
 .compose-form .compose-trash {
   opacity: 0.5;
   font-size: 1.8em;
+  cursor: pointer;
 }

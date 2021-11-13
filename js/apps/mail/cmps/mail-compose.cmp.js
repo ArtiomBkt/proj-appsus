@@ -16,7 +16,7 @@ export default {
             </div>
             <div class="compose-actions">
               <button type="submit" class="send-btn">Send</button>
-              <span class="compose-trash">
+              <span @click="clear" class="compose-trash">
                 <i class="fas fa-trash"></i>
               </span>
             </div>

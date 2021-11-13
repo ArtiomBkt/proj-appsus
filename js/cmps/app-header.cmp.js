@@ -1,10 +1,10 @@
 export default {
-    name: "app-header",
-    template: `
+  name: 'app-header',
+  template: `
         <header>
             <div class="logo">
                 <router-link @click.native="scrollToTop" to="/" class="logo-link">
-                    <img :src="getHeaderLogo" @mouseleave="mouseLeave" @mouseover="mouseHover" alt="logo" />
+                    <!-- <img :src="getHeaderLogo" @mouseleave="mouseLeave" @mouseover="mouseHover" alt="logo" /> -->
                 </router-link>
             </div>
             <nav :class="mobileMenuOpen" class="main-nav">

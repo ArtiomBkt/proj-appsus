@@ -2,7 +2,7 @@
   background-color: lightgray;
   border-radius: 5px;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 1.2rem;
+  font-size: 0.875rem;
   padding: 10px;
 }
 
@@ -20,9 +20,12 @@
   gap: 20px;
 }
 
-.mail-details .details-delete-mail {
+.mail-details .details-delete-mail,
+.share-as-note,
+.expand-mail {
   all: unset;
   opacity: 0.8;
+  cursor: pointer;
 }
 
 .mail-details .details-back {
