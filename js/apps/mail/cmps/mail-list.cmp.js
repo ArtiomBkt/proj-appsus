@@ -19,7 +19,7 @@ export default {
                 @remove-mail="removeMail"
                 @click.native="select(mail)"
                 />
-                <mail-details v-show="selectedMail && selectedMail === mail" :mail="mail"></mail-details>
+                <mail-details @remove-mail="removeMail" v-show="selectedMail && selectedMail === mail" :mail="mail"></mail-details>
               </li>
       </ul>
   </div>

@@ -3,7 +3,10 @@ import { utilService } from '../../../services/util.service.js'
 
 const MAILS_KEY = 'emails'
 
-const loggedinUser = { email: 'basel@appsus.com', fullname: 'Basel Boulos' }
+const loggedinUser = [
+  { email: 'basel@appsus.com', fullname: 'Basel Boulos' },
+  { email: 'artium@appsus.com', fullname: 'Artiom Bukati' },
+]
 var gMails
 createEmails()
 
@@ -21,210 +24,58 @@ export const mailService = {
 }
 
 function createEmails() {
-  let gMails = utilService.loadFromStorage(MAILS_KEY)
+  gMails = utilService.loadFromStorage(MAILS_KEY)
   if (!gMails || !gMails.length) {
-    gMails = [
-      {
-        id: 'e101',
-        title: 'What is appsus email ?',
-        subject:
-          'Appsus email, is the best fucking email you will ever see Appsus email, is the best fucking email you will ever see Appsus email, is the best fucking email you will ever see Appsus email, is the best fucking email you will ever see Appsus email, is the best fucking email you will ever see Appsus email, is the best fucking email you will ever see Appsus email, is the best fucking email you will ever see Appsus email, is the best fucking email you will ever see',
-        body: 'Would love to catch up sometimes',
-        updatedAt: new Date().toLocaleDateString(),
-        from: loggedinUser.email,
-        to: 'momo@momo.com',
-        isRead: false,
-        isSent: false,
-        isStarred: false,
-        isDraft: false,
-        isTrash: false,
-      },
-      {
-        id: 'e102',
-        title: 'This is trash',
-        subject: 'This is the second email you will ever see in appsus okay ?',
-        body: 'This is the second email you will ever see in appsus okay ?',
-        updatedAt: new Date().toLocaleDateString(),
-        from: loggedinUser.email,
-        to: 'momo@momo.com',
-        isRead: false,
-        isSent: false,
-        isStarred: true,
-        isDraft: false,
-        isTrash: false,
-      },
-      {
-        id: 'e103',
-        title: 'This is trash',
-        subject: 'This is the second email you will ever see in appsus okay ?',
-        body: 'This is the second email you will ever see in appsus okay ?',
-        updatedAt: new Date().toLocaleDateString(),
-        from: loggedinUser.email,
-        to: 'momo@momo.com',
-        isRead: false,
-        isSent: false,
-        isStarred: true,
-        isDraft: false,
-        isTrash: false,
-      },
-      {
-        id: 'e104',
-        title: 'This is trash',
-        subject: 'This is the second email you will ever see in appsus okay ?',
-        body: 'This is the second email you will ever see in appsus okay ?',
-        updatedAt: new Date().toLocaleDateString(),
-        from: loggedinUser.email,
-        to: 'momo@momo.com',
-        isRead: false,
-        isSent: false,
-        isStarred: true,
-        isDraft: false,
-        isTrash: false,
-      },
-      {
-        id: 'e105',
-        title: 'This is trash',
-        subject: 'This is the second email you will ever see in appsus okay ?',
-        body: 'This is the second email you will ever see in appsus okay ?',
-        updatedAt: new Date().toLocaleDateString(),
-        from: loggedinUser.email,
-        to: 'momo@momo.com',
-        isRead: false,
-        isSent: false,
-        isStarred: true,
-        isDraft: false,
-        isTrash: false,
-      },
-      {
-        id: 'e106',
-        title: 'This is trash',
-        subject: 'This is the second email you will ever see in appsus okay ?',
-        body: 'This is the second email you will ever see in appsus okay ?',
-        updatedAt: new Date().toLocaleDateString(),
-        from: loggedinUser.email,
-        to: 'momo@momo.com',
-        isRead: false,
-        isSent: false,
-        isStarred: true,
-        isDraft: false,
-        isTrash: false,
-      },
-      {
-        id: 'e107',
-        title: 'This is trash',
-        subject: 'This is the second email you will ever see in appsus okay ?',
-        body: 'This is the second email you will ever see in appsus okay ?',
-        updatedAt: new Date().toLocaleDateString(),
-        from: loggedinUser.email,
-        to: 'momo@momo.com',
-        isRead: false,
-        isSent: false,
-        isStarred: true,
-        isDraft: false,
-        isTrash: false,
-      },
-      {
-        id: 'e108',
-        title: 'This is trash',
-        subject: 'This is the second email you will ever see in appsus okay ?',
-        body: 'This is the second email you will ever see in appsus okay ?',
-        updatedAt: new Date().toLocaleDateString(),
-        from: loggedinUser.email,
-        to: 'momo@momo.com',
-        isRead: false,
-        isSent: false,
-        isStarred: true,
-        isDraft: false,
-        isTrash: false,
-      },
-      {
-        id: 'e109',
-        title: 'This is trash',
-        subject: 'This is the second email you will ever see in appsus okay ?',
-        body: 'This is the second email you will ever see in appsus okay ?',
-        updatedAt: new Date().toLocaleDateString(),
-        from: loggedinUser.email,
-        to: 'momo@momo.com',
-        isRead: false,
-        isSent: false,
-        isStarred: true,
-        isDraft: false,
-        isTrash: false,
-      },
-      {
-        id: 'e110',
-        title: 'This is trash',
-        subject: 'This is the second email you will ever see in appsus okay ?',
-        body: 'This is the second email you will ever see in appsus okay ?',
-        updatedAt: new Date().toLocaleDateString(),
-        from: loggedinUser.email,
-        to: 'momo@momo.com',
-        isRead: false,
-        isSent: false,
-        isStarred: true,
-        isDraft: false,
-        isTrash: false,
-      },
-      {
-        id: 'e111',
-        title: 'This is trash',
-        subject: 'This is the second email you will ever see in appsus okay ?',
-        body: 'This is the second email you will ever see in appsus okay ?',
-        updatedAt: new Date().toLocaleDateString(),
-        from: loggedinUser.email,
-        to: 'momo@momo.com',
-        isRead: false,
-        isSent: false,
-        isStarred: true,
-        isDraft: false,
-        isTrash: false,
-      },
-      {
-        id: 'e112',
-        title: 'This is trash',
-        subject: 'This is the second email you will ever see in appsus okay ?',
-        body: 'This is the second email you will ever see in appsus okay ?',
-        updatedAt: new Date().toLocaleDateString(),
-        from: loggedinUser.email,
-        to: 'momo@momo.com',
-        isRead: false,
-        isSent: false,
-        isStarred: true,
-        isDraft: false,
-        isTrash: false,
-      },
-      {
-        id: 'e113',
-        title: 'This is trash',
-        subject: 'This is the second email you will ever see in appsus okay ?',
-        body: 'This is the second email you will ever see in appsus okay ?',
-        updatedAt: new Date().toLocaleDateString(),
-        from: loggedinUser.email,
-        to: 'momo@momo.com',
-        isRead: false,
-        isSent: false,
-        isStarred: true,
-        isDraft: false,
-        isTrash: false,
-      },
-      {
-        id: 'e114',
-        title: 'This is trash',
-        subject: 'This is the second email you will ever see in appsus okay ?',
-        body: 'This is the second email you will ever see in appsus okay ?',
-        updatedAt: new Date().toLocaleDateString(),
-        from: loggedinUser.email,
-        to: 'momo@momo.com',
-        isRead: false,
-        isSent: false,
-        isStarred: true,
-        isDraft: false,
-        isTrash: false,
-      },
-    ]
+    gMails = []
+    for (let i = 0; i < 30; i++) {
+      const mail = {
+        id: utilService.makeId(),
+        title: utilService.makeLorem(10),
+        subject: utilService.makeLorem(10),
+        body: utilService.makeLorem(50),
+        from: loggedinUser[utilService.getRandInt(0, 1)].email,
+        to: 'Artium@appsus.com',
+        isRead: Math.random() < 0.5,
+        isSent: Math.random() < 0.5,
+        isStarred: Math.random() < 0.5,
+        isDraft: Math.random() < 0.5,
+        isTrash: Math.random() < 0.5,
+        updatedAt: utilService.randomDate(),
+      }
+      gMails.push(mail)
+    }
     utilService.saveToStorage(MAILS_KEY, gMails)
   }
   return gMails
+}
+
+function createMail() {
+  const mail = {
+    title: '',
+    subject: '',
+    body: '',
+    from: loggedinUser[utilService.getRandInt(0, 1)].email,
+    to: '',
+    isRead: false,
+    isSent: false,
+    isStarred: false,
+    isDraft: false,
+    isTrash: false,
+    updatedAt: new Date().toLocaleDateString(),
+  }
+  return save(mail)
+}
+
+function composeMail(mail) {
+  mail.isSent = true
+  mail.isDraft = false
+  mail.updatedAt = new Date().toLocaleDateString()
+  return save(mail)
+}
+
+function save(mail) {
+  if (mail.id) return storageService.put(MAILS_KEY, mail)
+  else return storageService.post(MAILS_KEY, mail)
 }
 
 function query(criteria) {
@@ -271,11 +122,6 @@ function getMailMap() {
   })
 }
 
-function save(mail) {
-  if (mail.id) return storageService.put(MAILS_KEY, mail)
-  else return storageService.post(MAILS_KEY, mail)
-}
-
 function getMailById(mailId) {
   return storageService.get(MAILS_KEY, mailId)
 }
@@ -291,42 +137,16 @@ function removeEmail(mailId) {
   return getMailById(mailId).then((mail) => {
     if (!mail.isTrash) {
       mail.isTrash = true
-      mail.updatedAt = new Date().toLocaleTimeString()
+      mail.updatedAt = new Date().toLocaleDateString()
       save(mail)
     } else storageService.remove(MAILS_KEY, mailId)
   })
 }
 
-function composeMail(mail) {
-  mail.isSent = true
-  mail.isRead = false
-  mail.isStarred = false
-  mail.isDraft = false
-  mail.isTrash = false
-  mail.updatedAt = new Date().toLocaleTimeString()
-  mail.from = loggedinUser.email
-  return save(mail)
-}
-
-function createMail() {
-  const mail = {
-    title: '',
-    subject: '',
-    body: '',
-    from: loggedinUser.email,
-    to: '',
-    isRead: false,
-    isSent: false,
-    isStarred: false,
-    isDraft: false,
-    isTrash: false,
-  }
-  return save(mail)
-}
-
 function autoSave(mail) {
+  console.log('saving', mail)
   mail.isDraft = true
-  mail.updatedAt = new Date().toLocaleTimeString()
+  mail.updatedAt = new Date().toLocaleDateString()
   return save(mail)
 }
 

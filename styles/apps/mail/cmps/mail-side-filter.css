@@ -11,7 +11,7 @@
 .mail-side-filter > * {
   all: unset;
   height: 52px;
-  font-size: 0.875rem;
+  font-size: 1em;
   cursor: pointer;
   width: 100%;
   transition: ease-in 0.1s;
@@ -39,7 +39,7 @@
   border-radius: 24px;
   text-align: center;
   color: #3c4043;
-  font-size: 1.1em;
+  font-size: 1.2em;
 }
 
 .compose-btn:hover {
@@ -74,6 +74,6 @@
 
 progress {
   width: 100%;
-  min-height: 70px;
+  min-height: 65px;
   padding: 10px;
 }

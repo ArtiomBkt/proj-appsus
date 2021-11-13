@@ -51,8 +51,10 @@ export default {
     },
     readMail(mailId) {
       const idx = this.mails.findIndex((mail) => mail.id === mailId)
-      this.mails[idx].isRead = true
-      mailService.readMail(mailId)
+      if (!this.mails[idx].isRead) {
+        this.mails[idx].isRead = true
+        mailService.readMail(mailId).then(this.loadMails)
+      }
     },
     setSearch(searchBy) {
       this.searchBy = searchBy
@@ -70,7 +72,7 @@ export default {
       this.showCompose = false
     },
     sendMail(mail) {
-      mailService.composeMail(mail).then((mail) => this.mails.push(mail))
+      mailService.composeMail(mail).then(this.loadMails)
       this.showCompose = false
     },
     toggleStar(mailId) {

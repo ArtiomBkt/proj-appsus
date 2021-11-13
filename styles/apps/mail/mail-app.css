@@ -4,4 +4,5 @@
 @import '../mail/cmps/mail-side-filter.css';
 @import '../mail/cmps/mail-sort-list.css';
 @import '../mail/cmps/mail-list.css';
+@import '../mail/cmps/mail-details.css';
 @import '../mail/views/mail-index.css';
