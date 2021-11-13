@@ -1,4 +1,11 @@
+li {
+    list-style: circle;
+}
 
 .strike {
     text-decoration: line-through;
+}
+
+.todo-done {
+    list-style: disc;
 }

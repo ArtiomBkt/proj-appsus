@@ -1,17 +1,22 @@
 .flash-msg {
-    position: absolute;
+    position: fixed;
     top: 15vh;
     right: 0;
     padding: 10px 50px;
+
+    font-size: 1.2rem;
+    font-weight: 500;
  
     border-radius: 5px;
     background-color: inherit;
+
+    z-index: 100;
 }
  
 .success {
-    background-color: rgba(32, 197, 32, .5);
+    background-color: rgba(32, 173, 32, 0.904);
 }
  
 .error {
-    background-color: rgba(255, 38, 38, 0.5);
+    background-color: rgba(255, 38, 38, 0.849);
 }

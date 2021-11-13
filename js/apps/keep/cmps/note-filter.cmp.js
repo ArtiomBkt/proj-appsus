@@ -12,12 +12,16 @@ export default {
     `,
     data() {
         return {
-            noteTypes: ['txt','todos','img','vid']
+            noteTypes: ['all', 'text','todos','img','vid'],
+            filterBy: {
+                type: null
+            }
         }
     },
     methods: {
         showTypeOf(type) {
-            
+            this.filterBy.type = type
+            this.$emit('filterBy', { ...this.filterBy })
         }
     },
 }

@@ -1,18 +1,25 @@
-.note-add {
-    width: 100%;
-}
-
-.note-add .input-row {
+.note-add  {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
+    width: 100%;
+
+    margin-bottom: 50px;
+}
+
+.input-row {
     position: relative;
+}
+
+.input-row {
+    max-width: 600px;
 }
 
 .note-add .input-row input {
     width: 100%;
+    height: 100%;
     padding: 10px 10px;
 
     border-radius: 5px;
@@ -35,6 +42,7 @@
 
     position: absolute;
     right: 10px;
+    bottom: 45px;
 
     width: 35px;
     height: 35px;

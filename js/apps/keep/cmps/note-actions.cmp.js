@@ -5,12 +5,12 @@ export default {
     template: `
         <span class="actions">
             <span @click="notePin"><i class="fas fa-map-pin"></i></span>
-            <span @click="noteShare"><i class="fas fa-share-alt"></i></span>
+            <span @click="noteShare"><i class="fas fa-paper-plane"></i></span>
             <span @click="noteEdit"><i class="fas fa-edit"></i></span>
             <span @click="noteDuplicate"><i class="fas fa-clone"></i></span>
             <span @click="noteRemove"><i class="fas fa-trash-alt"></i></span>
             <span @click="toggleColorsMenu"><i class="fas fa-brush"></i></span>
-            <span class="color-picker" v-if="colorChangeOn">
+            <span class="color-picker" v-show="colorChangeOn">
                 <template v-for="color in bgcolors">
                     <span :style="{'background-color': color.value}" 
                         :class="[setColorClass(color.value), color.name]" class="color-blob"

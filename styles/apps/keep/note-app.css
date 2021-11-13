@@ -5,6 +5,7 @@
 @import './cmps/filter.css';
 @import './cmps/list.css';
 @import './cmps/video.css';
+@import './cmps/aside.css';
 
 .note-app {
   display: flex;

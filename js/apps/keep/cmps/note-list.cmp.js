@@ -13,8 +13,7 @@ export default {
     template: `
     <section class="notes-list">
         <div class="pinned-notes masonry">
-            <h3>Pinned Notes</h3>
-            <div v-for="(note, idx) in pinnedNotes" class="note-card" :style="note.style">
+            <div v-for="(note, idx) in pinnedNotes" :class="{ pinned: note.isPinned }" class="note-card" :style="note.style">
                 <note-preview @toggleTodo="todoDone" :note="note" />
                 <note-edit :note="note" v-if="note.isEditing" @noteSaved="noteSubmitEdit" />
                 <note-actions :note="note"
@@ -28,7 +27,6 @@ export default {
             </div>
         </div>
         <div class="other-notes masonry">
-            <h3>Notes</h3>
             <div v-for="(note, idx) in otherNotes" class="note-card" :style="note.style">
                 <note-preview @toggleTodo="todoDone" :note="note" />
                 <note-edit :note="note" v-if="note.isEditing" @noteSaved="noteSubmitEdit" />

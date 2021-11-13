@@ -10,7 +10,7 @@ export default {
         <div>
             <h2 class="note-title">{{ info.title }}</h2>
             <ul class="todos-container">
-                <li v-for="(todo,idx) in info.todos" :key="idx" class="todo-item">
+                <li v-for="(todo,idx) in info.todos" :key="idx" :class="{ 'todo-done': todo.isDone }" class="todo-item">
                     <todo-preview @doTodo="todoDone" :todo="todo" />
                 </li>
             </ul>

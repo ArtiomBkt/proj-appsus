@@ -5,6 +5,7 @@
 @import 'apps/mail/mail-app.css';
 @import 'apps/books/book-app.css';
 @import 'cmps/flash-msg.css';
+@import 'cmps/app-home.css';
 
 * {
   box-sizing: border-box;

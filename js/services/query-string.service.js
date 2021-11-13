@@ -9,6 +9,6 @@ function noteToMail(subject, body) {
 }
 
 function mailToNote(title, body) {
-    const url = `keep?title=${title}&body=${body}`
+    const url = `/keep?title=${title}&body=${body}`
     return url
 }

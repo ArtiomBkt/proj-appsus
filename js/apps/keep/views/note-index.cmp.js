@@ -14,7 +14,7 @@ export default {
     },
     template: `
         <section class="note-app">
-            <note-filter />
+            <note-filter @filterBy="setFilter" :notes="notes" />
             <div class="main-keep-container">
                 <note-add :noteTypes="noteTypes" @noteSaved="addNote" />
                 <note-list :pinnedNotes="getPinnedNotes" :otherNotes="getOtherNotes"
@@ -64,7 +64,6 @@ export default {
     },
     created() {
         this.loadNotes()
-        console.log(this.$route.params);
     },
     methods: {
         loadNotes() {
@@ -79,13 +78,15 @@ export default {
                     this.notes = [note, ...this.notes]
                 })
                 .then(msgService.sendMsg('success', 'Note was successfully added.'))
-                .catch(() => msgService.sendMsg('error', 'Something went wrong, please try again.'))
+                .catch(() => msgService.sendMsg('error', 'Invalid inputs, please try again.'))
         },
         pinNote(noteId) {
             const idx = this.notes.findIndex(note => note.id === noteId)
             this.notes[idx].isPinned = !this.notes[idx].isPinned
             noteService.pinNote(noteId)
                 .then(this.loadNotes)
+                .then(msgService.sendMsg('success', `Note was successfully ${this.notes[idx].isPinned ? 'pinned' : 'unpinned'}.`))
+                .catch(() => msgService.sendMsg('error', 'Something went wrong, please try again.'))
         },
         colorNote(noteId, color) {
             const idx = this.notes.findIndex(note => note.id === noteId)
@@ -104,29 +105,50 @@ export default {
         submitEdit(noteEdit) {
             noteService.editNote(noteEdit)
                 .then(this.loadNotes)
+                .then(msgService.sendMsg('success', 'Note was successfully edited.'))
+                .catch(() => msgService.sendMsg('error', 'Something went wrong, please try again.'))
         },
         duplicateNote(noteId) {
             const idx = this.notes.findIndex(note => note.id === noteId)
             noteService.dupNote(this.notes[idx])
                 .then(this.loadNotes)
+                .then(msgService.sendMsg('success', 'Note was successfully duplicated.'))
+                .catch(() => msgService.sendMsg('error', 'Something went wrong, please try again.'))
         },
         removeNote(noteId) {
             noteService.removeNote(noteId)
                 .then(this.loadNotes)
+                .then(msgService.sendMsg('success', 'Note was successfully removed.'))
+                .catch(() => msgService.sendMsg('error', 'Something went wrong, please try again.'))
         },
         todoToggle(todo, note) {
             const idx = this.notes.findIndex(updatedNote => updatedNote.id === note.id)
             this.notes[idx].isDone = !this.notes[idx].isDone
             noteService.toggleTodo(todo, note)
                 .then(this.loadNotes)
+        },
+        setFilter(filter) {
+            this.filterBy = filter
         }
     },
     computed: {
         getPinnedNotes() {
-            return this.notes.filter(note => note.isPinned)
+            if (this.filterBy) {
+                var { type } = this.filterBy
+            }
+            return this.notes.filter(note => {
+                if (type !== 'all' && type) return (note.isPinned && note.type === type)
+                else return note.isPinned
+            })
         },
         getOtherNotes() {
-            return this.notes.filter(note => !note.isPinned)
+            if (this.filterBy) {
+                var { type } = this.filterBy
+            }
+            return this.notes.filter(note => {
+                if (type !== 'all' && type) return (!note.isPinned && note.type === type)
+                else return !note.isPinned
+            })
         }
     }
 }

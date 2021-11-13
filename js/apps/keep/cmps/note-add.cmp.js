@@ -7,28 +7,36 @@ export default {
         <section class="note-add">
             <form @submit.prevent="saveNote" novalidate="true">
                 <div class="input-row">
-                    <input type="text" v-if="inputFocus" v-model="inputData.title" placeholder="Title" />
-                    <input :type="setInputType" @click="onInputFocus" v-model="inputData.txt" 
+                    <input type="text" v-if="inputFocus" class="note-title-inp" v-model="inputData.title" placeholder="Title" />
+                    <input :type="setInputType" class="note-text-inp" :class="{ 'input-focus': inputFocus }" @click="onInputFocus" v-model="inputData.txt" 
                         :placeholder="setPlaceHolder" />
                     <template v-for="(noteType, idx) in noteTypes">
-                        <span @click="setNoteType(idx)" :class="selected(idx)" :title="noteType.title">
+                        <span @click="setNoteType(idx)" v-if="inputFocus" :class="selected(idx)" :title="noteType.title">
                             <i :class="noteType.icon"></i>
                         </span>
                     </template>
                 </div>
-                <input type="submit" value="Submit" />
+                <!-- <input type="submit" value="Submit" /> -->
             </form>
         </section>
     `,
     data() {
         return {
-            note: noteService.getTemplateNote(),
+            note: '',
             inputData: {
-                title: '',
-                txt: ''
+                title: null,
+                txt: null
             },
             inputFocus: false
         }
+    },
+    created() {
+        this.note = noteService.getTemplateNote()
+        this.inputData.title = this.$route.query.title
+        this.inputData.txt = this.$route.query.body
+        // if (this.inputData.title && this.inputData.txt) {
+        //     this.saveNote()
+        // }
     },
     methods: {
         onInputFocus() {
@@ -47,6 +55,7 @@ export default {
             this.note = noteService.getTemplateNote()
             this.inputData.title = ''
             this.inputData.txt = ''
+            if (this.$route.query.txt) this.$router.push('/keep')
         }
     },
     computed: {

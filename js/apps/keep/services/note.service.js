@@ -51,7 +51,9 @@ function removeNote(noteId) {
 }
 
 function dupNote(note) {
-    return storageService.post(NOTE_STORAGE_KEY, note)
+    const noteToDup = note
+    noteToDup.isPinned = false
+    return storageService.post(NOTE_STORAGE_KEY, noteToDup)
 }
 
 function editNote(editedNote) {

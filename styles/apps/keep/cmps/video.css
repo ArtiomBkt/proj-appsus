@@ -2,6 +2,8 @@ iframe {
     position: absolute;
     width: inherit;
     height: inherit;
+
+    border: none;
 }
 
 @media screen and (min-width: 1008px) and (max-width: 1280px) {
