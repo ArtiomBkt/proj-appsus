@@ -64,6 +64,7 @@ export default {
     },
     created() {
         this.loadNotes()
+        console.log(this.$route.params);
     },
     methods: {
         loadNotes() {
