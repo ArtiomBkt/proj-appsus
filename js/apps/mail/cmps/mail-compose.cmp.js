@@ -11,7 +11,7 @@ export default {
             <div class="compose-content">
               <input v-model="mail.title" class="compose-title" type="text" placeholder="Title" required/>
               <input v-model="mail.to" type="mail" class="compose-to" placeholder="To: " required/>
-              <input v-model="mail.subject" type="text" class="compose-subject" placeholder="Subject" />
+              <input v-model="mail.subject" type="text" class="compose-subject" placeholder="Subject" required/>
               <textarea v-model="mail.body" class="compose-body" type="text" />
             </div>
             <div class="compose-actions">
@@ -32,7 +32,7 @@ export default {
   created() {
     this.mail = this.mailTemplate
     this.myInterval = setInterval(() => {
-      this.$emit('autosave-mail', { ...this.mail })
+      if (this.mail.subject) this.$emit('autosave-mail', { ...this.mail })
     }, 5000)
   },
   methods: {

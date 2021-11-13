@@ -2,6 +2,8 @@ import homePage from './../views/app-home.cmp.js'
 import aboutPage from './../views/app-about.cmp.js'
 import mailPage from './../apps/mail/views/mail-index.cmp.js'
 import keepPage from './../apps/keep/views/note-index.cmp.js'
+import bookPage from './../apps/book/views/book-index.cmp.js'
+import bookDetails from './../apps/book/views/book-details.cmp.js'
 
 const routes = [
   {
@@ -31,6 +33,12 @@ const routes = [
       {
         name: 'drafts',
         path: 'drafts',
+        children: [
+          {
+            name: 'compose',
+            path: 'compose',
+          },
+        ],
       },
       {
         name: 'trash',
@@ -46,10 +54,17 @@ const routes = [
       },
     ],
   },
-
   {
     path: '/keep',
     component: keepPage,
+  },
+  {
+    path: '/book',
+    component: bookPage,
+  },
+  {
+    path: '/book/:bookId',
+    component: bookDetails,
   },
 ]
 
