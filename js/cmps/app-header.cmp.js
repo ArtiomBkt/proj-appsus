@@ -57,7 +57,7 @@ export default {
             return this.burgerOpen ? 'mobile-active' : ''
         },
         getHeaderLogo() {
-            return this.mouseOver ? './../assets/img/vuejs-color.svg' : './../assets/img/vuejs-shadow.svg'
+            return this.mouseOver ? './../../assets/img/vuejs-color.svg' : './../../assets/img/vuejs-shadow.svg'
         }
     }
 }
