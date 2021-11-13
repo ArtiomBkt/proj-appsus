@@ -1,0 +1,24 @@
+.home-bg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 90vh;
+  color: white;
+  background-color: rgb(57, 56, 56);
+}
+
+.app-home-title {
+  margin-top: 20px;
+}
+
+.app-home-team {
+  margin: 0;
+}
+
+.app-home-title,
+.app-home-team {
+  font-size: 25px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: italic;
+}

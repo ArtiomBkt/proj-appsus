@@ -54,16 +54,26 @@
 
 .progress-bar {
   position: relative;
+  height: 30px;
 }
 
-.progress-bar span {
+.progress-bar .percentage {
   position: absolute;
   padding: 10px;
+}
+.unread-emails-txt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  border: none;
+  padding: 5px;
+  font-size: 0.875em;
 }
 
 progress {
   width: 100%;
-  padding: 25px;
+  height: 100%;
 }
 
 /* BP */

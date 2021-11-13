@@ -19,8 +19,10 @@ export default {
         <section class="mail-index">
           <mail-side-filter :foldersMap="foldersMap"/>
           <div class="layout-wrapper">
-            <mail-top-filter @searched="setSearch" />
-            <mail-sort-list @sorted="setSort" />
+            <div class="filter-top-container">
+              <mail-top-filter @searched="setSearch" />
+              <mail-sort-list @sorted="setSort" />
+            </div>
             <mail-list 
             @read-mail="readMail" 
             @toggle-star="toggleStar"

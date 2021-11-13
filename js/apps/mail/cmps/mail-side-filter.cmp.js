@@ -12,10 +12,11 @@ export default {
     <router-link to='/mail/trash'><i class="fas fa-trash"></i> Trash ({{trashCount}})</router-link>
     <router-link to='/mail/read'><i class="fas fa-book"></i> Read ({{readCount}})</router-link>
     <router-link to='/mail/unread'><i class="fas fa-envelope"></i> Unread ({{unreadCount}})</router-link>
-    <div class="progress-bar">
-      <span :style="progressStyle">{{percentageToShow}}</span>
-      <progress :value="progressVal" max="100"></progress>
-    </div>
+      <span class="unread-emails-txt">Unread emails</span>
+      <div class="progress-bar">
+        <span class="percentage" :style="progressStyle">{{percentageToShow}}</span>
+        <progress :value="progressVal" max="100"></progress>
+      </div>
     <div v-if="windowWidth" :class="isSideNavOpen" @click="openSideNav" class="sidenav-collapser">
         <span class="bar"> </span>
         <span class="bar"> </span>
@@ -31,7 +32,7 @@ export default {
       },
       windowWidth: window.innerWidth,
       sideNavCollapse: false,
-      sideNavOpen: false
+      sideNavOpen: false,
     }
   },
   methods: {
@@ -39,16 +40,16 @@ export default {
       this.$emit('compose')
     },
     onResize() {
-        this.windowWidth = window.innerWidth
-        this.sideNavCollapse = this.windowWidth < 761 ? true : false
+      this.windowWidth = window.innerWidth
+      this.sideNavCollapse = this.windowWidth < 761 ? true : false
     },
     openSideNav() {
-        this.sideNavOpen = !this.sideNavOpen
-    }
+      this.sideNavOpen = !this.sideNavOpen
+    },
   },
   mounted() {
     this.$nextTick(() => {
-        window.addEventListener('onresize', this.onResize)
+      window.addEventListener('onresize', this.onResize)
     })
   },
 
@@ -77,9 +78,9 @@ export default {
     unreadCount() {
       return this.foldersMap.unread
     },
-    isSideNavOpen() { 
-        return this.sideNavOpen ? 'nav-open' : ''
-    }
+    isSideNavOpen() {
+      return this.sideNavOpen ? 'nav-open' : ''
+    },
   },
   watch: {
     foldersMap: {
@@ -89,7 +90,7 @@ export default {
         const unreadCount = this.foldersMap.unread
         const percentage = (unreadCount / mailsCount) * 100
         this.progressVal = percentage ? percentage.toFixed(0) : 0
-        this.progressStyle.width = this.progressVal + '% - Unread emails'
+        this.progressStyle.width = this.progressVal + '%'
       },
     },
   },
