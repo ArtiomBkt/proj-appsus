@@ -101,7 +101,7 @@ function getTemplateNote() {
 
 function prepareParams(note) {
     const subject = note.info.title
-    const body = note.info.txt || note.info.todos || note.info.url
+    const body = note.info.txt || note.info.url || note.info.todos.map(todo => todo.txt).join(', ')
     return queryService.noteToMail(subject, body)
 }
 
