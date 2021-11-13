@@ -10,7 +10,8 @@ export default {
             <nav class="main-nav">
                 <router-link @click.native="scrollToTop" to='/' active-class="active-link" exact>Home</router-link>
                 <router-link @click.native="scrollToTop" to='/mail/inbox' active-class="active-link">Mail</router-link>
-                <router-link @click.native="scrollToTop" to='/keep' active-class="active-link">Keep-app</router-link>
+                <router-link @click.native="scrollToTop" to='/keep' active-class="active-link">Keep</router-link>
+                <router-link @click.native="scrollToTop" to='/book' active-class="active-link">Books</router-link>
                 <router-link @click.native="scrollToTop" to='/about' active-class="active-link">About</router-link>
             </nav>
         </header>

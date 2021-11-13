@@ -7,12 +7,12 @@
 @import './cmps/video.css';
 
 .note-app {
-    display: flex;
-    transition: .3s;
+  display: flex;
+  transition: 0.3s;
 
-    margin: 15px;
+  margin: 15px;
 }
 
 .main-keep-container {
-    width: 100%;
+  width: 100%;
 }

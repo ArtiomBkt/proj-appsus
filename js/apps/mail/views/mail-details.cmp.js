@@ -22,7 +22,7 @@ export default {
           <span>Message: </span>
           <p>{{mail.body}}</p>
         </div> 
-        <a @click="$router.go(-1)"><i class="fas fa-arrow-left details-back"></i></a>
+        <!-- <a @click="$router.go(-1)"><i class="fas fa-arrow-left details-back"></i></a> -->
     </section>
     `,
   methods: {
