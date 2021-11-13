@@ -12,7 +12,6 @@ export default {
     <router-link to='/mail/trash'><i class="fas fa-trash"></i> Trash ({{trashCount}})</router-link>
     <router-link to='/mail/read'><i class="fas fa-book"></i> Read ({{readCount}})</router-link>
     <router-link to='/mail/unread'><i class="fas fa-envelope"></i> Unread ({{unreadCount}})</router-link>
-    <span class="progress-title">Unread Emails</span>
     <div class="progress-bar">
       <span :style="progressStyle">{{percentageToShow}}</span>
       <progress :value="progressVal" max="100"></progress>
@@ -67,7 +66,7 @@ export default {
         const unreadCount = this.foldersMap.unread
         const percentage = (unreadCount / mailsCount) * 100
         this.progressVal = percentage ? percentage.toFixed(0) : 0
-        this.progressStyle.width = this.progressVal + '%'
+        this.progressStyle.width = this.progressVal + '% - Unread emails'
       },
     },
   },

@@ -7,6 +7,10 @@
   flex-basis: 100%;
 }
 
+.mail-content .mail-star {
+  padding: 10px;
+}
+
 .mail-content .mail-star:hover {
   color: gold;
 }

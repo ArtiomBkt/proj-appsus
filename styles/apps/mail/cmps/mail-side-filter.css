@@ -1,60 +1,51 @@
 .mail-side-filter {
   display: flex;
   flex-direction: column;
-  min-width: 250px;
-  max-width: 250px;
-  gap: 5px;
-  margin-right: 15px;
-  justify-content: space-between;
+  min-width: 200px;
+  max-width: 200px;
+  padding-inline-end: 15px;
 }
 
 .mail-side-filter > * {
   all: unset;
-  height: 52px;
+  height: 42px;
   font-size: 1em;
   cursor: pointer;
   width: 100%;
   transition: ease-in 0.1s;
-  color: #808080;
+  opacity: 0.8;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  letter-spacing: 0.25px;
   gap: 10px;
-  border-bottom: 2px solid #f3f5f7;
+  padding: 5px;
+  letter-spacing: 0.25px;
+  border-bottom: 1px solid #808080;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .mail-side-filter > *:hover {
   background-color: #e0e0e0;
   transform: ease-in;
-  color: red;
+  color: #000000;
 }
 
 .router-link-active {
-  color: red;
+  color: #000000;
+  background-color: #e0e0e0;
 }
 
 .compose-btn {
-  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
-  border-radius: 24px;
-  color: #3c4043;
-  font-size: 1.2em;
+  color: green;
+  font-size: 1.1em;
 }
 
 .compose-btn:hover {
   box-shadow: 0 1px 3px 0 rgb(60 64 67 / 30%), 0 4px 8px 3px rgb(60 64 67 / 15%);
   background-color: #fafafb;
+  color: green;
 }
 
-.progress-title {
-  margin: 0;
-  height: 10px;
-  text-align: center;
-  border: none;
-  padding: 10px;
-}
-
-.progress-title:hover,
 .progress-bar:hover {
   background: none;
   cursor: text;
@@ -67,14 +58,12 @@
 
 .progress-bar span {
   position: absolute;
-  color: lightgray;
   padding: 10px;
 }
 
 progress {
   width: 100%;
-  min-height: 65px;
-  padding: 10px;
+  padding: 25px;
 }
 
 /* BP */

@@ -1,10 +1,10 @@
 export default {
-    name: "app-header",
-    template: `
+  name: 'app-header',
+  template: `
         <header>
             <div class="logo">
                 <router-link @click.native="scrollToTop" to="/" class="logo-link">
-                    <img :src="getHeaderLogo" @mouseleave="mouseLeave" @mouseover="mouseHover" alt="logo" />
+                    <!-- <img :src="getHeaderLogo" @mouseleave="mouseLeave" @mouseover="mouseHover" alt="logo" /> -->
                 </router-link>
             </div>
             <nav :class="mobileMenuOpen" class="main-nav">
@@ -21,43 +21,45 @@ export default {
             </div>
         </header>
     `,
-    data() {
-        return {
-            // windowWidth: window.innerWidth,
-            toggleMobile: window.innerWidth <= 760 ? true : false,
-            burgerOpen: false,
-            mouseOver: false
-        }
-    },
-    // mounted() {
-    //     this.$nextTick(() => {
-    //         window.addEventListener('click', this.scrollToTop)
-    //     })
-    // },
-    methods: {
-        scrollToTop() {
-            window.scrollTo(0, 0)
-            this.burgerOpen = false
-        },
-        // onResize() {
-        //     this.windowWidth = window.innerWidth
-        // },
-        openMenu() {
-            this.burgerOpen = !this.burgerOpen
-        },
-        mouseHover() {
-            this.mouseOver = true
-        },
-        mouseLeave() {
-            this.mouseOver = false
-        }
-    },
-    computed: {
-        mobileMenuOpen() {
-            return this.burgerOpen ? 'mobile-active' : ''
-        },
-        getHeaderLogo() {
-            return this.mouseOver ? './../../assets/img/vuejs-color.svg' : './../../assets/img/vuejs-shadow.svg'
-        }
+  data() {
+    return {
+      // windowWidth: window.innerWidth,
+      toggleMobile: window.innerWidth <= 760 ? true : false,
+      burgerOpen: false,
+      mouseOver: false,
     }
+  },
+  // mounted() {
+  //     this.$nextTick(() => {
+  //         window.addEventListener('click', this.scrollToTop)
+  //     })
+  // },
+  methods: {
+    scrollToTop() {
+      window.scrollTo(0, 0)
+      this.burgerOpen = false
+    },
+    // onResize() {
+    //     this.windowWidth = window.innerWidth
+    // },
+    openMenu() {
+      this.burgerOpen = !this.burgerOpen
+    },
+    mouseHover() {
+      this.mouseOver = true
+    },
+    mouseLeave() {
+      this.mouseOver = false
+    },
+  },
+  computed: {
+    mobileMenuOpen() {
+      return this.burgerOpen ? 'mobile-active' : ''
+    },
+    getHeaderLogo() {
+      return this.mouseOver
+        ? './../../assets/img/vuejs-color.svg'
+        : './../../assets/img/vuejs-shadow.svg'
+    },
+  },
 }

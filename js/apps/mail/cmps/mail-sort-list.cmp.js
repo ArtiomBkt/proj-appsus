@@ -2,10 +2,10 @@ export default {
   name: 'mail-sort-list',
   template: `
     <section class="sort-container">
-      <button @click="onSelect($event)" value="from">From</button>
-      <button @click="onSelect($event)" value="title">Title</button>
-      <button @click="onSelect($event)" value="subject">Subject</button>
-      <button @click="onSelect($event)" value="date">Date</button>
+      <button @click="onSelect($event)" value="from"><i class="fas fa-sort"></i> From</button>
+      <button @click="onSelect($event)" value="title"><i class="fas fa-sort"></i> Title</button>
+      <button @click="onSelect($event)" value="subject"><i class="fas fa-sort"></i> Subject</button>
+      <button @click="onSelect($event)" value="date"><i class="fas fa-sort"></i> Date</button>
     </section>
   `,
   data() {

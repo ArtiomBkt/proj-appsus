@@ -9,13 +9,14 @@ export default {
   template: `
         <section class="mail-container" :class="isReadBgc" @click="read(mail.id)" >
           <div class="mail-content">
-          <span class="mail-star" :class="colorStar" @click.stop.prevent="toggleStar(mail.id)"> 
-          </span>
-              <span class="mail-from capitalize">{{mail.from}}</span>
+            <span class="mail-star" :class="colorStar" @click.stop.prevent="toggleStar(mail.id)"> 
+              </span>
+              <span class="mail-from">{{mail.from}}</span>
               <long-text class="mail-subject capitalize" v-bind:txt="mail.subject" /> 
-          </div>
-          <section class="mail-actions">
-              <span @click.stop.prevent="toggleRead(mail.id)">
+            </div>
+            <span class="mail-timestamp">{{timeToShow}}</span>
+            <section class="mail-actions">
+            <span @click.stop.prevent="toggleRead(mail.id)">
                 <i :class="toggleEnvelope" class="envelope-icon"></i>
               </span>
           </section>
@@ -42,6 +43,9 @@ export default {
     },
     toggleEnvelope() {
       return this.mail.isRead ? 'fas fa-envelope-open' : 'fas fa-envelope'
+    },
+    timeToShow() {
+      return this.mail.updatedAt
     },
   },
 }

@@ -86,7 +86,7 @@ function createMail() {
     isStarred: false,
     isDraft: false,
     isTrash: false,
-    updatedAt: new Date().toLocaleDateString(),
+    updatedAt: new Date().toLocaleTimeString(),
   }
   return save(mail)
 }
