@@ -1,10 +1,10 @@
 export default {
   name: 'app-home',
   template: `
-        <section>
-            <h3>just for you, Adina</h3>
-            <div class="video-container">
-                <!-- <video src="https://css-tricks-post-videos.s3.us-east-1.amazonaws.com/blurry-trees.mov" autoplay loop poster muted type="video/mp4"></video> -->
+        <section class="app-home">
+            <!-- <h3>just for you, Adina</h3> -->
+            <div class="home-bg">
+                <h1>Appsus.</h1>
             </div>
         </section>
     `,

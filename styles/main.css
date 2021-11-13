@@ -1,5 +1,6 @@
 @import 'cmps/app-header.css';
 @import 'cmps/app-footer.css';
+@import 'cmps/app-about.css';
 @import 'partials/helpers.css';
 @import 'apps/keep/note-app.css';
 @import 'apps/mail/mail-app.css';
