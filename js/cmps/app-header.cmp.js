@@ -41,7 +41,7 @@ export default {
         },
         onResize() {
             this.windowWidth = window.innerWidth
-            this.toggleMobile = this.windowWidth < 770 ? true : false
+            this.toggleMobile = this.windowWidth < 761 ? true : false
         },
         openMenu() {
             this.burgerOpen = !this.burgerOpen
@@ -59,11 +59,6 @@ export default {
         },
         getHeaderLogo() {
             return this.mouseOver ? './../../assets/img/vuejs-color.svg' : './../../assets/img/vuejs-shadow.svg'
-        },
-        // screenWidth() {
-        //     console.log(this.windowWidth);
-            
-        // }
+        }
     }
 }
-// return this.toggleMobile = 

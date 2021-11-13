@@ -29,11 +29,5 @@ export default {
             this.filterBy.type = type
             this.$emit('filterBy', { ...this.filterBy })
         }
-    },
-    computed: {
-        selectedFilter() {
-            console.log({...this.noteTypes});
-            // if (this.filterBy.type === this.noteType.filter)
-        }
     }
 }

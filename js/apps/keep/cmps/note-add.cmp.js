@@ -8,7 +8,7 @@ export default {
             <form @submit.prevent="saveNote" novalidate="true">
                 <div class="input-row">
                     <input type="text" v-if="inputFocus" class="note-title-inp" v-model="inputData.title" placeholder="Title" />
-                    <input :type="setInputType" class="note-text-inp" :class="{ 'input-focus': inputFocus }" @click="onInputFocus" v-model="inputData.txt" 
+                    <input :type="setInputType" ref="textInput" class="note-text-inp" :class="{ 'input-focus': inputFocus }" @click="onInputFocus" v-model="inputData.txt" 
                         :placeholder="setPlaceHolder" />
                     <template v-for="(noteType, idx) in noteTypes">
                         <span @click="setNoteType(idx)" v-if="inputFocus" :class="selected(idx)" :title="noteType.title">
@@ -41,6 +41,7 @@ export default {
     methods: {
         onInputFocus() {
             this.inputFocus = true
+            this.$refs.textInput.focus()
         },
         setNoteType(noteType) {
             this.inputFocus = true

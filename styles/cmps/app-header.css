@@ -19,6 +19,10 @@ header a {
     height: 100%;
 }
 
+.logo img {
+    width: 150px;
+}
+
 .logo-link {
     height: 100%;
 }
@@ -49,11 +53,11 @@ header a {
     width: 25px;
     height: 3px;
     margin: 5px 10px;
-    transition: all .3s ease-in-out;
+    transition: all 0.5s ease-in-out;
     background-color: linen;
 }
 
-@media screen and (min-width: 768px) {   
+@media screen and (min-width: 761px) {   
     .main-nav a {
         display: flex;
         justify-content: center;
@@ -70,7 +74,7 @@ header a {
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 761px) {
     .main-nav {
         position: fixed;
         flex-direction: column;
@@ -87,7 +91,7 @@ header a {
         background-color: #3f3f3f;
 
         z-index: 100;
-        transition: .3;
+        transition: all 0.5s ease-in-out;
     }
 
     .main-nav.mobile-active {
@@ -97,7 +101,7 @@ header a {
     .nav-link {
         display: inline-block;
         width: 100%;
-        padding: 1rem 0;
+        padding: 3.5rem 0;
     }
 
     .nav-link:hover {

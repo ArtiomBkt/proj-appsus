@@ -16,6 +16,11 @@ export default {
       <span :style="progressStyle">{{percentageToShow}}</span>
       <progress :value="progressVal" max="100"></progress>
     </div>
+    <div v-if="windowWidth" :class="isSideNavOpen" @click="openSideNav" class="sidenav-collapser">
+        <span class="bar"> </span>
+        <span class="bar"> </span>
+        <span class="bar"> </span>
+    </div>
   </aside>
         `,
   data() {
@@ -24,12 +29,27 @@ export default {
       progressStyle: {
         width: null,
       },
+      windowWidth: window.innerWidth,
+      sideNavCollapse: false,
+      sideNavOpen: false
     }
   },
   methods: {
     compose() {
       this.$emit('compose')
     },
+    onResize() {
+        this.windowWidth = window.innerWidth
+        this.sideNavCollapse = this.windowWidth < 761 ? true : false
+    },
+    openSideNav() {
+        this.sideNavOpen = !this.sideNavOpen
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+        window.addEventListener('onresize', this.onResize)
+    })
   },
 
   computed: {
@@ -57,6 +77,9 @@ export default {
     unreadCount() {
       return this.foldersMap.unread
     },
+    isSideNavOpen() { 
+        return this.sideNavOpen ? 'nav-open' : ''
+    }
   },
   watch: {
     foldersMap: {
