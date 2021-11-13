@@ -86,14 +86,14 @@ function createMail() {
     isStarred: false,
     isDraft: false,
     isTrash: false,
-    updatedAt: new Date().toLocaleTimeString(),
+    updatedAt: new Date().toLocaleDateString(),
   }
   return save(mail)
 }
 
 function autoSave(mail) {
   mail.isDraft = true
-  mail.updatedAt = new Date().toLocaleTimeString()
+  mail.updatedAt = new Date().toLocaleDateString()
   return save(mail)
 }
 
