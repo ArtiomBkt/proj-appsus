@@ -6,6 +6,7 @@ export default {
   template: `
     <section class="mail-details">
         <div class="details-actions">
+        <span class="mail-timestamp">{{timeToShow}}</span>
           <span title="Expand">
             <i class="fas fa-expand"></i>
           </span>
@@ -16,7 +17,7 @@ export default {
             <i class="fa fa-trash trash-icon"></i>
           </span>
         </div>
-        <div v-if="mail" class="mail-details-content">
+        <div v-if="mail" class="mail-details-content capitalize">
           <p><span>Title:</span>{{mail.title}}</p>
           <p><span>To: </span>{{mail.to}}</p>
           <span>Subject: </span>
@@ -34,6 +35,11 @@ export default {
     shareAsNote(mail) {
       const url = mailService.prepareParams(mail)
       this.$router.push(url)
+    },
+  },
+  computed: {
+    timeToShow() {
+      return this.mail.updatedAt
     },
   },
 }

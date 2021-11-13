@@ -1,0 +1,27 @@
+.book-filter form {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price-filter-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price-filter-container > * {
+  height: 40px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.book-filter-btn {
+  all: unset;
+  color: white;
+  background: #1a73e8;
+  text-align: center;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}

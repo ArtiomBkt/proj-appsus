@@ -7,12 +7,6 @@ export default {
       <button @click="onSelect($event)" value="subject">Subject</button>
       <button @click="onSelect($event)" value="date">Date</button>
     </section>
-    <!-- <select @change="onSelect($event)">
-        <option value="title">Title</option>
-        <option value="date">Date</option>
-        <option value="subject">Subject</option>
-        <option value="from">From</option>
-    </select> -->
   `,
   data() {
     return {

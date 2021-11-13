@@ -1,8 +1,16 @@
 .mail-index {
   display: flex;
-  /* background: #efebea; */
 }
 
 .layout-wrapper {
   flex-grow: 1;
+}
+
+/* BP */
+
+/* medium */
+@media (max-width: 760px) {
+  .mail-index {
+    /* flex-direction: row-reverse; */
+  }
 }

@@ -7,7 +7,7 @@
 }
 
 .mail-details-content span {
-  color: red;
+  font-weight: bold;
 }
 
 .mail-details p {

@@ -1,2 +1,7 @@
 @import './cmps/book-list.css';
 @import './cmps/book-preview.css';
+@import './views/book-details.css';
+@import './cmps/review-add.css';
+@import './cmps/review-list.css';
+@import './cmps/review-preview.css';
+@import './cmps/book-filter.css';
