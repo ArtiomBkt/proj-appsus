@@ -11,17 +11,12 @@ export default {
           <div class="mail-content">
           <span class="mail-star" :class="colorStar" @click.stop.prevent="toggleStar(mail.id)"> 
           </span>
-              <span class="mail-from">{{mail.from}}</span>
-              <long-text v-bind:txt="mail.subject" /> 
-              <span class="mail-timestamp">{{timeToShow}}</span>
+              <span class="mail-from capitalize">{{mail.from}}</span>
+              <long-text class="mail-subject capitalize" v-bind:txt="mail.subject" /> 
           </div>
           <section class="mail-actions">
               <span @click.stop.prevent="toggleRead(mail.id)">
-              <i :class="toggleEnvelope" class="envelope-icon">
-              </i>
-              </span>
-              <span @click.stop.prevent="removeMail(mail.id)">
-              <i class="fa fa-trash trash-icon"></i>
+                <i :class="toggleEnvelope" class="envelope-icon"></i>
               </span>
           </section>
       </section>
@@ -37,9 +32,6 @@ export default {
     toggleRead(mailId) {
       this.$emit('toggle-read', mailId)
     },
-    removeMail(mailId) {
-      this.$emit('remove-mail', mailId)
-    },
   },
   computed: {
     isReadBgc() {
@@ -50,9 +42,6 @@ export default {
     },
     toggleEnvelope() {
       return this.mail.isRead ? 'fas fa-envelope-open' : 'fas fa-envelope'
-    },
-    timeToShow() {
-      return this.mail.updatedAt
     },
   },
 }

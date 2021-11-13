@@ -1,0 +1,38 @@
+.add-reviews-container h2 {
+  margin: 0 0 1rem;
+}
+
+.review-add form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rate-star {
+  cursor: pointer;
+}
+
+.review-body {
+  max-width: 500px;
+  font-size: 1.2em;
+  min-height: 200px;
+  min-width: 250px;
+}
+
+.review-submit-btn {
+  all: unset;
+  color: white;
+  background: #1a73e8;
+  text-align: center;
+  padding: 12px 17px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+/* Helper for the stars rate */
+
+.checked {
+  color: gold;
+}

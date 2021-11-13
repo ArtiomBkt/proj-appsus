@@ -1,0 +1,5 @@
+.reviews-container {
+  overflow-y: scroll;
+  min-width: 400px;
+  max-height: 500px;
+}

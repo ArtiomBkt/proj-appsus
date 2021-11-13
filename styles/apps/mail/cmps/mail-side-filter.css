@@ -37,7 +37,6 @@
 .compose-btn {
   box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
   border-radius: 24px;
-  text-align: center;
   color: #3c4043;
   font-size: 1.2em;
 }
@@ -76,4 +75,25 @@ progress {
   width: 100%;
   min-height: 65px;
   padding: 10px;
+}
+
+/* BP */
+
+/* medium */
+@media (max-width: 760px) {
+  .mail-side-filter {
+    height: 100vh;
+    z-index: 10000;
+    position: fixed;
+    left: 0;
+    margin-right: 0;
+    transition: transform 0.6s, box-shadow 0.6s;
+    transform: translate(-100%);
+    border-inline-end: 1px solid #1e1e1e;
+    background-color: lightcyan;
+    justify-content: flex-start;
+  }
+  .compose-btn {
+    font-size: 1em;
+  }
 }

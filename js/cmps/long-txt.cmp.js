@@ -8,12 +8,12 @@ export default {
   },
   created() {
     const txtLen = this.txt.length
-    if (txtLen > 100) this.isLongTxt = true
+    if (txtLen >= 80) this.isLongTxt = true
   },
   computed: {
     txtForDisplay() {
       if (!this.isLongTxt) return this.txt
-      else return this.txt.substring(0, 100) + '...'
+      else return this.txt.substring(0, 80) + '...'
     },
   },
 }
