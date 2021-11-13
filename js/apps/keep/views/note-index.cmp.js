@@ -92,8 +92,8 @@ export default {
             noteService.colorNote(noteId, color)
         },
         shareNote(noteId) {
-            // const idx = this.notes.findIndex(note => note.id === noteId)
-            // this.notes[idx]
+            const idx = this.notes.findIndex(note => note.id === noteId)
+            noteService.prepareParams(this.notes[idx])
         },
         editNote(noteId) {
             const idx = this.notes.findIndex(note => note.id === noteId)

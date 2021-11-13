@@ -1,5 +1,6 @@
-import { utilService } from "../../../services/util.service.js"
-import { storageService } from "../../../services/async-storage.service.js"
+import { utilService } from '../../../services/util.service.js'
+import { storageService } from '../../../services/async-storage.service.js'
+import { queryService } from './../../../services/query-string.service.js'
 
 export const noteService = {
     query,
@@ -11,7 +12,8 @@ export const noteService = {
     editNote,
     colorNote,
     dupNote,
-    toggleTodo
+    toggleTodo,
+    prepareParams
 }
 
 const NOTE_STORAGE_KEY = 'notesStorage'
@@ -91,6 +93,13 @@ function getTemplateNote() {
         type: 'text',
         cmp: 'note-text'
     }
+}
+
+function prepareParams(note) {
+    const subject = note.info.title
+    // console.log(...note.info.todos.);
+    const body = note.info.txt || note.info.todos || note.info.url
+    queryService.noteToMail(subject, body)
 }
 
 
