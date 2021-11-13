@@ -1,6 +1,7 @@
 import { utilService } from '../../../services/util.service.js'
 import { storageService } from '../../../services/async-storage.service.js'
 import { queryService } from './../../../services/query-string.service.js'
+import { msgService } from './../../../services/msg.service.js'
 
 export const noteService = {
     query,
@@ -65,7 +66,10 @@ function editNote(editedNote) {
 }
 
 function addNote(noteTemplate, noteData) {
-    if (!noteData.txt || !noteData.title) return msgService.sendMsg('error', 'Inputes are required.')
+    if (!noteData.txt || !noteData.title) {
+        msgService.sendMsg('error', 'Inputes are required.')
+        return Promise.reject()
+    }
     if (noteTemplate.type === 'text') {
         noteTemplate.info['title'] = noteData.title
         noteTemplate.info.txt = noteData.txt
@@ -97,9 +101,8 @@ function getTemplateNote() {
 
 function prepareParams(note) {
     const subject = note.info.title
-    // console.log(...note.info.todos.);
     const body = note.info.txt || note.info.todos || note.info.url
-    queryService.noteToMail(subject, body)
+    return queryService.noteToMail(subject, body)
 }
 
 

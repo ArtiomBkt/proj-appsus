@@ -93,7 +93,8 @@ export default {
         },
         shareNote(noteId) {
             const idx = this.notes.findIndex(note => note.id === noteId)
-            noteService.prepareParams(this.notes[idx])
+            const url = noteService.prepareParams(this.notes[idx])
+            this.$router.push(url)
         },
         editNote(noteId) {
             const idx = this.notes.findIndex(note => note.id === noteId)
