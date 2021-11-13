@@ -1,5 +1,5 @@
 export default {
-    name: 'note-txt',
+    name: 'note-text',
     props: ['info'],
     template: `
         <div>

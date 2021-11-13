@@ -31,15 +31,15 @@ export default {
             let txt = ''
             let type = this.note.type
             let id = this.note.id
-            if (this.note.type === 'note-txt') {
+            if (this.note.type === 'text') {
                 title = this.note.info.title
                 txt = this.note.info.txt
             } 
-            else if (this.note.type === 'note-todos') {
+            else if (this.note.type === 'todos') {
                 title = this.note.info.title
                 txt = this.note.info.todos.map(todo => todo.txt).join(', ')
             }
-            else if (this.note.type === 'note-img' || this.note.type === 'note-vid') {
+            else if (this.note.type === 'img' || this.note.type === 'vid') {
                 title = this.note.info.title
                 txt = this.note.info.url
             }

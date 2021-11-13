@@ -1,5 +1,3 @@
-import { noteService } from './../services/note.service.js'
-import { msgService } from './../../../services/msg.service.js'
 import { eventBus } from './../../../services/event-bus.service.js'
 
 export default {
@@ -61,4 +59,4 @@ export default {
             return (this.note.style.backgroundColor === color) ? 'selected' : ''
         }
     }
-}
+} 

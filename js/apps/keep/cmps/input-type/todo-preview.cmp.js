@@ -3,23 +3,18 @@ export default {
     props: ['todo'],
     template: `
         <span :class="strikeTodo" @click="toggleTodo">
-            {{ todo.txt }} <span v-if="isDone">- {{ todo.doneAt }}</span>
+            {{ todo.txt }} <span v-if="todo.isDone">- {{ todo.doneAt }}</span>
         </span>
     `,
-    data() {
-        return {
-            isDone: false
-        }
-    },
     methods: {
         toggleTodo(){
-            this.isDone = !this.isDone
-            this.todo.doneAt = this.todo.doneAt ? null : new Date().toLocaleTimeString()
+            this.todo.isDone = !this.todo.isDone
+            this.$emit('doTodo', this.todo)
         }
     },
     computed: {
         strikeTodo() {
-            return this.isDone ? 'strike' : ''
+            return this.todo.isDone ? 'strike' : ''
         }
     }
 }

@@ -1,18 +1,20 @@
-import { msgService } from './../../../services/msg.service.js'
-import { eventBus } from './../../../services/event-bus.service.js'
+import { noteService } from "../services/note.service.js"
 
 export default {
     name: 'note-add',
+    props: ['noteTypes'],
     template: `
         <section class="note-add">
-            <form @submit.prevent="validateForm" novalidate="true">
+            <form @submit.prevent="saveNote" novalidate="true">
                 <div class="input-row">
-                    <!-- <input type="text" v-model="note.title" placeholder="Title" /> -->
-                    <input type="text" v-model="note.txt" :placeholder="setPlaceHolder" />
-                    <span @click.stop="setType" data-type="note-txt" title="Text input"><i class="far fa-edit"></i></span>
-                    <span @click.stop="setType" data-type="note-todos" title="Todos input"><i class="fas fa-list-ul"></i></span>
-                    <span @click.stop="setType" data-type="note-img" title="Img input"><i class="far fa-image"></i></span>
-                    <span @click.stop="setType" data-type="note-vid" title="Video input"><i class="fab fa-youtube"></i></span>
+                    <input type="text" v-if="inputFocus" v-model="inputData.title" placeholder="Title" />
+                    <input :type="setInputType" @click="onInputFocus" v-model="inputData.txt" 
+                        :placeholder="setPlaceHolder" />
+                    <template v-for="(noteType, idx) in noteTypes">
+                        <span @click="setNoteType(idx)" :class="selected(idx)" :title="noteType.title">
+                            <i :class="noteType.icon"></i>
+                        </span>
+                    </template>
                 </div>
                 <input type="submit" value="Submit" />
             </form>
@@ -20,47 +22,40 @@ export default {
     `,
     data() {
         return {
-            note: {
-                title: 's',
-                txt: '',
-                type: 'note-txt'
-            }
+            note: noteService.getTemplateNote(),
+            inputData: {
+                title: '',
+                txt: ''
+            },
+            inputFocus: false
         }
     },
     methods: {
-        setType(ev) {
-            this.note.type = ev.target.dataset.type
+        onInputFocus() {
+            this.inputFocus = true
         },
-        validateForm() {
-            // console.log(this.note);
-            // if (!this.note.txt || !this.note.title) return msgService.sendMsg('error', 'Invalid inputs.')
-            // console.log(this.note.type);
-            // if (this.note.type !== 'note-txt' && this.note.type !== 'note-todos') {
-            //     let ytId = this.note.txt.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
-            //     if (ytId) {
-            //         this.note.txt = ytId
-            //         this.note.type = 'note-vid'
-            //     }
-            //     else if (this.note.txt.match(/\.(jpeg|jpg|gif|png)$/)) this.note.type = 'note-img'
-            //     else console.log('error');
-            // console.log(this.note.type);
-            this.saveNote()
+        setNoteType(noteType) {
+            this.inputFocus = true
+            this.note.type = noteType
+            this.note.cmp = this.noteTypes[noteType].cmp
+        },
+        selected(noteType) {
+            return (this.note.type === noteType) ? 'type-selected' : ''
         },
         saveNote() {
-            this.$emit('noteSaved', {...this.note})
-            this.note.txt = ''
-            // this.note.title = ''
-            // eventBus.$emit('listChanged')
+            this.$emit('noteSaved', this.note, {...this.inputData})
+            this.note = noteService.getTemplateNote()
+            this.inputData.title = ''
+            this.inputData.txt = ''
         }
     },
     computed: {
+        setInputType() {
+            if (this.note.type === 'text' || this.note.type === 'todos') return 'text'
+            else return 'url'
+        },
         setPlaceHolder() {
-            if (this.note.type === 'note-txt') return 'What\'s on your mind...'
-            if (this.note.type === 'note-todos') return 'Use commas to separate todos'
-            else return 'Insert your desired URL'
+            return this.noteTypes[this.note.type].placeholder
         }
     }
 }
-
-
-

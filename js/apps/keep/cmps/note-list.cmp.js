@@ -1,4 +1,3 @@
-import { noteService } from './../services/note.service.js'
 import notePreview from './note-preview.cmp.js'
 import noteEdit from './note-edit.cmp.js'
 import noteActions from './note-actions.cmp.js'
@@ -16,7 +15,7 @@ export default {
         <div class="pinned-notes masonry">
             <h3>Pinned Notes</h3>
             <div v-for="(note, idx) in pinnedNotes" class="note-card" :style="note.style">
-                <note-preview :note="note" />
+                <note-preview @toggleTodo="todoDone" :note="note" />
                 <note-edit :note="note" v-if="note.isEditing" @noteSaved="noteSubmitEdit" />
                 <note-actions :note="note"
                     @notePinned="notePin"
@@ -31,9 +30,9 @@ export default {
         <div class="other-notes masonry">
             <h3>Notes</h3>
             <div v-for="(note, idx) in otherNotes" class="note-card" :style="note.style">
-                <note-preview :note="note" />
+                <note-preview @toggleTodo="todoDone" :note="note" />
                 <note-edit :note="note" v-if="note.isEditing" @noteSaved="noteSubmitEdit" />
-                <note-actions :note="note" 
+                <note-actions :note="note"
                     @notePinned="notePin"
                     @noteColored="noteColor"
                     @noteShare="noteShare"
@@ -66,6 +65,9 @@ export default {
         },
         noteRemove(noteId) {
             this.$emit('noteRemove', noteId)
+        },
+        todoDone(todo, note) {
+            this.$emit('toggleTodo', todo, note)
         }
     },
 }

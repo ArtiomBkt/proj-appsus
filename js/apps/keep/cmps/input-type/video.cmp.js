@@ -3,7 +3,13 @@ export default {
     props: ['info'],
     template: `
         <div class="note-video">
-            <iframe :src="info.url"></iframe>
+            <h3 class="note-title">{{ info.title }}</h3>
+            <iframe :src="ytEmbed+info.url"></iframe>
         </div>
     `,
+    data() {
+        return {
+            ytEmbed: 'https://www.youtube.com/embed/'
+        }
+    },
 }

@@ -4,7 +4,6 @@ import { noteService } from '../services/note.service.js'
 import noteList from './../cmps/note-list.cmp.js'
 import noteAdd from './../cmps/note-add.cmp.js'
 import noteFilter from './../cmps/note-filter.cmp.js'
-import txtCmp from '../cmps/input-type/txt.cmp.js'
 
 export default {
     name: 'note-app',
@@ -17,7 +16,7 @@ export default {
         <section class="note-app">
             <note-filter />
             <div class="main-keep-container">
-                <note-add @noteSaved="addNote" />
+                <note-add :noteTypes="noteTypes" @noteSaved="addNote" />
                 <note-list :pinnedNotes="getPinnedNotes" :otherNotes="getOtherNotes"
                     @notePinned="pinNote"
                     @noteColored="colorNote"
@@ -25,7 +24,8 @@ export default {
                     @noteEdit="editNote"
                     @noteUpdateEdit="submitEdit"
                     @noteDuplicate="duplicateNote"
-                    @noteRemove="removeNote" 
+                    @noteRemove="removeNote"
+                    @toggleTodo="todoToggle"
                     />
             </div> 
         </section>
@@ -33,11 +33,37 @@ export default {
     data() {
         return {
             notes: [],
+            noteTypes: {
+                text: {
+                    icon: 'far fa-edit',
+                    placeholder: 'What\'s on your mind...',
+                    title: 'Text',
+                    cmp: 'note-text'
+                },
+                todos: {
+                    icon: 'fas fa-list-ul',
+                    placeholder: 'Enter todos, comma separated...',
+                    title: 'Todos',
+                    cmp: 'note-todos'
+                },
+                img: {
+                    icon: 'far fa-image',
+                    placeholder: 'Enter an image URL...',
+                    title: 'Image',
+                    cmp: 'note-img'
+                },
+                vid: {
+                    icon: 'fab fa-youtube',
+                    placeholder: 'Enter a youtube URL...',
+                    title: 'Video',
+                    cmp: 'note-vid'
+                }
+            },
+            filterBy: null
         }
     },
     created() {
         this.loadNotes()
-        // eventBus.$on('listChanged', this.loadNotes)
     },
     methods: {
         loadNotes() {
@@ -46,8 +72,8 @@ export default {
                     this.notes = notes
                 })
         },
-        addNote(newNote) {
-            noteService.addNote(newNote)
+        addNote(noteTemplate, noteData) {
+            noteService.addNote(noteTemplate, noteData)
                 .then(note => {
                     this.notes = [note, ...this.notes]
                 })
@@ -66,13 +92,12 @@ export default {
             noteService.colorNote(noteId, color)
         },
         shareNote(noteId) {
-            const idx = this.notes.findIndex(note => note.id === noteId)
-            this.notes[idx]
+            // const idx = this.notes.findIndex(note => note.id === noteId)
+            // this.notes[idx]
         },
         editNote(noteId) {
             const idx = this.notes.findIndex(note => note.id === noteId)
             this.notes[idx].isEditing = !this.notes[idx].isEditing
-            // return noteService.editNote(this.notes[idx])
         },
         submitEdit(noteEdit) {
             noteService.editNote(noteEdit)
@@ -85,6 +110,12 @@ export default {
         },
         removeNote(noteId) {
             noteService.removeNote(noteId)
+                .then(this.loadNotes)
+        },
+        todoToggle(todo, note) {
+            const idx = this.notes.findIndex(updatedNote => updatedNote.id === note.id)
+            this.notes[idx].isDone = !this.notes[idx].isDone
+            noteService.toggleTodo(todo, note)
                 .then(this.loadNotes)
         }
     },
