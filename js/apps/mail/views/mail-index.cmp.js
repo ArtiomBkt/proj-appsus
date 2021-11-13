@@ -2,7 +2,7 @@ import { mailService } from '../services/mail.service.js'
 import mailList from '../cmps/mail-list.cmp.js'
 import mailTopFilter from '../cmps/mail-top-search.cmp.js'
 import mailSideFilter from '../cmps/mail-side-filter.cmp.js'
-import mailFolderList from '../cmps/mail-folder-list.cmp.js'
+import mailSortList from '../cmps/mail-sort-list.cmp.js'
 import mailCompose from '../cmps/mail-compose.cmp.js'
 
 export default {
@@ -13,22 +13,22 @@ export default {
     mailTopFilter,
     mailSideFilter,
     mailCompose,
-    mailFolderList,
+    mailSortList,
   },
   template: `
         <section class="mail-index">
           <mail-side-filter @compose="openCompose" :foldersMap="foldersMap"/>
           <div class="layout-wrapper">
             <mail-top-filter @searched="setSearch" />
-            <mail-folder-list @sorted="setSort" />
+            <mail-sort-list @sorted="setSort" />
             <mail-list 
             @read-mail="readMail" 
             @toggle-star="toggleStar"
             @toggle-read="toggleRead"
             @remove-mail="removeMail"
             :mails="mailsToShow" />
+          </div>
           <mail-compose v-if="showCompose" :mailTemplate="mailTemplate" @send-mail="sendMail" @autosave-mail="autoSave" @close-compose="closeCompose" />
-        </div>
         </section>
     `,
   data() {
@@ -51,8 +51,10 @@ export default {
     },
     readMail(mailId) {
       const idx = this.mails.findIndex((mail) => mail.id === mailId)
-      this.mails[idx].isRead = true
-      mailService.readMail(mailId)
+      if (!this.mails[idx].isRead) {
+        this.mails[idx].isRead = true
+        mailService.readMail(mailId).then(this.loadMails)
+      }
     },
     setSearch(searchBy) {
       this.searchBy = searchBy
@@ -70,7 +72,7 @@ export default {
       this.showCompose = false
     },
     sendMail(mail) {
-      mailService.composeMail(mail).then((mail) => this.mails.push(mail))
+      mailService.composeMail(mail).then(this.loadMails)
       this.showCompose = false
     },
     toggleStar(mailId) {

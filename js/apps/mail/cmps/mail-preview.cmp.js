@@ -11,10 +11,9 @@ export default {
           <div class="mail-content">
           <span class="mail-star" :class="colorStar" @click.stop.prevent="toggleStar(mail.id)"> 
           </span>
-              <span>{{mail.from}}</span>
+              <span class="mail-from">{{mail.from}}</span>
               <long-text v-bind:txt="mail.subject" /> 
-              <!-- <span>{{mail.subject}}</span> -->
-              <span>{{timeToShow}}</span>
+              <span class="mail-timestamp">{{timeToShow}}</span>
           </div>
           <section class="mail-actions">
               <span @click.stop.prevent="toggleRead(mail.id)">

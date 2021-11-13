@@ -3,7 +3,12 @@ export default {
   props: ['foldersMap'],
   template: `
   <aside class="mail-side-filter">
-    <button class="compose-btn" @click="compose"><i class="fas fa-plus"></i> Compose</button>
+    <button class="compose-btn" @click="compose">
+      <span>
+      <!-- <img src="../../../../assests/img/composeplus.png" />   -->
+      <i class="fas fa-plus"></i>
+      Compose</span>
+    </button>
     <router-link to='/mail/inbox'><i class="fas fa-inbox"></i> Inbox ({{inboxCount}})</router-link>
     <router-link to='/mail/starred'><i class="fas fa-star"></i> Starred ({{starredCount}})</router-link>
     <router-link to='/mail/sent'><i class="fas fa-paper-plane"></i> Sent ({{sentCount}})</router-link>
