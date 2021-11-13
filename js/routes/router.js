@@ -33,6 +33,12 @@ const routes = [
       {
         name: 'drafts',
         path: 'drafts',
+        children: [
+          {
+            name: 'compose',
+            path: 'compose',
+          },
+        ],
       },
       {
         name: 'trash',
@@ -45,10 +51,6 @@ const routes = [
       {
         name: 'unread',
         path: 'unread',
-      },
-      {
-        name: 'compose',
-        path: 'compose',
       },
     ],
   },

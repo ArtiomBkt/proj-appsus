@@ -23,6 +23,25 @@ export const mailService = {
   createMail,
 }
 
+function query(criteria) {
+  return storageService.query(MAILS_KEY).then((mails) => {
+    const folder = criteria.folder
+    if (folder === 'inbox')
+      return mails.filter((mail) => !mail.isTrash && !mail.isDraft)
+    if (folder === 'sent')
+      return mails.filter((mail) => mail.isSent && !mail.isTrash)
+    if (folder === 'read') return mails.filter((mail) => mail.isRead)
+    if (folder === 'unread') return mails.filter((mail) => !mail.isRead)
+    if (folder === 'starred')
+      return mails.filter((mail) => mail.isStarred && !mail.isTrash)
+    if (folder === 'drafts')
+      return mails.filter((mail) => mail.isDraft && !mail.isTrash)
+    if (folder === 'trash') return mails.filter((mail) => mail.isTrash)
+    if (folder === 'compose')
+      return mails.filter((mail) => mail.isDraft && !mail.isTrash)
+  })
+}
+
 function createEmails() {
   gMails = utilService.loadFromStorage(MAILS_KEY)
   if (!gMails || !gMails.length) {
@@ -51,6 +70,7 @@ function createEmails() {
 
 function createMail() {
   const mail = {
+    id: utilService.makeId(),
     title: '',
     subject: '',
     body: '',
@@ -63,7 +83,7 @@ function createMail() {
     isTrash: false,
     updatedAt: new Date().toLocaleDateString(),
   }
-  return save(mail)
+  return mail
 }
 
 function composeMail(mail) {
@@ -76,23 +96,6 @@ function composeMail(mail) {
 function save(mail) {
   if (mail.id) return storageService.put(MAILS_KEY, mail)
   else return storageService.post(MAILS_KEY, mail)
-}
-
-function query(criteria) {
-  return storageService.query(MAILS_KEY).then((mails) => {
-    const folder = criteria.folder
-    if (folder === 'inbox')
-      return mails.filter((mail) => !mail.isTrash && !mail.isDraft)
-    if (folder === 'sent')
-      return mails.filter((mail) => mail.isSent && !mail.isTrash)
-    if (folder === 'read') return mails.filter((mail) => mail.isRead)
-    if (folder === 'unread') return mails.filter((mail) => !mail.isRead)
-    if (folder === 'starred')
-      return mails.filter((mail) => mail.isStarred && !mail.isTrash)
-    if (folder === 'drafts')
-      return mails.filter((mail) => mail.isDraft && !mail.isTrash)
-    if (folder === 'trash') return mails.filter((mail) => mail.isTrash)
-  })
 }
 
 function getMailMap() {
@@ -144,7 +147,6 @@ function removeEmail(mailId) {
 }
 
 function autoSave(mail) {
-  console.log('saving', mail)
   mail.isDraft = true
   mail.updatedAt = new Date().toLocaleDateString()
   return save(mail)

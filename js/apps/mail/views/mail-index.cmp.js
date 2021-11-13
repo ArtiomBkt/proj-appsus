@@ -63,17 +63,17 @@ export default {
       this.sortBy = sortBy
     },
     openCompose() {
-      mailService.createMail().then((mailTemplate) => {
-        this.mailTemplate = mailTemplate
-        this.showCompose = true
-      })
+      this.mailTemplate = mailService.createMail()
+      this.showCompose = true
     },
     closeCompose() {
       this.showCompose = false
+      this.$router.push('/mail/drafts')
     },
     sendMail(mail) {
       mailService.composeMail(mail).then(this.loadMails)
       this.showCompose = false
+      this.$router.push('/mail/inbox')
     },
     toggleStar(mailId) {
       const idx = this.mails.findIndex((mail) => mail.id === mailId)
@@ -124,7 +124,9 @@ export default {
     '$route.name': {
       immediate: true,
       handler() {
+        if (this.showCompose) this.showCompose = false
         this.criteria.folder = this.$route.name
+        if (this.criteria.folder === 'compose') this.openCompose()
         this.loadMails()
       },
     },
