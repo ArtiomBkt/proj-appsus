@@ -1,11 +1,20 @@
+.todos-container {
+    text-align: left;
+}
+
+ul {
+    padding-left: 5px;
+}
+
 li {
-    list-style: circle;
+    list-style: none;
 }
 
 .strike {
     text-decoration: line-through;
 }
 
-.todo-done {
-    list-style: disc;
+.todo-item span {
+    display: flex;
+    justify-content: space-between;
 }

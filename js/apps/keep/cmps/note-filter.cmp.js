@@ -3,18 +3,24 @@ export default {
     props: ['notes'],
     template: `
         <aside class="aside">
-            <template v-for="type in noteTypes">
-                <div :class="type" class="type-folder" @click="showTypeOf(type)">
-                    {{ type }}
+            <template v-for="type of noteTypes">
+                <div :class="{'selected-filter':filterBy.type === type.filter}" class="type-folder" :title="type.filter" @click="showTypeOf(type.filter)">
+                    <i :class="type.icon"></i>
                 </div>
             </template>
         </aside>
     `,
     data() {
         return {
-            noteTypes: ['all', 'text','todos','img','vid'],
+            noteTypes: {
+                'all':{filter:'all', icon:'fas fa-border-all'}, 
+                'text':{filter:'text' ,icon:'far fa-edit'},
+                'todos':{filter:'todos' ,icon:'fas fa-list-ul'},
+                'img':{filter:'img' ,icon:'far fa-image'},
+                'vid':{filter:'vid' ,icon:'fab fa-youtube'}
+            },
             filterBy: {
-                type: null
+                type: 'all'
             }
         }
     },
@@ -24,4 +30,10 @@ export default {
             this.$emit('filterBy', { ...this.filterBy })
         }
     },
+    computed: {
+        selectedFilter() {
+            console.log({...this.noteTypes});
+            // if (this.filterBy.type === this.noteType.filter)
+        }
+    }
 }

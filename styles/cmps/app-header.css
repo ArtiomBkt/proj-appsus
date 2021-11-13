@@ -27,6 +27,10 @@ header a {
     height: 100%;
 }
 
+.active-link {
+    box-shadow: inset 0px -9px 0px 0px rgba(66,185,131,0.7);
+}
+
 .main-nav {
     display: flex;
     justify-content: space-evenly;
@@ -75,7 +79,7 @@ header a {
         right: -100%;
         top: 0;
 
-        width: 350px;
+        width: 80%;
         height: 70%;
         border-radius: 15px 0 0 15px;
 
@@ -93,7 +97,6 @@ header a {
     .nav-link {
         display: inline-block;
         width: 100%;
-        line-height: 100px;
         padding: 1rem 0;
     }
 

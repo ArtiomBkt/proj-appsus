@@ -2,8 +2,8 @@ export default {
     name: 'todo-preview',
     props: ['todo'],
     template: `
-        <span :class="strikeTodo" @click="toggleTodo">
-            {{ todo.txt }} <span v-if="todo.isDone">- {{ todo.doneAt }}</span>
+        <span @click="toggleTodo">
+            <span :class="strikeTodo">{{ todo.txt }}</span> <span v-if="todo.isDone">{{ todo.doneAt }}</span>
         </span>
     `,
     methods: {

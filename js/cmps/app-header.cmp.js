@@ -14,7 +14,7 @@ export default {
                 <router-link class="nav-link" @click.native="scrollToTop" to='/book' active-class="active-link">Books</router-link>
                 <router-link class="nav-link" @click.native="scrollToTop" to='/about' active-class="active-link">About</router-link>
             </nav>
-            <div v-if="toggleMobile" :class="mobileMenuOpen" @click="openMenu" class="hamburger">
+            <div v-if="windowWidth" :class="mobileMenuOpen" @click="openMenu" class="hamburger">
                 <span class="bar"> </span>
                 <span class="bar"> </span>
                 <span class="bar"> </span>
@@ -23,25 +23,26 @@ export default {
     `,
     data() {
         return {
-            // windowWidth: window.innerWidth,
-            toggleMobile: window.innerWidth <= 760 ? true : false,
+            windowWidth: window.innerWidth,
+            toggleMobile: false,
             burgerOpen: false,
             mouseOver: false
         }
     },
-    // mounted() {
-    //     this.$nextTick(() => {
-    //         window.addEventListener('click', this.scrollToTop)
-    //     })
-    // },
+    mounted() {
+        this.$nextTick(() => {
+            window.addEventListener('onresize', this.onResize)
+        })
+    },
     methods: {
         scrollToTop() {
             window.scrollTo(0, 0)
             this.burgerOpen = false
         },
-        // onResize() {
-        //     this.windowWidth = window.innerWidth
-        // },
+        onResize() {
+            this.windowWidth = window.innerWidth
+            this.toggleMobile = this.windowWidth < 770 ? true : false
+        },
         openMenu() {
             this.burgerOpen = !this.burgerOpen
         },
@@ -58,6 +59,11 @@ export default {
         },
         getHeaderLogo() {
             return this.mouseOver ? './../../assets/img/vuejs-color.svg' : './../../assets/img/vuejs-shadow.svg'
-        }
+        },
+        // screenWidth() {
+        //     console.log(this.windowWidth);
+            
+        // }
     }
 }
+// return this.toggleMobile = 

@@ -1,7 +1,34 @@
 .aside {
+    position: fixed;
+    top: 250px;
+    left: 5px;
+
+    width: 45px;
+}
+
+.aside > * {
+    width: 100%;
+    height: 45px;
+    font-size: 1.6rem;
+}
+
+.type-folder {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
 
-    width: 200px;
+    opacity: .7;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.selected-filter {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 50%;
+    opacity: 1;
+
+}
+
+.type-folder:hover:not(.selected-filter) {
+    background-color: rgba(0, 0, 0, 0.1);
 }

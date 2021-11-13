@@ -16,7 +16,7 @@ export default {
                         </span>
                     </template>
                 </div>
-                <!-- <input type="submit" value="Submit" /> -->
+                <input v-show="false" type="submit" value="Submit" />
             </form>
         </section>
     `,

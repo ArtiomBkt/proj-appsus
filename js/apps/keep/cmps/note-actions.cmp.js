@@ -8,8 +8,7 @@ export default {
             <span @click="noteShare"><i class="fas fa-paper-plane"></i></span>
             <span @click="noteEdit"><i class="fas fa-edit"></i></span>
             <span @click="noteDuplicate"><i class="fas fa-clone"></i></span>
-            <span @click="noteRemove"><i class="fas fa-trash-alt"></i></span>
-            <span @click="toggleColorsMenu"><i class="fas fa-brush"></i></span>
+            <span @click="toggleColorsMenu" :class="{ 'color-choose': colorChangeOn }"><i class="fas fa-brush"></i></span>
             <span class="color-picker" v-show="colorChangeOn">
                 <template v-for="color in bgcolors">
                     <span :style="{'background-color': color.value}" 
@@ -18,6 +17,7 @@ export default {
                     </span>
                 </template>
             </span>
+            <span @click="noteRemove"><i class="fas fa-trash-alt"></i></span>
         </span>
     `,
     data() {

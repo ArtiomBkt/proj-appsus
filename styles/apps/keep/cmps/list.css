@@ -3,8 +3,8 @@
 }
 
 .pinned-notes {
-    min-height: 600px;
-    margin-bottom: 70px;
+    min-height: 400px;
+    margin-bottom: 30px;
 }
 
 @media screen and (max-width: 1024px) {
