@@ -21,7 +21,6 @@ export default {
     <div v-if="windowWidth" :class="isSideNavOpen" @click="openSideNav" class="sidenav-collapser">
         <span :class="isSideNavOpen" class="line"> </span>
         <span :class="isSideNavOpen" class="line"> </span>
-        <span :class="isSideNavOpen" class="line"> </span>
     </div>
 </div>
         `,
