@@ -99,11 +99,9 @@
 .color-blob.selected {
     border: 2px solid black;
 }
-
-@media only screen and (max-width: 1200px) {
-    .note-card {
-        margin-bottom: 30px;  
-    }
+    
+.note-card {
+    margin-bottom: 25px;  
 }
 
 @media only screen and (max-width: 550px) {
