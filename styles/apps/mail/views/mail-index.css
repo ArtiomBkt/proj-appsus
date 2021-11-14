@@ -1,5 +1,6 @@
 .mail-index {
   display: flex;
+  padding: 10px;
 }
 
 .layout-wrapper {
@@ -10,13 +11,16 @@
 
 /* medium */
 @media (max-width: 760px) {
-    .layout-wrapper {
-        flex-grow: 0;
-        width: 95%;
-        margin-left: auto;
-    }
+  .layout-wrapper {
+    flex-grow: 0;
+    width: 95%;
+    margin-left: auto;
+  }
 
   .mail-index {
     /* flex-direction: row-reverse; */
   }
+}
+
+.filter-top-container {
 }

@@ -33,7 +33,7 @@ export default {
       },
       windowWidth: window.innerWidth,
       sideNavCollapse: false,
-      sideNavOpen: false
+      sideNavOpen: false,
     }
   },
   methods: {
@@ -41,16 +41,16 @@ export default {
       this.$emit('compose')
     },
     onResize() {
-        this.windowWidth = window.innerWidth
-        this.sideNavCollapse = this.windowWidth < 761 ? true : false
+      this.windowWidth = window.innerWidth
+      this.sideNavCollapse = this.windowWidth < 761 ? true : false
     },
     openSideNav() {
-        this.sideNavOpen = !this.sideNavOpen
-    }
+      this.sideNavOpen = !this.sideNavOpen
+    },
   },
   mounted() {
     this.$nextTick(() => {
-        window.addEventListener('onresize', this.onResize)
+      window.addEventListener('onresize', this.onResize)
     })
   },
 
@@ -79,9 +79,9 @@ export default {
     unreadCount() {
       return this.foldersMap.unread
     },
-    isSideNavOpen() { 
-        return this.sideNavOpen ? 'nav-open' : ''
-    }
+    isSideNavOpen() {
+      return this.sideNavOpen ? 'nav-open' : ''
+    },
   },
   watch: {
     foldersMap: {
@@ -91,7 +91,7 @@ export default {
         const unreadCount = this.foldersMap.unread
         const percentage = (unreadCount / mailsCount) * 100
         this.progressVal = percentage ? percentage.toFixed(0) : 0
-        this.progressStyle.width = this.progressVal + '% - Unread emails'
+        this.progressStyle.width = this.progressVal + '%'
       },
     },
   },
