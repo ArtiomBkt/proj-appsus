@@ -13,9 +13,10 @@ export default {
         <router-link to='/mail/trash'><i class="fas fa-trash"></i> Trash ({{trashCount}})</router-link>
         <router-link to='/mail/read'><i class="fas fa-book"></i> Read ({{readCount}})</router-link>
         <router-link to='/mail/unread'><i class="fas fa-envelope"></i> Unread ({{unreadCount}})</router-link>
+        <span class="unread-emails-txt">Unread emails</span>
         <div class="progress-bar">
-        <span :style="progressStyle">{{percentageToShow}}</span>
-        <progress :value="progressVal" max="100"></progress>
+          <span class="percentage" :style="progressStyle">{{percentageToShow}}</span>
+          <progress :value="progressVal" max="100"></progress>
         </div>
     </aside>
     <div v-if="windowWidth" :class="isSideNavOpen" @click="openSideNav" class="sidenav-collapser">
