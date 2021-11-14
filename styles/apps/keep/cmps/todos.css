@@ -3,11 +3,24 @@
 }
 
 ul {
+    position: relative;
     padding-left: 5px;
 }
 
 li {
     list-style: none;
+}
+
+li::before {
+    content: '°';
+    position: absolute;
+    left: -5px;
+}
+
+.todo-done::before {
+    content: '•';
+    position: absolute;
+    left: -5;
 }
 
 .strike {

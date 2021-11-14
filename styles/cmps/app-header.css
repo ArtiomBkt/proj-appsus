@@ -116,6 +116,10 @@ header a {
         border-radius: 0 0 0 15px;
     }
 
+    .nav-link:last-child {
+        border-radius: 0 0 0 15px;
+    }
+
     .hamburger {
         display: block;
         cursor: pointer;

@@ -7,16 +7,18 @@ export default {
         <section class="note-add">
             <form @submit.prevent="saveNote" novalidate="true">
                 <div class="input-row">
-                    <input type="text" v-if="inputFocus" class="note-title-inp" v-model="inputData.title" placeholder="Title" />
-                    <input :type="setInputType" ref="textInput" class="note-text-inp" :class="{ 'input-focus': inputFocus }" @click="onInputFocus" v-model="inputData.txt" 
-                        :placeholder="setPlaceHolder" />
+                    <div class="inputs" :class="{ 'input-focus': inputFocus }">
+                        <input type="text" v-if="inputFocus" class="note-title-inp" v-model="inputData.title" placeholder="Title" />
+                        <input :type="setInputType" ref="textInput" class="note-text-inp" 
+                            @click="onInputFocus" v-model="inputData.txt" :placeholder="setPlaceHolder" />
+                    </div>
                     <template v-for="(noteType, idx) in noteTypes">
                         <span @click="setNoteType(idx)" v-if="inputFocus" :class="selected(idx)" :title="noteType.title">
                             <i :class="noteType.icon"></i>
                         </span>
                     </template>
                 </div>
-                <input v-show="false" type="submit" value="Submit" />
+                <input v-if="inputFocus" class="submit-button-notes" type="submit" value="Submit" />
             </form>
         </section>
     `,
@@ -32,16 +34,10 @@ export default {
     },
     created() {
         this.note = noteService.getTemplateNote()
-        this.inputData.title = this.$route.query.title
-        this.inputData.txt = this.$route.query.body
-        // if (this.inputData.title && this.inputData.txt) {
-        //     this.saveNote()
-        // }
     },
     methods: {
         onInputFocus() {
             this.inputFocus = true
-            this.$refs.textInput.focus()
         },
         setNoteType(noteType) {
             this.inputFocus = true
@@ -56,7 +52,6 @@ export default {
             this.note = noteService.getTemplateNote()
             this.inputData.title = ''
             this.inputData.txt = ''
-            if (this.$route.query.txt) this.$router.push('/keep')
         }
     },
     computed: {

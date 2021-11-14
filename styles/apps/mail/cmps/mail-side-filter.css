@@ -3,6 +3,7 @@
   flex-direction: column;
   min-width: 200px;
   max-width: 200px;
+  height: 70vh;
   padding-inline-end: 15px;
 }
 
@@ -24,7 +25,7 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-.mail-side-filter > *:hover {
+.mail-side-filter > a:hover {
   background-color: #e0e0e0;
   transform: ease-in;
   color: #000000;
@@ -66,23 +67,106 @@ progress {
   padding: 25px;
 }
 
+.sidenav-collapser {
+    display: none;
+}
+
+.sidenav-collapser .line {
+    display: inline-block;
+    width: 3px;
+    height: 60px;
+    margin: 5px 1px;
+    transition: all .5s ease-in-out;
+    background-color: #222;
+}
+
+.sidenav-collapser {
+    margin-left: 2px;
+}
+
 /* BP */
 
 /* medium */
-@media (max-width: 760px) {
+@media screen and (min-width: 760px) {
+    .mail-side-filter a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        font-size: 1.2rem;
+        width: 100%;
+        height: 100%;
+    }
+
+    .mail-side-filter a:hover {
+        background-color: #ccc;
+        color: #222;
+    }
+}
+
+@media only screen and (max-width: 760px) {
+    .side-nav-container {
+        display: flex;
+        align-items: center;
+    }
+
   .mail-side-filter {
-    height: 100vh;
-    z-index: 10000;
     position: fixed;
-    left: 0;
-    margin-right: 0;
-    transition: transform 0.6s, box-shadow 0.6s;
-    transform: translate(-100%);
-    border-inline-end: 1px solid #1e1e1e;
-    background-color: lightcyan;
-    justify-content: flex-start;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    left: -100%;
+    top: 5.8rem;
+
+    width: 80%;
+    height: 91%;
+
+    text-align: center;
+    color: linen;
+    background-color: #3f3f3f;
+
+    z-index: 1000;
+    transition: all 0.5s ease-in-out;
   }
+
+    .mail-side-filter.nav-open {
+        left: 0;
+    }
+
+    .line.nav-open {
+        background-color: linen;
+    }
+
   .compose-btn {
     font-size: 1em;
   }
+
+    .mail-side-filter a {
+        display: inline-block;
+        width: 100%;
+        padding: 2rem 1rem;
+    }
+
+    .mail-side-filter a:hover {
+        background-color: #222;
+        color: linen;
+    }
+
+    .sidenav-collapser {
+        display: block;
+        cursor: pointer;
+        z-index: 1002;
+    }
+
+    .sidenav-collapser.nav-open .line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .sidenav-collapser.nav-open .line:nth-child(1) {
+    transform: translateY(8px);
+    }
+
+    .sidenav-collapser.nav-open .line:nth-child(3) {
+    transform: translateY(-8px);
+    }
 }

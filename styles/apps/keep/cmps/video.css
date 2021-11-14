@@ -6,23 +6,7 @@ iframe {
     border: none;
 }
 
-@media screen and (min-width: 1008px) and (max-width: 1280px) {
-    iframe {
-        width: 250px;
-        height: 150px
-    }
-}
-
-@media screen and (min-width: 664px) and (max-width: 905px) {
-    iframe {
-        width: 250px;
-        height: 150px
-    }
-}
-
-@media screen and (max-width: 500px) {
-    iframe {
-        width: 250px;
-        height: 150px
-    }
+iframe {
+    max-width: 250px;
+    height: 150px
 }

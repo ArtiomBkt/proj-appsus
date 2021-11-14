@@ -36,6 +36,27 @@
     padding-top: 1em;
 }
 
+.note-indicators {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pinned-note-pin {
+    position: relative;
+    font-size: 1.5rem;
+    transform: rotate(40deg);
+    color: rgb(255, 0, 0);
+}
+
+.pinned-note-pin::before {
+    position: absolute;
+    content: '•';
+
+    left: 5px;
+    bottom: -12px;
+    color:#000000;
+}
+
 .actions span {
     opacity: .56;
 }
@@ -61,7 +82,10 @@
     position: absolute;
     right: 0;
     top: -1em;
-    padding-top: 10px;
+    padding: 0 5px;
+    padding-top: 5px;
+    background-color: rgb(129, 129, 129);
+    border-radius: 10px;
 }
 
 .color-blob {

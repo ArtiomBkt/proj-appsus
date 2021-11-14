@@ -17,7 +17,7 @@ export default {
             <note-filter @filterBy="setFilter" :notes="notes" />
             <div class="main-keep-container">
                 <note-add :noteTypes="noteTypes" @noteSaved="addNote" />
-                <note-list :pinnedNotes="getPinnedNotes" :otherNotes="getOtherNotes"
+                <note-list :noteTypes="noteTypes" :pinnedNotes="getPinnedNotes" :otherNotes="getOtherNotes"
                     @notePinned="pinNote"
                     @noteColored="colorNote"
                     @noteShare="shareNote"
@@ -59,11 +59,23 @@ export default {
                     cmp: 'note-vid'
                 }
             },
-            filterBy: null
+            filterBy: null,
+            note: '',
+            noteData: {
+                title: null,
+                txt: null
+            }
         }
     },
     created() {
         this.loadNotes()
+        if (this.$route.query.title) {
+            this.note = noteService.getTemplateNote()
+            this.noteData.title = this.$route.query.title
+            this.noteData.txt = this.$route.query.body
+            this.addNote(this.note, this.noteData)
+            this.$router.push('/keep')
+        }
     },
     methods: {
         loadNotes() {
