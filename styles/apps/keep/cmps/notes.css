@@ -100,6 +100,12 @@
     border: 2px solid black;
 }
 
+@media only screen and (max-width: 1200px) {
+    .note-card {
+        margin-bottom: 30px;  
+    }
+}
+
 @media only screen and (max-width: 550px) {
     .note-card {
         margin-bottom: 30px;  
