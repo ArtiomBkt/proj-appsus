@@ -1,7 +1,6 @@
 .note-card {
     break-inside: avoid;
-
-    margin: 15px;
+    
     padding: 10px;
 
     box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
@@ -99,4 +98,8 @@
 
 .color-blob.selected {
     border: 2px solid black;
+}
+
+@media only screen and (max-width: 550px) {
+    margin: 15px;   
 }
