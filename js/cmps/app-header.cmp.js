@@ -4,7 +4,7 @@ export default {
         <header>
           <div class="header-logo">
             <router-link @click.native="scrollToTop" to="/" >
-                <img src="../assets/img/Appsus-logos_transparent.png" class="header-logo" alt="logo" title="Appsus"/>
+                <img src="./assets/img/Appsus-logos_transparent.png" class="header-logo" alt="logo" title="Appsus"/>
             </router-link>
           </div>
           
