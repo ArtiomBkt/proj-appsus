@@ -7,6 +7,8 @@
 @import './cmps/video.css';
 
 .note-app {
+  overflow-x:hidden; /* :( */
+  
   display: flex;
   transition: 0.3s;
 
@@ -15,5 +17,5 @@
 
 .main-keep-container {
   width: 100%;
-  margin-left: 40px;
+  margin-left: 35px;
 }
