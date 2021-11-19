@@ -2,11 +2,19 @@ export default {
   name: 'app-header',
   template: `
         <header>
-            <div class="logo">
+          <div class="header-logo">
+            <router-link @click.native="scrollToTop" to="/" >
+                <img src="../assets/img/Appsus-logos_transparent.png" class="header-logo" alt="logo" title="Appsus"/>
+            </router-link>
+          </div>
+          
+            <!-- Replaced with simpler logo // can uncomment-->
+            <!-- <div class="logo">
                 <router-link @click.native="scrollToTop" to="/" class="logo-link">
                     <img :src="getHeaderLogo" @mouseleave="mouseLeave" @mouseover="mouseHover" alt="logo" />
                 </router-link>
-            </div>
+            </div> -->
+            
             <nav :class="mobileMenuOpen" class="main-nav">
                 <router-link class="nav-link" @click.native="scrollToTop" to='/' active-class="active-link" exact>Home</router-link>
                 <router-link class="nav-link" @click.native="scrollToTop" to='/mail/inbox' active-class="active-link">Mail</router-link>

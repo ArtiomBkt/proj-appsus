@@ -15,6 +15,7 @@
 .social-icons > * {
   font-size: 30px;
   cursor: pointer;
+  color: black;
 }
 
 .team-container {

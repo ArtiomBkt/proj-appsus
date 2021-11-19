@@ -1,3 +1,12 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 1rem;
+}
+
 .home-bg {
   display: flex;
   justify-content: center;
@@ -5,15 +14,12 @@
   flex-direction: column;
   height: 90vh;
   color: white;
-  background-color: rgb(57, 56, 56);
+  /* background-color: rgb(57, 56, 56); */
+  background-color: #303030;
 }
 
 .app-home-title {
   margin-top: 20px;
-}
-
-.app-home-team {
-  margin: 0;
 }
 
 .app-home-title,
