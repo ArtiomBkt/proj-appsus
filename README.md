@@ -1,4 +1,7 @@
 # AppSus
+
+https://baselboulos.github.io/proj-appsus/#/
+
 AppSus is a dual Frontend email and a note keeping app, Includes Apps integration- note can be sent as an email and email can be saved as a note, inspired by Google Keep and Gmail.
 
 Vue.js & CSS3
